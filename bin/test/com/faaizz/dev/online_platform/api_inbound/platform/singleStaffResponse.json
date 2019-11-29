@@ -1,0 +1,15 @@
+{
+  "data": {
+    "first_name": "Aisha",
+    "last_name": "Yetunde",
+    "email": "aishayetunde",
+    "api_token": "GahzzqxIuONIpHz8J64sU17Prdj8dMY3RA6xT1axBpynlWoLUQbDOUWwpLhW",
+    "address": "Ibadan, Nigeria",
+    "gender": "female",
+    "phone_numbers": "[\"+2348187456305\"]",
+    "privilege_level": "staff",
+    "created_at": "2019-09-01T00:44:24.000000Z",
+    "updated_at": "2019-09-01T00:44:24.000000Z",
+    "pending_orders": 8
+  }
+}

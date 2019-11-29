@@ -1,0 +1,17 @@
+{
+  "data": {
+    "id": 3,
+    "product_id": 164,
+    "product_size": "lg",
+    "product_quantity": 8,
+    "customer_email": "fr3yy3ziey@exampllle.orgg",
+    "staff_email": "jalyn.gottlieb@bahringer.com",
+    "status": "pending",
+    "est_del_date": null,
+    "failure_date": null,
+    "failure_cause": "",
+    "delivery_date": null,
+    "created_at": "2019-09-07 14:38:35",
+    "updated_at": "2019-09-07 14:38:35"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "id": 15,
+    "name": "Ipsam quas quas distinctio id necessitatibus explicabo aut.",
+    "brand": "eos",
+    "description": "Rem aut et quas minus dolorem dolorem. Facilis porro consequatur tenetur voluptatum. Quibusdam maxime voluptatibus voluptates rerum et. Nisi dignissimos impedit quibusdam omnis et nihil laborum. Sit est consequatur veritatis eaque. Deserunt consequatur hic vero nesciunt quo sit maxime aut. Ut omnis ab aut magnam et. Exercitationem fuga harum rem iure asperiores. Voluptatem aut suscipit quibusdam autem et. Voluptas accusantium libero accusantium saepe. Et nihil neque qui molestiae. Ea sit et placeat rem id magni id provident. Ea hic consequuntur quaerat nihil officia et est. Quis consequatur et illo asperiores nobis. Placeat ducimus consequatur temporibus atque dolores optio nihil. Reiciendis hic veniam error voluptatibus delectus ducimus ea. Est rerum accusamus voluptatum tenetur praesentium ipsam dolore. Quia repellendus maiores quis quam occaecati et. Dolore voluptate dicta cum error qui quod.",
+    "section": "shoes",
+    "sub_section": "male",
+    "category": "Sneakers",
+    "price": 1.05,
+    "color": "Cornsilk",
+    "material": "adipisci",
+    "images": "[\"/path/to/image/one.jpg\"]",
+    "options": "[]",
+    "created_at": "2019-09-07 14:38:23",
+    "updated_at": "2019-09-07 14:38:23"
+  }
+}

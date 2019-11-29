@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'com.faaizz.dev.online_platform'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+    implementation 'org.apache.httpcomponents:httpmime:4.5.10'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+}
+
+javafx{
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+mainClassName= 'com.faaizz.dev.online_platform.GUI.Main'
+
+//MAIN MANIFEST TO ALLOW EXECUTION OF .jar ARTIFACT
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.faaizz.dev.online_platform.GUI.Main'
+        )
+    }
+
+    //THIS BUNDLES THE DEPENDENCIES INTO THE .jar ARTIFACT
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+
+    /*TO RUN JAR FILE YOU MUST SUPPLY THE FOLLOWING JVM ARGUMENTS
+        --module-path <path to javafx sdk>/lib
+        --add-modules=javafx.controls,javafx.fxml
+    */
+}

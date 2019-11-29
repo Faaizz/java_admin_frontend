@@ -1,0 +1,239 @@
+{
+  "data": [
+    {
+      "first_name": "Dr. Isabelle Schuster V",
+      "last_name": "Nyasia Nitzsche",
+      "email": "aemard@example.org",
+      "address": "584 Jaron Grove\nTinaborough, MO 79657-4897",
+      "gender": "female",
+      "phone_numbers": "[\"+23489360958\", \"+23444702844\", \"+23439046487\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 0
+    },
+    {
+      "first_name": "Elda Skiles",
+      "last_name": "Peyton O'Keefe",
+      "email": "alfredo.hyatt@example.net",
+      "address": "49883 Beer Park Apt. 135\nKaelaborough, OH 65691-1076",
+      "gender": "female",
+      "phone_numbers": "[\"+23489805281\", \"+23475486312\", \"+23454019591\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Georgianna Dietrich Sr.",
+      "last_name": "Betsy Little",
+      "email": "alvena.monahan@example.org",
+      "address": "9860 Nicolas Hollow\nElmiraview, WY 11201-8976",
+      "gender": "male",
+      "phone_numbers": "[\"+23448021354\", \"+23449833665\", \"+23469491655\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Antoinette Aufderhar",
+      "last_name": "Durward Kunde",
+      "email": "baby.wilderman@example.com",
+      "address": "6156 Streich Hill\nWest Karinemouth, NC 42677",
+      "gender": "male",
+      "phone_numbers": "[\"+23410048739\", \"+23498624713\", \"+23480765497\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Lionel Buckridge Sr.",
+      "last_name": "Prof. Hillary Hessel Jr.",
+      "email": "belle.kunde@example.com",
+      "address": "3207 Eloise Underpass\nNew Stan, MN 92047-0833",
+      "gender": "male",
+      "phone_numbers": "[\"+23414874756\", \"+23497708132\", \"+23477441331\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Dr. Catalina Carter III",
+      "last_name": "Caitlyn Braun",
+      "email": "beulah.sawayn@example.org",
+      "address": "9138 Schultz Path Apt. 513\nSouth Donavon, AK 29046",
+      "gender": "male",
+      "phone_numbers": "[\"+23479999109\", \"+23438999618\", \"+2348072740\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 0
+    },
+    {
+      "first_name": "Prof. Justyn Jakubowski",
+      "last_name": "Eliza Brakus Jr.",
+      "email": "bill.olson@example.com",
+      "address": "6302 Annabelle Ports Suite 616\nEast Arianna, MA 35534-5771",
+      "gender": "female",
+      "phone_numbers": "[\"+23478033605\", \"+23447236381\", \"+23459168916\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Bettie Hoeger III",
+      "last_name": "Prof. Kelly Sawayn PhD",
+      "email": "braeden20@example.net",
+      "address": "890 Allan Forges\nSouth Lolitafurt, NE 93146-3780",
+      "gender": "female",
+      "phone_numbers": "[\"+23433127289\", \"+23446645350\", \"+23445942464\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 2
+    },
+    {
+      "first_name": "Estell Franecki III",
+      "last_name": "Alvina Bernier",
+      "email": "branson.von@example.org",
+      "address": "75514 Jacobs Rapids\nCorwinshire, NE 47362",
+      "gender": "female",
+      "phone_numbers": "[\"+23446108420\", \"+23427542743\", \"+23450370040\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Ines Keebler",
+      "last_name": "Gust Schinner",
+      "email": "brown29@example.net",
+      "address": "551 Greenholt Meadows\nLaneview, TX 67142",
+      "gender": "male",
+      "phone_numbers": "[\"+23481549963\", \"+23417678419\", \"+23465707198\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 1
+    },
+    {
+      "first_name": "Nathan Jast",
+      "last_name": "Mr. Jayden Keebler",
+      "email": "brunte@example.org",
+      "address": "111 Hoeger Stream\nEast Nicholeville, KS 93931",
+      "gender": "male",
+      "phone_numbers": "[\"+23488064347\", \"+23441840251\", \"+23499638191\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 0
+    },
+    {
+      "first_name": "Macie Cole",
+      "last_name": "Marcos Rowe",
+      "email": "bwiza@example.net",
+      "address": "6625 Tito Branch Apt. 910\nWest Minnie, MD 01557",
+      "gender": "female",
+      "phone_numbers": "[\"+23480877481\", \"+23448274307\", \"+23445705619\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 2
+    },
+    {
+      "first_name": "Miss Macie Rempel",
+      "last_name": "Ruthe Beahan",
+      "email": "cbeier@example.org",
+      "address": "4746 Carey Camp Apt. 256\nWest Olafburgh, IL 63789",
+      "gender": "female",
+      "phone_numbers": "[\"+23450901830\", \"+23451684676\", \"+23460437793\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 3
+    },
+    {
+      "first_name": "Colton Effertz",
+      "last_name": "Elnora Dach Sr.",
+      "email": "champlin.thea@example.net",
+      "address": "8523 Marian Shoals\nLake Lenna, PA 31771",
+      "gender": "female",
+      "phone_numbers": "[\"+23446659160\", \"+23487386024\", \"+23410098762\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 2
+    },
+    {
+      "first_name": "Jennie Denesik",
+      "last_name": "Nicolette Lockman",
+      "email": "connor71@example.org",
+      "address": "876 Liliane Alley\nNew Cletashire, LA 81630-0901",
+      "gender": "male",
+      "phone_numbers": "[\"+23414386438\", \"+23429319615\", \"+23452576332\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 4
+    },
+    {
+      "first_name": "Michel Simonis",
+      "last_name": "Kristina Rohan",
+      "email": "damore.desmond@example.org",
+      "address": "88658 Jones Plaza\nLake Dejaport, WA 15914-5345",
+      "gender": "female",
+      "phone_numbers": "[\"+2341202022\", \"+23442712155\", \"+23414317656\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 0
+    },
+    {
+      "first_name": "Mr. Elroy Pfannerstill",
+      "last_name": "Prof. Austin Beier",
+      "email": "ebins@example.org",
+      "address": "3136 Gia Terrace\nSouth Albinaburgh, AR 85131-6188",
+      "gender": "male",
+      "phone_numbers": "[\"+23446032047\", \"+23457133690\", \"+23489042717\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 3
+    },
+    {
+      "first_name": "Dejon Rath",
+      "last_name": "Lempi Kirlin",
+      "email": "ellsworth.sipes@example.net",
+      "address": "296 Eudora Views Suite 205\nPort Silas, TX 49725-1729",
+      "gender": "male",
+      "phone_numbers": "[\"+23495205105\", \"+23494420694\", \"+23491893902\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 0
+    },
+    {
+      "first_name": "Winifred Homenick MD",
+      "last_name": "Garrett Jerde",
+      "email": "fparker@example.net",
+      "address": "921 Amaya Oval\nCandacefurt, CA 85951-5142",
+      "gender": "male",
+      "phone_numbers": "[\"+23424021760\", \"+23491457079\", \"+23429397819\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 2
+    },
+    {
+      "first_name": "Faizudeen",
+      "last_name": "Kajogbola",
+      "email": "fr33ziey@example.orgg",
+      "address": "Kurt-Schumacher-Str. 16\n67663 Kaiserslautern",
+      "gender": "male",
+      "phone_numbers": "[\"+2348147619784\", \"2348147619784\", \"2348147619784\"]",
+      "activation_status": "no",
+      "newsletters": "yes",
+      "pending_orders": 5
+    }
+  ],
+  "links": {
+    "first": "http:\/\/127.0.0.1:8000\/api\/customers?page=1",
+    "last": "http:\/\/127.0.0.1:8000\/api\/customers?page=3",
+    "prev": null,
+    "next": "http:\/\/127.0.0.1:8000\/api\/customers?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 3,
+    "path": "http:\/\/127.0.0.1:8000\/api\/customers",
+    "per_page": 20,
+    "to": 20,
+    "total": 57
+  }
+}

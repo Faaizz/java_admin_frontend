@@ -1,0 +1,13 @@
+{
+  "data": {
+    "first_name": "Antoinette Aufderhar",
+    "last_name": "Durward Kunde",
+    "email": "baby.wilderman@example.com",
+    "address": "6156 Streich Hill\nWest Karinemouth, NC 42677",
+    "gender": "male",
+    "phone_numbers": "[\"+23410048739\", \"+23498624713\", \"+23480765497\"]",
+    "activation_status": "no",
+    "newsletters": "yes",
+    "pending_orders": 1
+  }
+}

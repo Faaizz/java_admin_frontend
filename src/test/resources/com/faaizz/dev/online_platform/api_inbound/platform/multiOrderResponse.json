@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "product_id": 132,
+      "product_size": "xxl",
+      "product_quantity": 3,
+      "customer_email": "connor71@example.org",
+      "staff_email": "ustiedemann@berge.com",
+      "status": "pending",
+      "est_del_date": null,
+      "failure_date": null,
+      "failure_cause": "",
+      "delivery_date": null,
+      "created_at": "2019-09-07 14:38:34",
+      "updated_at": "2019-09-07 14:38:34"
+    },
+    {
+      "id": 2,
+      "product_id": 286,
+      "product_size": "sm",
+      "product_quantity": 2,
+      "customer_email": "steuber.alysa@example.com",
+      "staff_email": "jamarcus11@hotmail.com",
+      "status": "pending",
+      "est_del_date": null,
+      "failure_date": null,
+      "failure_cause": "",
+      "delivery_date": null,
+      "created_at": "2019-09-07 14:38:35",
+      "updated_at": "2019-09-07 14:38:35"
+    },
+    {
+      "id": 3,
+      "product_id": 164,
+      "product_size": "lg",
+      "product_quantity": 8,
+      "customer_email": "fr3yy3ziey@exampllle.orgg",
+      "staff_email": "jalyn.gottlieb@bahringer.com",
+      "status": "pending",
+      "est_del_date": null,
+      "failure_date": null,
+      "failure_cause": "",
+      "delivery_date": null,
+      "created_at": "2019-09-07 14:38:35",
+      "updated_at": "2019-09-07 14:38:35"
+    },
+    {
+      "id": 4,
+      "product_id": 177,
+      "product_size": "xl",
+      "product_quantity": 7,
+      "customer_email": "fr3yy3zieyttt@ymail.net",
+      "staff_email": "ola23@terry.com",
+      "status": "pending",
+      "est_del_date": null,
+      "failure_date": null,
+      "failure_cause": "",
+      "delivery_date": null,
+      "created_at": "2019-09-07 14:38:35",
+      "updated_at": "2019-09-07 14:38:35"
+    },
+    {
+      "id": 5,
+      "product_id": 6,
+      "product_size": "xs",
+      "product_quantity": 8,
+      "customer_email": "renner.rogers@example.org",
+      "staff_email": "aishayetunde",
+      "status": "pending",
+      "est_del_date": null,
+      "failure_date": null,
+      "failure_cause": "",
+      "delivery_date": null,
+      "created_at": "2019-09-07 14:38:35",
+      "updated_at": "2019-09-07 14:38:35"
+    }
+  ],
+  "links": {
+    "first": "http:\/\/127.0.0.1:8000\/api\/orders?page=1",
+    "last": "http:\/\/127.0.0.1:8000\/api\/orders?page=20",
+    "prev": null,
+    "next": "http:\/\/127.0.0.1:8000\/api\/orders?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 20,
+    "path": "http:\/\/127.0.0.1:8000\/api\/orders",
+    "per_page": 5,
+    "to": 5,
+    "total": 97
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "data": [
+    {
+      "first_name": "Aisha",
+      "last_name": "Yetunde",
+      "email": "aishayetunde",
+      "api_token": "GahzzqxIuONIpHz8J64sU17Prdj8dMY3RA6xT1axBpynlWoLUQbDOUWwpLhW",
+      "address": "Ibadan, Nigeria",
+      "gender": "female",
+      "phone_numbers": "[\"+2348187456305\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-09-01T00:44:24.000000Z",
+      "updated_at": "2019-09-01T00:44:24.000000Z",
+      "pending_orders": 8
+    },
+    {
+      "first_name": "Selmer Macejkovic",
+      "last_name": "Ezekiel Moen",
+      "email": "barton.enid@bogan.com",
+      "api_token": "9ihwgKpYV2f3GbY49jbWizMU5xUlCTEJskPSDCyoBOpYqm18FQm58qkyNjr1",
+      "address": "5629 Shawn Springs\nNorth Percival, NY 51941-5770",
+      "gender": "female",
+      "phone_numbers": "[\"+23425077604\", \"+23453310657\", \"+23495914134\"]",
+      "privilege_level": "admin",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 10
+    },
+    {
+      "first_name": "Erin Dicki III",
+      "last_name": "Jailyn Aufderhar",
+      "email": "bill67@yahoo.com",
+      "api_token": "9WMnZfkMZAHdZZZZWFbFLAKs503Ordwa7cTwiKmCxp2RlKh58vKhrlNFhxvA",
+      "address": "366 Crooks Hills\nBellafort, MO 64512-3950",
+      "gender": "male",
+      "phone_numbers": "[\"+23430642073\", \"+23474333858\", \"+23458462444\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 11
+    },
+    {
+      "first_name": "Vergie Franecki II",
+      "last_name": "Isabel Wiegand DVM",
+      "email": "bmacejkovic@hegmann.biz",
+      "api_token": "2yL2TfO8eqMui3Y0ztJvw4YYXLcx1prjCm46Ff4OxEEaBJCie8XyCnYydIoU",
+      "address": "1508 Alysha Hills Apt. 790\nEast Jordon, MS 95038",
+      "gender": "female",
+      "phone_numbers": "[\"+23411050655\", \"+23425191511\", \"+23451838368\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 6
+    },
+    {
+      "first_name": "Prof. Morgan Collins IV",
+      "last_name": "Dr. Lew Ortiz",
+      "email": "ddouglas@hotmail.com",
+      "api_token": "YFVeQLPrIfiWyNGSKolrouatRkVkjHrTritIQalpbPsBl7TAnVMHJKGwARns",
+      "address": "5011 Bette Junction Suite 221\nHomenickland, WV 68136",
+      "gender": "female",
+      "phone_numbers": "[\"+23451347272\", \"+23433704434\", \"+23436197935\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-09-01T22:25:57.000000Z",
+      "pending_orders": 7
+    },
+    {
+      "first_name": "Ruben Muller Sr.",
+      "last_name": "Krystina Beier",
+      "email": "frederik21@yahoo.com",
+      "api_token": "tEKNLmXdgAIvuEZ9rndKUYbUoyOYz8ad6f4B1My70wYNvm3MHGm0BVetD4Xp",
+      "address": "27412 Roberta Prairie\nLarissachester, NY 53532",
+      "gender": "female",
+      "phone_numbers": "[\"+23491038791\", \"+23499773025\", \"+23462953507\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:47.000000Z",
+      "updated_at": "2019-08-27T21:28:47.000000Z",
+      "pending_orders": 6
+    },
+    {
+      "first_name": "Dr. Jefferey Runolfsdottir II",
+      "last_name": "Deonte Gleichner III",
+      "email": "jalyn.gottlieb@bahringer.com",
+      "api_token": "3qSkS9K4VsrI9lZ1rDKEqVogDCumB00Dmgd03GwjlgbtbBSOPbFOdRU69t3B",
+      "address": "63677 Tremblay Ridges\nJeanchester, VT 08500",
+      "gender": "female",
+      "phone_numbers": "[\"+23450667701\", \"+23448030570\", \"+23494728985\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 4
+    },
+    {
+      "first_name": "Jessy Bartoletti",
+      "last_name": "Everette Osinski",
+      "email": "jamarcus11@hotmail.com",
+      "api_token": "gDgzWLqc2vT2vNDTsfWpLkJdqTl2C6gv18aCqKV4bjrJXTTi3hKr3g9n3xFD",
+      "address": "398 Mertie Centers Apt. 756\nNorth Brenda, OH 79813-8776",
+      "gender": "female",
+      "phone_numbers": "[\"+2349748491\", \"+23432375999\", \"+23448182315\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 16
+    },
+    {
+      "first_name": "Tania Skiles",
+      "last_name": "Frederique Bergstrom PhD",
+      "email": "maegan54@yahoo.com",
+      "api_token": "H8gOuKpxW46LBJ783lEi830bDv0VIlFAZ8JRHxAdpr0JSFADomKSk6xJuEm2",
+      "address": "618 Rau Shoals\nPort Marlenshire, KY 67683-1726",
+      "gender": "female",
+      "phone_numbers": "[\"+23422100735\", \"+23468506865\", \"+23448365685\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 10
+    },
+    {
+      "first_name": "Sheldon Romaguera",
+      "last_name": "Griffin Morar I",
+      "email": "ola23@terry.com",
+      "api_token": "RQeXqLXQLGSWB4gNxBLKVGuStd7ZT9gC7ooMS93FfnTo8D1FsOkKcyWgKwIA",
+      "address": "2712 Lyla Isle\nPort Zelma, VT 55734",
+      "gender": "male",
+      "phone_numbers": "[\"+23471166585\", \"+23443556271\", \"+23499817854\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-08-27T21:28:48.000000Z",
+      "pending_orders": 7
+    },
+    {
+      "first_name": "Taiwo",
+      "last_name": "Sophie Morissette DDS",
+      "email": "ustiedemann@berge.com",
+      "api_token": "x6Q7KqJfghcRzgo1bCpKStslqsOhBR8VnQDe0NgAtAGOhnkWN6YCENhg21tO",
+      "address": "6401 Reilly Camp Suite 549\nLake Karleeburgh, OK 14924",
+      "gender": "female",
+      "phone_numbers": "[\"+23482435527\", \"+23495515043\", \"+2349061626\"]",
+      "privilege_level": "staff",
+      "created_at": "2019-08-27T21:28:48.000000Z",
+      "updated_at": "2019-09-01T00:28:38.000000Z",
+      "pending_orders": 11
+    }
+  ],
+  "links": {
+    "first": "http:\/\/127.0.0.1:8000\/api\/staff?page=1",
+    "last": "http:\/\/127.0.0.1:8000\/api\/staff?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "http:\/\/127.0.0.1:8000\/api\/staff",
+    "per_page": 20,
+    "to": 11,
+    "total": 11
+  }
+}
