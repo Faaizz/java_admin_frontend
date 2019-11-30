@@ -109,3 +109,19 @@
     -fx-background-color: #646A70;
     -fx-text-fill: #EAE9E5;
 }
+
+.file-chooser-button{
+    -fx-cursor: hand;
+    -fx-background-color: #DAD9D5;
+    -fx-border-color: #343A40;
+    -fx-text-fill: #343A40;
+}
+
+.file-chooser-button:hover{
+    -fx-background-color: #EEEEEE;
+}
+
+/* V    A   L   I   D   A   T   I   O   N   */
+.red_borders{
+    -fx-border-color: red!important;
+}

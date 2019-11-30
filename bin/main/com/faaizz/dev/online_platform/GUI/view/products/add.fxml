@@ -20,7 +20,7 @@
 <?import javafx.collections.*?>
 
 <?import java.lang.String?>
-<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.Controller.Main">
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.products.Add">
 
     <top>
         <VBox>
@@ -50,7 +50,7 @@
                         <Tooltip text="logout" />
                     </tooltip>
                 </Button>
-                <Button styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10">
+                <Button styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10" onMouseClicked="#handleExit">
                     <graphic>
                         <ImageView>
                             <Image url="@../img/close.png"/>
@@ -111,22 +111,54 @@
                     <content>
                         <HBox  styleClass="sub-section-style" spacing="30" alignment="CENTER">
                             <!--LABELS-->
-                            <VBox spacing="10">
+                            <VBox fx:id="labels_vbox" spacing="10">
                                 <Label text="Name:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30"/>
                                 <Label text="Brand:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30"/>
                                 <Label text="Description:" styleClass="mid-body-font" alignment="TOP_RIGHT" minHeight="70" prefHeight="70"/>
-                                <Label text="Section:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30"/>
+                                <Label text="Section:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Sub-section:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Category:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Color:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Price:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Material:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Size:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <VBox fx:id="decoy_labels_vbox">
+                                <!--BLANK LABEL TO HOLD "Add Additional Size" LINE-->
+                                <Label text=" " styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                </VBox>
+                                <Label text="Image One:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Image Two:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                                <Label text="Image Three:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
                             </VBox>
 
                             <!--TEXTFIELDS-->
-                            <VBox spacing="10">
-                                <TextField  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
-                                <TextField  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
-                                <TextArea styleClass="big-body-textarea" minHeight="70" prefHeight="70" />
-                                <ComboBox fx:id="sections_dropdown" styleClass="big-body-combobox">
-                                    
-                                </ComboBox>
-                                <Button text="ADD" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35"/>
+                            <VBox fx:id="textfields_vbox"  spacing="10">
+                                <TextField fx:id="name_textfield"  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                                <TextField fx:id="brand_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                                <TextArea fx:id="description_text_area" styleClass="big-body-textarea" minHeight="70" prefHeight="70" />
+                                <ComboBox fx:id="section_dropdown" styleClass="big-body-combobox" onAction="#handleSectionChange" />
+                                <ComboBox fx:id="sub_section_dropdown" styleClass="big-body-combobox" onAction="#handleSub_sectionChange" />
+                                <ComboBox fx:id="category_dropdown" styleClass="big-body-combobox" />
+                                <TextField fx:id="color_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                                <TextField fx:id="price_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" />
+                                <TextField fx:id="material_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" />
+                                <VBox fx:id="size_and_quantity_vbox">
+                                    <HBox fx:id="size_and_quantity_hbox" >
+                                        <TextField fx:id="size_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" minWidth="70" prefWidth="70" />
+                                        <Label text="Quantity:" styleClass="mid-body-font" minHeight="30" prefHeight="30">
+                                            <padding>
+                                                <Insets bottom="0" left="25.0" right="15.0" top="0" />
+                                            </padding>
+                                        </Label>
+                                        <TextField fx:id="quantity_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" minWidth="70" prefWidth="70" />
+                                    </HBox>
+                                </VBox>
+                                <Button fx:id="add_size_button" text="Add Another Size" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleAddSize" />
+                                <!--SPECIFY EXTREMELY LARGE MAX SIZE FOR BUTTON SO IT TAKES UP REMAINING SPACE-->
+                                <Button fx:id="image_one_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="image_two_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="image_three_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="add_product_button" text="ADD PRODUCT" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleAddProduct" />
                             </VBox>
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />

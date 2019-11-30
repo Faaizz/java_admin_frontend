@@ -1,11 +1,13 @@
 package com.faaizz.dev.online_platform.GUI;
 
+import com.faaizz.dev.online_platform.api_outbound.platform.StaffResource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,7 +24,17 @@ public class Main extends Application {
 
         try{
 
-            Parent root= FXMLLoader.load(getClass().getResource("view/Products/add.fxml"));
+            // SET APPLICATION DATA
+            SettingsData.setBase_URL("127.0.0.1:8000");
+            SettingsData.setApi_path("/api");
+            SettingsData.setApi_token("x6Q7KqJfghcRzgo1bCpKStslqsOhBR8VnQDe0NgAtAGOhnkWN6YCENhg21tO");
+
+            // TODO: REMOVE THIS
+            // Simulate Staff Login
+            StaffResource staffResource= new StaffResource(SettingsData.getBase_URL(), SettingsData.getApi_path(), SettingsData.getApi_token());
+            staffResource.login("barton.enid@bogan.com", "Qui tempore dolores qui excepturi corrupti magni.", "yes");
+
+            Parent root= FXMLLoader.load(getClass().getResource("view/products/add.fxml"));
 
             primaryStage.setTitle("Admin Portal");
 
@@ -37,6 +49,7 @@ public class Main extends Application {
 
             //SHOW STAGE
             primaryStage.show();
+
 
         } catch(Exception e){
             //CATCH BLOCK TO HANDLE EXCEPTIONS THROWN FROM ANY PART OF THE APPLICATION
