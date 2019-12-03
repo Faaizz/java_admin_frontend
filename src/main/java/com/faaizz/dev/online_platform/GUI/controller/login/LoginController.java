@@ -7,7 +7,15 @@ import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
 import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
+import com.faaizz.dev.online_platform.api_outbound.exceptions.ResponseException;
 import com.faaizz.dev.online_platform.api_outbound.platform.StaffResource;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.apache.http.client.ClientProtocolException;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +24,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.net.ConnectException;
 
 public class LoginController extends MainController {
 
@@ -90,7 +99,7 @@ public class LoginController extends MainController {
                         try{
 
                             // CREATE StaffResource
-                            StaffResource staff_resource= new StaffResource(SettingsData.getBase_URL(), SettingsData.getApi_path(), SettingsData.getApi_token());
+                            StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
                             // LOGIN STAFF
                             staff_resource.login(id_textfield.getText(), passwordfield.getText(), "yes");
@@ -113,10 +122,22 @@ public class LoginController extends MainController {
                             // REDIRECT TO MANAGE PRODUCTS (SEARCH PRODUCTS)
                             Main.getInstance().redirectToManageProducts();
 
+                        }catch (ResponseException e){
+
+                            // ENABLE CLOSE BUTTON
+                            mini_dialog_controller.enableCloseButton();
+
+                            // PARSE JSON RESPONSE
+
+                            // SET message RECIEVED FROM API
+                            mini_dialog_controller.setDialog_text_label(e.getJsonResponse());
+
+                            // LOG ERROR TO CONSOLE
+                            e.printStackTrace();
                         }catch(Exception e){
                             // ENABLE CLOSE BUTTON
                             mini_dialog_controller.enableCloseButton();
-                            mini_dialog_controller.setDialog_text_label("Incorrect login/password combination");
+                            mini_dialog_controller.setDialog_text_label("An Unxpected Error Ocurred");
 
                             // LOG ERROR TO CONSOLE
                             e.printStackTrace();

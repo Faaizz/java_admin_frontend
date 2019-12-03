@@ -248,7 +248,6 @@ public abstract class APIResource {
 
             CookieStore.getCookies().forEach( (name, cookie)->{
 
-                System.err.println("Attaching cookie: " + name);
                 request.addHeader("Cookie", cookie.getValue());
 
             });

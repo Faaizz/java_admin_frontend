@@ -45,7 +45,7 @@ public class ManageProductsController extends GenericProductController {
 
             // SUCCESS VALIDATION
             // SETUP PRODUCT RESOURCE
-            ProductResource productResource= new ProductResource(SettingsData.getBase_URL(), SettingsData.getApi_path(), SettingsData.getApi_token());
+            ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
             // SETUP SEARCH PARAMETERS
             Map<String, String> post_data= new HashMap<>();
 

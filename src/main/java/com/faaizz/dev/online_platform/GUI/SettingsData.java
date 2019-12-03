@@ -1,40 +1,54 @@
 package com.faaizz.dev.online_platform.GUI;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import com.faaizz.dev.online_platform.GUI.model.Settings;
+import com.google.gson.Gson;
+
 /**
  * This class holds current application settings
  */
 public class SettingsData {
 
-    private static String api_token;
-    private static String base_URL;
-    private static String api_path;
+    private static Settings settings;
 
-    /*========================================================================================*/
-    /*  G   E   T   T   E   R   S   */
+    public static void loadSettings() throws IOException {
 
-    public static String getApi_token() {
-        return api_token;
+
+        // STRING BUILDER
+        StringBuilder jsonSB= new StringBuilder();
+
+        try(BufferedReader file_reader= new BufferedReader(new InputStreamReader(new FileInputStream("settings/main.json")))){
+            // LOAD SETTINGS FILE
+
+            // TEMPORARY STRING
+            String line;
+
+            // WHILE THERE'S STILL CONTENT IN THE FILE
+            while( (line= file_reader.readLine()) != null ) {
+                jsonSB.append(line);
+            }
+
+        }catch(Exception e){
+            throw e;
+        }
+
+        // JSON STRING
+        String json_string= jsonSB.toString();
+
+        // LOAD SETTINGS FROM LOCAL JSON FILE (settings/main.json)
+        Gson gson= new Gson();
+
+        // CREATE Settings OBJECT
+        settings= gson.fromJson(json_string, Settings.class);
+
     }
 
-    public static String getBase_URL() {
-        return base_URL;
+    public static Settings getSettings(){
+        return settings;
     }
 
-    public static String getApi_path() {
-        return api_path;
-    }
-    /*========================================================================================*/
-    /*  S   E   T   T   E   R   S   */
-
-    public static void setApi_token(String api_token) {
-        SettingsData.api_token = api_token;
-    }
-
-    public static void setBase_URL(String base_URL) {
-        SettingsData.base_URL = base_URL;
-    }
-
-    public static void setApi_path(String api_path) {
-        SettingsData.api_path = api_path;
-    }
 }

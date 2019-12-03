@@ -53,7 +53,7 @@ public class AddProductController extends GenericProductController {
             /*  S   U   C   C   E   S   S       V   A   L   I   D   A   T   I   O   N */
 
             // SETUP PRODUCT RESOURCE
-            ProductResource productResource = new ProductResource(SettingsData.getBase_URL(), SettingsData.getApi_path(), SettingsData.getApi_token());
+            ProductResource productResource = new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
             // SETUP SIZES AND CORRESPONDING QUANTITIES
             List<Map<String, String>> options = new ArrayList<>();

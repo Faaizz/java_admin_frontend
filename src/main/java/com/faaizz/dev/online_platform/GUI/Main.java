@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,10 +40,8 @@ public class Main extends Application {
             // SET INTERNAL STATIC Stage VARIABLE
             this.main_stage= primaryStage;
 
-            // SET APPLICATION DATA
-            SettingsData.setBase_URL("127.0.0.1:8000");
-            SettingsData.setApi_path("/api");
-            SettingsData.setApi_token("x6Q7KqJfghcRzgo1bCpKStslqsOhBR8VnQDe0NgAtAGOhnkWN6YCENhg21tO");
+            // LOAD APPLICATION DATA
+            SettingsData.loadSettings();
 
             // LOAD LOGIN PAGE BY DEFAULT
             Parent root= FXMLLoader.load(getClass().getResource("view/login/login.fxml"));
@@ -125,7 +124,7 @@ public class Main extends Application {
         checkAuthentication();
 
         // LOGOUT USER
-        StaffResource staff_resource= new StaffResource(SettingsData.getBase_URL(), SettingsData.getApi_path(), SettingsData.getApi_token());
+        StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
         staff_resource.logout();
 
         InstanceData.setAuthenticated(false);

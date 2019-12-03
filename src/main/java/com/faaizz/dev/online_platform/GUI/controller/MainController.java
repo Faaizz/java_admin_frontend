@@ -29,6 +29,9 @@ public class MainController {
     @FXML
     protected Label staff_name;
 
+    @FXML
+    protected Button settings_button;
+
     /*========================================================================================*/
     @FXML
     public void handleExit(){
@@ -57,6 +60,23 @@ public class MainController {
             // LOG EXCEPTION TO CONSOLE
             e.printStackTrace();
         }
+
+    }
+
+    @FXML
+    public void handleSettings() throws IOException {
+
+        // DISPLAY LOADING DIALOG
+        // Create dialog
+        Dialog settings_dialog = new Dialog();
+        settings_dialog.initOwner(root_border_pane.getScene().getWindow());
+        // Create FXML Loader
+        FXMLLoader settings_dialog_loader = new FXMLLoader();
+        settings_dialog_loader.setLocation(getClass().getResource("../../view/settings/settings.fxml"));
+        // Load FXML
+        settings_dialog.getDialogPane().setContent(settings_dialog_loader.load());
+        settings_dialog.initStyle(StageStyle.UNDECORATED);
+        settings_dialog.show();
 
     }
 

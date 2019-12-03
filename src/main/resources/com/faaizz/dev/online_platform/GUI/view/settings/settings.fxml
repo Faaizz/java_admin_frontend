@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<?import javafx.geometry.Insets?>
+<HBox fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@../css/base.css" prefHeight="200" prefWidth="600"
+      fx:controller="com.faaizz.dev.online_platform.GUI.controller.settings.SettingsController"
+>
+
+    <VBox fx:id="settings_vbox" HBox.hgrow="ALWAYS" >
+        <HBox maxWidth="100000000" alignment="CENTER_RIGHT">
+            <Button fx:id="close_button" styleClass="active-section-button" maxWidth="10" onMouseClicked="#handleExit">
+                <graphic>
+                    <ImageView>
+                        <Image url="@../img/close.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="exit" />
+                </tooltip>
+            </Button>
+        </HBox>
+
+        <HBox fx:id="settings_hbox" styleClass="sub-section-style" spacing="30" alignment="CENTER">
+            <!--LABELS-->
+            <VBox fx:id="labels_vbox" spacing="10">
+                <Label text="Base URL:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                <Label text="API Path:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                <Label text="API Token:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+            </VBox>
+
+            <!--TEXTFIELDS-->
+            <VBox fx:id="textfields_vbox"  spacing="10">
+                <TextField fx:id="base_url_textfield"  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                <TextField fx:id="api_path_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                <TextField fx:id="api_token_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                <Button fx:id="save_settings_button" text="SAVE" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleSaveSettings" />
+            </VBox>
+            <padding>
+                <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+            </padding>
+        </HBox>
+
+    </VBox>
+
+</HBox>
