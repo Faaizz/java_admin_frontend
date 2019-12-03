@@ -13,7 +13,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -73,10 +75,18 @@ public class StaffResource extends APIResource {
      * Logs out currently authenticated user
      * @return returns true on success, false otherwise
      */
-    public boolean logout(){
+    public boolean logout() throws Exception {
 
-        //DELETE EXISTING STAFF AUTHENTICATION COOKIE "X-REMEMBER"
-        return CookieStore.removeCookie("X-REMEMBER");
+        URI uri= buildUri("/logout" );
+
+        HttpGet httpGet= new HttpGet(uri);
+
+        CloseableHttpResponse response= this.executeRequest(httpGet);
+
+        this.handleResponse(response);
+
+        // CLEAR COOKIES
+        return CookieStore.clearCookies();
 
     }
 

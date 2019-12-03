@@ -13,7 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Tooltip?>
-<BorderPane stylesheets="@css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.Main">
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.login.LoginController">
 
     <top>
         <GridPane styleClass="dark-color-style">
@@ -22,26 +22,36 @@
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
             </Label>
-            <Button styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER_RIGHT" maxWidth="10">
+            <Button fx:id="settings_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER_RIGHT" maxWidth="10">
                 <graphic>
                     <ImageView>
-                        <Image url="@img/settings.png"/>
+                        <Image url="@../img/settings.png"/>
                     </ImageView>
                 </graphic>
                 <tooltip>
                     <Tooltip text="settings" />
                 </tooltip>
             </Button>
-            <Button styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="2" alignment="CENTER_RIGHT" maxWidth="10">
-                    <graphic>
-                        <ImageView>
-                            <Image url="@img/close.png"/>
-                        </ImageView>
-                    </graphic>
-                    <tooltip>
-                        <Tooltip text="exit" />
-                    </tooltip>
-                </Button>
+            <Button fx:id="logout_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="2" alignment="CENTER_RIGHT" maxWidth="10">
+                <graphic>
+                    <ImageView>
+                        <Image url="@../img/logout.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="logout" />
+                </tooltip>
+            </Button>
+            <Button fx:id="close_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10" onMouseClicked="#handleExit">
+                <graphic>
+                    <ImageView>
+                        <Image url="@../img/close.png"/>
+                    </ImageView>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="exit" />
+                </tooltip>
+            </Button>
         </GridPane>
     </top>
 
@@ -57,9 +67,9 @@
 
                 <!--TEXTFIELDS-->
                 <VBox spacing="10">
-                    <TextField  styleClass="big-body-textfield" minHeight="35" prefHeight="35"/>
-                    <PasswordField styleClass="big-body-textfield" minHeight="35" prefHeight="35"/>
-                    <Button text="LOGIN" alignment="CENTER" styleClass="big-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35"/>
+                    <TextField fx:id="id_textfield"  styleClass="big-body-textfield" minHeight="35" prefHeight="35"/>
+                    <PasswordField fx:id="passwordfield" styleClass="big-body-textfield" minHeight="35" prefHeight="35"/>
+                    <Button fx:id="login_button" text="LOGIN" alignment="CENTER" styleClass="big-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleLogin" />
                 </VBox>
             </HBox>
         </VBox>

@@ -57,15 +57,12 @@
         assertDoesNotThrow( ()->{
 
             //LOG OUT THE USER (LOGIN ALREADY PERFORMED IN @BeforeAll)
-            assertFalse(
+            staffResource.logout();
 
-                    //ASSERT TRUE
-                    ! staffResource.logout()
-
-            );
+            staffResource= new StaffResource("127.0.0.1:8000", "/api", "x6Q7KqJfghcRzgo1bCpKStslqsOhBR8VnQDe0NgAtAGOhnkWN6YCENhg21tO");
 
             //LOGIN STAFF
-           staffResource.login("barton.enid@bogan.com", "Qui tempore dolores qui excepturi corrupti magni.", "yes");
+           staffResource.login("aishayetunde", "9b7b0ae9d8d17ce3e893b45206ecd3e139381560e6c61c8550627f072f0286ec", "yes");
 
            //GRAB DETAILS OF AUTHENTICATED STAFF
             String login_staff_string= staffResource.myAccount();
@@ -74,7 +71,7 @@
             Staff login_staff= APIParser.getInstance().parseSingleStaffResponse(login_staff_string);
 
             //VERIFY SUCCESSFUL LOGIN
-            assertEquals("barton.enid@bogan.com", login_staff.getEmail());
+            assertEquals("aishayetunde", login_staff.getEmail());
 
         });
 

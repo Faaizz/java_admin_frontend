@@ -43,4 +43,13 @@ public class CookieStore {
 
     }
 
+    public static boolean clearCookies(){
+
+        // CLEAR COOKIES
+        cookies= new HashMap<>();
+
+        return true;
+
+    }
+
 }

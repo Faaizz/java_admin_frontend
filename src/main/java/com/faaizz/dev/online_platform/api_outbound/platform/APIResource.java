@@ -244,11 +244,11 @@ public abstract class APIResource {
      */
     void attachCookies(HttpRequestBase request) throws IOException, ClassNotFoundException {
 
-
         if(CookieStore.getCookies().size() > 0){
 
             CookieStore.getCookies().forEach( (name, cookie)->{
 
+                System.err.println("Attaching cookie: " + name);
                 request.addHeader("Cookie", cookie.getValue());
 
             });

@@ -9,15 +9,15 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<?import javafx.geometry.Insets?>
+
 <HBox fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      stylesheets="@../css/base.css" prefHeight="200" prefWidth="400"
+      stylesheets="@../css/base.css" prefHeight="200" prefWidth="600"
       fx:controller="com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController"
 >
 
     <VBox HBox.hgrow="ALWAYS" >
         <HBox maxWidth="100000000" alignment="CENTER_RIGHT">
-            <Button styleClass="active-section-button" maxWidth="10" onMouseClicked="#handleExit">
+            <Button fx:id="close_button" styleClass="active-section-button" maxWidth="10" onMouseClicked="#handleExit">
                 <graphic>
                     <ImageView>
                         <Image url="@../img/close.png"/>
