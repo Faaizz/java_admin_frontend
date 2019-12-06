@@ -30,7 +30,7 @@
         </HBox>
 
         <VBox maxWidth="1000000" VBox.vgrow="ALWAYS" alignment="CENTER">
-            <Label fx:id="dialog_text_label" text="" styleClass="big-body-font"  />
+            <Label wrapText="true" fx:id="dialog_text_label" text="" styleClass="big-body-font"  />
         </VBox>
 
 

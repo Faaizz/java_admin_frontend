@@ -1,6 +1,11 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
+import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.controller.MainController;
+import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
+import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
+import com.faaizz.dev.online_platform.api_outbound.exceptions.ResponseException;
+
 import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -19,6 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 public class GenericProductController extends ProductController {
+
+    // PAGE PATHS
+    private final String MANAGE_PRODUCTS = "view/products/manage.fxml";
+    private final String ADD_PRODUCTS = "view/products/add.fxml";
+    private final String REMOVE_PRODUCTS = "view/products/remove.fxml";
 
     @FXML
     protected Button add_size_button;
@@ -53,7 +63,7 @@ public class GenericProductController extends ProductController {
     @FXML
     protected Button image_three_filechooser;
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
 
         // INITIALIZE SECTIONS, SUB SECTIONS AND CATEGORIES
         super.initialize();
@@ -88,7 +98,6 @@ public class GenericProductController extends ProductController {
      * ===========
      */
     /* A C T I O N H A N D L E R S */
-
 
     @FXML
     public void handleAddSize() {
@@ -179,7 +188,7 @@ public class GenericProductController extends ProductController {
 
         File temp_file = fileChooser.showOpenDialog(root_border_pane.getScene().getWindow());
 
-        if(temp_file != null) {
+        if (temp_file != null) {
             // Add file to image_files_list
             image_files_list.add(temp_file);
 
@@ -188,6 +197,37 @@ public class GenericProductController extends ProductController {
         }
 
     }
+
+
+    @FXML
+    protected void handleRedirectToAddProducts() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(ADD_PRODUCTS);    
+
+    }
+
+
+    @FXML
+    protected void handleRedirectToManageProducts() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(MANAGE_PRODUCTS);    
+
+    }
+
+
+    @FXML
+    protected void handleRedirectToRemoveProducts() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(REMOVE_PRODUCTS);    
+
+    }
+
+
+
+    /*========================================================================================*/
 
     public boolean validateEntries(){
 

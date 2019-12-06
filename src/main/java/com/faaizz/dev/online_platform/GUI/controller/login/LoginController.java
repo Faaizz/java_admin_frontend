@@ -87,7 +87,7 @@ public class LoginController extends MainController {
         // VALIDATION
         if(validateEntries()){
 
-            // CALL INHERITED METHOD FROM MainController CLASS TO DISPLAY LOAING DIALOG
+            // CALL INHERITED METHOD FROM MainController CLASS TO DISPLAY LOADING DIALOG
             MiniDialogController mini_dialog_controller= showLoadingMiniDialog();
 
             // PERFORM API ACCESS IN NEW THREAD
@@ -120,7 +120,7 @@ public class LoginController extends MainController {
                             mini_dialog_controller.handleExit();
 
                             // REDIRECT TO MANAGE PRODUCTS (SEARCH PRODUCTS)
-                            Main.getInstance().redirectToManageProducts();
+                            Main.getInstance().redirectToPage("view/products/manage.fxml");
 
                         }catch (ResponseException e){
 

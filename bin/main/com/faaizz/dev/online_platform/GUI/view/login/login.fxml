@@ -32,7 +32,7 @@
                     <Tooltip text="settings" />
                 </tooltip>
             </Button>
-            <Button fx:id="logout_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="2" alignment="CENTER_RIGHT" maxWidth="10">
+            <Button fx:id="logout_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="2" alignment="CENTER_RIGHT" maxWidth="10" >
                 <graphic>
                     <ImageView>
                         <Image url="@../img/logout.png"/>
@@ -42,7 +42,7 @@
                     <Tooltip text="logout" />
                 </tooltip>
             </Button>
-            <Button fx:id="close_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10" onMouseClicked="#handleExit">
+            <Button fx:id="close_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10" onAction="#handleExit">
                 <graphic>
                     <ImageView>
                         <Image url="@../img/close.png"/>

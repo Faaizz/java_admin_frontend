@@ -1,7 +1,6 @@
 package com.faaizz.dev.online_platform.GUI;
 
 import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
-import com.faaizz.dev.online_platform.api_outbound.platform.CookieStore;
 import com.faaizz.dev.online_platform.api_outbound.platform.StaffResource;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +8,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -102,16 +98,16 @@ public class Main extends Application {
 
 
     /**
-     * REDIRECT TO MANAGE PRODUCTS (SEARCH PRODUCTS)
+     * REDIRECT TO PAGE WITH SPECIFIED FXML
      * @throws IOException
      * @throws AuthenticationException
      */
-    public void redirectToManageProducts() throws IOException, AuthenticationException {
+    public void redirectToPage(String path_to_fxml) throws IOException, AuthenticationException {
 
         // VERIFY AUTHENTICATION
         checkAuthentication();
 
-        Parent manage_products= FXMLLoader.load(getClass().getResource("view/products/manage.fxml"));
+        Parent manage_products= FXMLLoader.load(getClass().getResource(path_to_fxml));
 
         main_stage.setScene(new Scene(manage_products, ( screen_size.getWidth() - screen_size.getWidth()/10), ( screen_size.getHeight() - screen_size.getHeight()/5 )));
 
@@ -119,9 +115,6 @@ public class Main extends Application {
 
 
     public void logout() throws Exception {
-
-        // VERIFY AUTHENTICATION
-        checkAuthentication();
 
         // LOGOUT USER
         StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());

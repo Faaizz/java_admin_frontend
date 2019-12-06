@@ -1,5 +1,6 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
+import com.faaizz.dev.online_platform.GUI.InstanceData;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.ProductCollection;
@@ -20,13 +21,13 @@ import java.util.Map;
 public class ManageProductsController extends GenericProductController {
 
     @FXML
-    private TextField min_price_textfield;
+    protected TextField min_price_textfield;
     @FXML
-    private TextField max_price_textfield;
+    protected TextField max_price_textfield;
     @FXML
-    private Button search_products_button;
+    protected Button search_products_button;
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
         // INITIALIZE SECTIONS, SUB SECTIONS AND CATEGORIES
         super.initialize();
     }

@@ -10,7 +10,7 @@ public class UpdateProductController extends GenericProductController {
     @FXML
     private TextField id_textfield;
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
 
         // LOAD PRODUCT TO UPDATE
 

@@ -66,10 +66,10 @@
 
             <!-- SECTIONS -->
             <GridPane styleClass="">
-                <Button fx:id="products_button" styleClass="section-buttons, big-body-font, active-section-button" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
-                <Button fx:id="orders_button" styleClass="section-buttons, big-body-font" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
-                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
-                <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="MANAGE STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+                <Button disable="true" fx:id="products_button" styleClass="section-buttons, big-body-font, active-section-button" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToProducts" />
+                <Button fx:id="orders_button" styleClass="section-buttons, big-body-font" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToOrders"  />
+                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
+                <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="MANAGE STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToManageStaff" />
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
@@ -91,9 +91,9 @@
 
             <!--PRODUCT BUTTONS-->
             <VBox fx:id="products_sub_section" spacing="10"  styleClass="sub-section-style">
-                <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity"/>
-                <Button fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" />
-                <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddProducts" />
+                <Button disable="true" fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>

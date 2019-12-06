@@ -4,6 +4,8 @@ import com.faaizz.dev.online_platform.GUI.InstanceData;
 import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
+import com.faaizz.dev.online_platform.api_inbound.model.supplement.StaffPrivilegeLevel;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -80,6 +82,30 @@ public class MainController {
 
     }
 
+
+    @FXML
+    public void  handleSectionChangeToProducts(){
+        
+    }
+
+
+    @FXML
+    public void  handleSectionChangeToOrders(){
+        
+    }
+
+
+    @FXML
+    public void  handleSectionChangeToCustomers(){
+        
+    }
+
+
+    @FXML
+    public void  handleSectionChangeToManageStaff(){
+
+    }
+
     /*========================================================================================*/
     public MiniDialogController showLoadingMiniDialog() throws IOException {
         // DISPLAY LOADING DIALOG
@@ -111,35 +137,17 @@ public class MainController {
     }
 
 
-    public void verifyAdminAuthorization() throws IOException {
+    public void verifyAdminAuthorization() throws Exception {
 
-        // SHOW LOADING DIALOG
-        MiniDialogController mini_dialog_controller= showLoadingMiniDialog();
+        // CHECK IF AUTHENTICATED STAFF IS ADMIN
+        if( !(InstanceData.getCurrentStaff().getPrivilege_level().equals(StaffPrivilegeLevel.ADMIN)) ){
 
-        try{
+            // IF NOT ADMIN, LOGOUT THE USER AND REDIRECT TO LOGIN PAGE
+            Main.getInstance().logout();
 
-            // CHECK IF AUTHENTICATED STAFF IS ADMIN
-            if( !(InstanceData.getCurrentStaff().getPrivilege_level().equals("admin")) ){
-
-                // IF NOT ADMIN, LOGOUT THE USER AND REDIRECT TO LOGIN PAGE
-                Main.getInstance().logout();
-
-                // THEN THROW AN EXCEPTION
-                throw new AuthenticationException("Failed Authorization. \nPlease login as admin");
-            }
-            // OTHERWISE, CLOSE DIALOG AND DO NOTHING
-            mini_dialog_controller.handleExit();
-
-        }catch (Exception e){
-
-            mini_dialog_controller.enableCloseButton();
-            mini_dialog_controller.setDialog_text_label(e.getMessage());
-
-            // LOG EXCEPTION TO CONSOLE
-            e.printStackTrace();
-
+            // THEN THROW AN EXCEPTION
+            // throw new AuthenticationException("Failed Authorization. \nPlease login as admin");
         }
-
 
 
     }

@@ -1,14 +1,13 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
+import com.faaizz.dev.online_platform.GUI.InstanceData;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableProduct;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class AddProductController extends GenericProductController {
      */
     /* I N I T I A L I Z E */
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
 
         super.initialize();
 
@@ -35,6 +34,9 @@ public class AddProductController extends GenericProductController {
         section_dropdown.getSelectionModel().selectFirst();
         handleSectionChange();
         handleSub_sectionChange();
+
+
+        System.out.println(InstanceData.getAuthenticated());
 
     }
 

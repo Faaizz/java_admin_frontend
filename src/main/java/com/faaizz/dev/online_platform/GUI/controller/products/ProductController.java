@@ -35,7 +35,7 @@ public class ProductController extends MainController {
     protected TextField color_textfield;
 
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
 
         /*
          * =============================================================================
