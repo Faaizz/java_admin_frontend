@@ -19,7 +19,7 @@
 
 /* F    I   X   E   S */
 
-.big-body-textfield, .big-body-textfield:focused, .big-body-textarea .content, .big-body-textarea:focused .content, .big-body-combobox:focused, .big-body-combobox{
+.big-body-textfield, .big-body-textfield:focused, .pagination-textfield, .pagination-textfield:focused, .big-body-textarea .content, .big-body-textarea:focused .content, .big-body-combobox:focused, .big-body-combobox{
     -fx-highlight-fill: -fx-accent;
     -fx-highlight-text-fill: white;
     -fx-border-color: #343A40;
@@ -56,6 +56,12 @@
 .sub-section-style{
     -fx-text-fill: #4C5258;
     -fx-background-color: #DAD9D5;
+}
+
+
+/*  T   E   X   T   F   I   E   L   D   S   */
+.pagination-textfield, .pagination-textfield:focused{
+    -fx-background-color: #EAE9E5;
 }
 
 
@@ -121,7 +127,41 @@
     -fx-background-color: #EEEEEE;
 }
 
+.image-view-button{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: #646A70;
+    -fx-text-fill: #DAD9D5;
+}
+
+.image-view-button:hover{
+    -fx-background-color: #343A40;
+}
+
+.pagination-button{
+    -fx-cursor: hand;
+    -fx-background-color: #DAD9D5;
+    -fx-border-color: #343A40;
+    -fx-text-fill: #343A40;
+}
+
+.pagination-button:hover{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: #343A40;
+    -fx-text-fill: #DAD9D5;
+}
+
+
 /* V    A   L   I   D   A   T   I   O   N   */
 .red_borders{
     -fx-border-color: red!important;
+}
+
+
+/*  S   I   N   G   L   E       P   R   O   D   U   C   T   S    */
+.single-product-vbox{
+    -fx-cursor: hand;
+}
+
+.single-product-vbox:hover{
+    -fx-background-color: #DAD9D5;
 }

@@ -2,6 +2,8 @@ package com.faaizz.dev.online_platform.GUI.controller.products;
 
 import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -43,6 +45,13 @@ public class ProductController extends MainController {
          */
         /* S E C T I O N S S U B S E C T I O N S C A T E G O R I E S */
 
+        initializeSections();
+
+
+    }
+
+
+    protected void initializeSections(){
         // ORGANISE SECTIONS, SUB SECTIONS, AND CATEGORIES FOR THEIR RESPECTIVE
         // COMBOBOXES
         List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
@@ -76,8 +85,6 @@ public class ProductController extends MainController {
         // Set categories as ComboBox options
         section_dropdown.getItems().clear();
         section_dropdown.getItems().addAll(sections_list);
-
-
     }
 
     /*
@@ -87,7 +94,7 @@ public class ProductController extends MainController {
     /* A C T I O N H A N D L E R S */
 
     @FXML
-    public void handleSectionChange() {
+    public void handleSectionChange(Event e) {
 
         // Get selected section string
         String selected_section = (String) section_dropdown.getSelectionModel().getSelectedItem();
@@ -110,7 +117,7 @@ public class ProductController extends MainController {
     }
 
     @FXML
-    public void handleSub_sectionChange() {
+    public void handleSub_sectionChange(Event e) {
 
         // Get selected section string
         String selected_section = (String) section_dropdown.getSelectionModel().getSelectedItem();

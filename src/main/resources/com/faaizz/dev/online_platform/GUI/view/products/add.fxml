@@ -91,7 +91,7 @@
 
             <!--PRODUCT BUTTONS-->
             <VBox fx:id="products_sub_section" spacing="10"  styleClass="sub-section-style">
-                <Button disable="true" fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" />
                 <Button fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageProducts" />
                 <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
                 <padding>
@@ -106,8 +106,8 @@
     </left>
 
     <center>
-        <VBox>
-                <ScrollPane styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
+        <VBox fx:id="center_vbox" >
+                <ScrollPane fx:id="content_scrollpane" styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
                     <content>
                         <HBox  styleClass="sub-section-style" spacing="30" alignment="CENTER">
                             <!--LABELS-->
@@ -155,9 +155,9 @@
                                 </VBox>
                                 <Button fx:id="add_size_button" text="Add Another Size" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleAddSize" />
                                 <!--SPECIFY EXTREMELY LARGE MAX SIZE FOR BUTTON SO IT TAKES UP REMAINING SPACE-->
-                                <Button fx:id="image_one_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
-                                <Button fx:id="image_two_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
-                                <Button fx:id="image_three_filechooser" text="Browse" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="image_one_filechooser" text="Image One" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="image_two_filechooser" text="Image Two" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
+                                <Button fx:id="image_three_filechooser" text="Image Three" textAlignment="RIGHT" styleClass="file-chooser-button" maxWidth="100000000" minHeight="35" prefHeight="35" onAction="#handleFileChooser" />
                                 <Button fx:id="add_product_button" text="ADD PRODUCT" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleAddProduct" />
                             </VBox>
                             <padding>

@@ -32,11 +32,11 @@ public class AddProductController extends GenericProductController {
 
         // Select the first item by default
         section_dropdown.getSelectionModel().selectFirst();
-        handleSectionChange();
-        handleSub_sectionChange();
+        handleSectionChange(null);
+        handleSub_sectionChange(null);
 
-
-        System.out.println(InstanceData.getAuthenticated());
+        // Reset image_files_list
+        image_files_map= new HashMap<>();
 
     }
 
@@ -90,7 +90,9 @@ public class AddProductController extends GenericProductController {
                     color_textfield.getText(),
                     price_textfield.getText(),
                     material_textfield.getText(), options,
-                    image_files_list.get(0), image_files_list.get(1), image_files_list.get(2)
+                    (image_files_map.containsKey("one") ? image_files_map.get("one"): null),
+                    (image_files_map.containsKey("two") ? image_files_map.get("two"): null),
+                    (image_files_map.containsKey("three") ? image_files_map.get("three"): null)
             );
 
             // Call inherited method from MainController class to display loading dialog
@@ -139,12 +141,23 @@ public class AddProductController extends GenericProductController {
                             upload_buttons.add(image_three_filechooser);
 
                             // Loop through, check if file has been selected, if not set CSS red borders
-                            upload_buttons.forEach( button ->{
-                                button.setText("Browse");
-                            } );
+                            for(int i=0; i < upload_buttons.size(); i++){
+
+                                switch(i){
+                                    case 0: upload_buttons.get(i).setText("Image One");
+                                        break;
+                                    
+                                    case 1: upload_buttons.get(i).setText("Image Two");
+                                        break;
+
+                                    case 2: upload_buttons.get(i).setText("Image Three");
+                                        break;
+                                }
+
+                            }
 
                             // Reset image_files_list
-                            image_files_list= new ArrayList<>();
+                            image_files_map= new HashMap<>();
 
                         } catch (Exception e) {
                             mini_dialog_controller.enableCloseButton();

@@ -93,7 +93,7 @@
             <VBox fx:id="products_sub_section" spacing="10"  styleClass="sub-section-style">
                 <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddProducts" />
                 <Button fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageProducts" />
-                <Button disable="true" fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
+                <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>
@@ -106,7 +106,7 @@
     </left>
 
     <center>
-        <VBox>
+        <VBox fx:id="center_vbox" >
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
                 <Label text="DELETE PRODUCTS" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
@@ -114,7 +114,7 @@
                 </padding>
             </HBox>
 
-            <ScrollPane styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
+            <ScrollPane fx:id="content_scrollpane" styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
                 <content>
                     <HBox  styleClass="sub-section-style" spacing="30" alignment="CENTER">
                         <!--LABELS-->

@@ -54,7 +54,7 @@ public class GenericProductController extends ProductController {
     @FXML
     protected TextArea description_text_area;
 
-    protected List<File> image_files_list;
+    protected Map<String, File> image_files_map;
 
     @FXML
     protected Button image_one_filechooser;
@@ -62,6 +62,11 @@ public class GenericProductController extends ProductController {
     protected Button image_two_filechooser;
     @FXML
     protected Button image_three_filechooser;
+
+    @FXML
+    protected ScrollPane content_scrollpane;
+    @FXML
+    protected VBox center_vbox;
 
     public void initialize() throws Exception {
 
@@ -89,8 +94,7 @@ public class GenericProductController extends ProductController {
          * =============================================================================
          * ===========
          */
-        image_files_list = new ArrayList<>();
-
+        image_files_map = new HashMap<>();
     }
 
     /*
@@ -100,7 +104,7 @@ public class GenericProductController extends ProductController {
     /* A C T I O N H A N D L E R S */
 
     @FXML
-    public void handleAddSize() {
+    public void handleAddSize(Event e) {
 
         // Create Additional Qunatity label
         Label additional_qty_label = new Label();
@@ -170,7 +174,6 @@ public class GenericProductController extends ProductController {
 
         // Get button that triggered the event
         Button button = (Button) event.getSource();
-        String file_number = button.getId();
 
         // Create FileChooser
         FileChooser fileChooser = new FileChooser();
@@ -189,11 +192,30 @@ public class GenericProductController extends ProductController {
         File temp_file = fileChooser.showOpenDialog(root_border_pane.getScene().getWindow());
 
         if (temp_file != null) {
-            // Add file to image_files_list
-            image_files_list.add(temp_file);
 
-            // Set button text to file name
-            button.setText(temp_file.getName());
+            // Check which file to add or edit
+            if(button.getText().toLowerCase().contains("one")) {
+                // add image file to image_files_map
+                image_files_map.put("one", temp_file);
+
+                // Append (selected) to button label
+                button.setText("Image One (selected)");
+            }
+            else if(button.getText().toLowerCase().contains("two")) {
+                // add image file to image_files_map
+                image_files_map.put("two", temp_file);
+
+                // Append (selected) to button label
+                button.setText("Image Two (selected)");
+            }
+            else if(button.getText().toLowerCase().contains("three")) {
+                // add image file to image_files_map
+                image_files_map.put("three", temp_file);
+
+                // Append (selected) to button label
+                button.setText("Image Three (selected)");
+            }
+
         }
 
     }
@@ -271,19 +293,26 @@ public class GenericProductController extends ProductController {
         } );
 
         // VALIDATE NUMBERS
-        List<TextField> expect_numbers= new ArrayList<>();
-        expect_numbers.add(price_textfield);
-        // Add all quantity textfields
-        quantity_textfields_list.forEach( textField -> {
-            expect_numbers.add(textField);
-        } );
+        // Validate Price
+        try{
+            // Try to parse text content to double
+            Double.valueOf(price_textfield.getText());
+        }catch(NumberFormatException e){
+            // Set red_borders css class
+            if(!price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
+                price_textfield.getStyleClass().add(CSS_RED_BORDERS);
+            }
+            // Increment validation_problems
+            validation_problems[0]++;
+        }
 
-        // Loop through expect_numbers
-        expect_numbers.forEach( textfield ->{
+        // Validate Quantities
+        // Add all quantity textfields
+        quantity_textfields_list.forEach( textfield ->{
 
             try{
-                // Try to parse text content to number
-                Double.valueOf(textfield.getText());
+                // Try to parse text content to integer
+                Integer.valueOf(textfield.getText());
             }catch(NumberFormatException e){
                 // Set red_borders css class
                 if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){
@@ -331,26 +360,42 @@ public class GenericProductController extends ProductController {
             }
         } );
 
-        // VALIDATE FILE UPLOAD BUTTONS
-        List<Button> upload_buttons= new ArrayList<>();
-        upload_buttons.add(image_one_filechooser);
-        upload_buttons.add(image_two_filechooser);
-        upload_buttons.add(image_three_filechooser);
 
-        // Loop through, check if file has been selected, if not set CSS red borders
-        upload_buttons.forEach( button ->{
-            if(button.getText().contains("Browse")){
-                if(!button.getStyleClass().contains(CSS_RED_BORDERS)){
-                    button.getStyleClass().add(CSS_RED_BORDERS);
-                }
-                // Increment validation_problems
-                validation_problems[0]++;
-            }else{
-                // Otherwise remove CSS red borders
-                button.getStyleClass().remove(CSS_RED_BORDERS);
+        // CHECK IF IMAGE ONE IS SET
+        if(!image_files_map.containsKey("one")){
+            if(!image_one_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
+                image_one_filechooser.getStyleClass().add(CSS_RED_BORDERS);
             }
-        } );
+            // Increment validation_problems
+            validation_problems[0]++;
+        }else{
+            // Otherwise remove CSS red borders
+            image_one_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
+        }
 
+        // CHECK IF IMAGE TWO IS SET
+        if(!image_files_map.containsKey("two")){
+            if(!image_two_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
+                image_two_filechooser.getStyleClass().add(CSS_RED_BORDERS);
+            }
+            // Increment validation_problems
+            validation_problems[0]++;
+        }else{
+            // Otherwise remove CSS red borders
+            image_two_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
+        }
+
+        // CHECK IF IMAGE THREE IS SET
+        if(!image_files_map.containsKey("three")){
+            if(!image_three_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
+                image_three_filechooser.getStyleClass().add(CSS_RED_BORDERS);
+            }
+            // Increment validation_problems
+            validation_problems[0]++;
+        }else{
+            // Otherwise remove CSS red borders
+            image_three_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
+        }
 
         return (validation_problems[0] <=0);
 
