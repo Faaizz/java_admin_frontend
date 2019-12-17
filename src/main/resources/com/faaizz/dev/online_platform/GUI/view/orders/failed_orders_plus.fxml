@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+
+<?import javafx.collections.*?>
+
+<?import java.lang.String?>
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.orders.GenericOrdersController">
+
+    <top>
+        <VBox>
+            <GridPane styleClass="dark-color-style">
+                <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="STAFF PORTAL" styleClass="dark-color-style, big-header-font" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </Label>
+                <Button fx:id="settings_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER_RIGHT" maxWidth="10" onAction="#handleSettings">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@../img/settings.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="settings" />
+                    </tooltip>
+                </Button>
+                <Button fx:id="logout_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="2" alignment="CENTER_RIGHT" maxWidth="10" onAction="#handleLogout" >
+                    <graphic>
+                        <ImageView>
+                            <Image url="@../img/logout.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="logout" />
+                    </tooltip>
+                </Button>
+                <Button fx:id="close_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="3" alignment="CENTER_RIGHT" maxWidth="10" onMouseClicked="#handleExit">
+                    <graphic>
+                        <ImageView>
+                            <Image url="@../img/close.png"/>
+                        </ImageView>
+                    </graphic>
+                    <tooltip>
+                        <Tooltip text="exit" />
+                    </tooltip>
+                </Button>
+
+            </GridPane>
+
+
+            <!-- SECTIONS -->
+            <GridPane styleClass="">
+                <Button fx:id="products_button" styleClass="section-buttons, big-body-font" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToProducts" />
+                <Button disable="true" fx:id="orders_button" styleClass="section-buttons, big-body-font, active-section-button" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToOrders"  />
+                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
+                <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="MANAGE STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToManageStaff" />
+                <padding>
+                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                </padding>
+            </GridPane>
+        </VBox>
+
+    </top>
+
+
+    <left>
+        <VBox fx:id="sub_section_pane" spacing="20" prefWidth="230" minWidth="230">
+            <VBox spacing="10" styleClass="sub-section-style">
+                <Label text="Hello," alignment="CENTER_LEFT" styleClass="mid-body-font" />
+                <Label fx:id="staff_name" text="" alignment="CENTER_LEFT" styleClass="big-body-font" />
+                <padding>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+                </padding>
+            </VBox>
+
+            <!--ORDER BUTTONS-->
+            <VBox fx:id="orders_sub_section" spacing="10"  styleClass="sub-section-style">
+                <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="unassigned_orders" text="Unassigned Order" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="pending_orders" text="Pending Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <Button fx:id="failed_orders" text="Failed Orders" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" />
+                <padding>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
+                </padding>
+            </VBox>
+
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="0" />
+            </padding>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox fx:id="center_vbox" >
+            <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
+                <Label text="PENDING ORDERS" styleClass="big-body-font" maxWidth="100000000000" />
+                <padding>
+                    <Insets bottom="20" left="10" right="10" top="10" />
+                </padding>
+            </HBox>
+            <ScrollPane fx:id="content_scrollpane" styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
+                <content>
+                    <VBox styleClass="general-background">
+                        <HBox  styleClass="sub-section-style, transparent-background" spacing="30" alignment="CENTER">
+                            
+                            <VBox spacing="20">
+
+                                <HBox spacing= "20">
+                                    <VBox>
+                                        <ImageView>
+                                            <Image url="@../../../../../../../../../../img/product.jpeg" requestedWidth="150" preserveRatio="true" />
+                                        </ImageView>
+                                    </VBox>
+
+                                    <VBox spacing= "10">
+                                        <Label fx:id="order_product_price" styleClass="big-body-font boldened" text="N 9000" />
+                                        <Label fx:id="order_product_name" styleClass="mid-body-font boldened" text="BRAND T-SHIRT" />
+                                        <Label fx:id="order_quantity" styleClass="small-body-font" text="QTY: 5" />
+                                        <Label fx:id="order_date" styleClass="small-body-font" text="ORDER DATE: 16-12-2019" />
+                                        <Label fx:id="order_customer_email" styleClass="small-body-font" text="CUSTOMER EMAIL: admin@CODECREEK.ORG" />
+                                        <Label fx:id="order_status" styleClass="small-body-font" text="STATUS: FAILED" />
+                                        <Label fx:id="order_status" styleClass="small-body-font" text="FAILURE REASON: Customer out of reach" />
+                                        <Label fx:id="order_staff" styleClass="small-body-font" text="STAFF IN CHARGE: Faizudeen" />
+                                    </VBox>
+                                </HBox>
+
+                                <!--MAKESHIFT LINE-->
+                                <Label text="''" maxWidth="100000000" prefHeight="5" minHeight="5" styleClass="darker-background" />
+                                
+                                <padding>
+                                    <Insets bottom="10" left="10" right="10" top="10" />
+                                </padding>
+
+                            </VBox>
+
+                            <padding>
+                                <Insets bottom="10" left="10" right="10" top="10" />
+                            </padding>
+                        </HBox>
+                        <HBox  styleClass="sub-section-style, transparent-background" spacing="30" alignment="CENTER">
+                            
+                            <VBox spacing="20">
+
+                                <HBox spacing= "20">
+                                    <VBox>
+                                        <ImageView>
+                                            <Image url="@../../../../../../../../../../img/product.jpeg" requestedWidth="150" preserveRatio="true" />
+                                        </ImageView>
+                                    </VBox>
+
+                                    <VBox spacing= "10">
+                                        <Label fx:id="order_product_price" styleClass="big-body-font boldened" text="N 9000" />
+                                        <Label fx:id="order_product_name" styleClass="mid-body-font boldened" text="BRAND T-SHIRT" />
+                                        <Label fx:id="order_quantity" styleClass="small-body-font, capitalize" text="QTY: 5" />
+                                        <Label fx:id="order_date" styleClass="small-body-font, capitalize" text="ORDER DATE: 16-12-2019" />
+                                        <Label fx:id="order_customer_email" styleClass="small-body-font, capitalize" text="CUSTOMER EMAIL: AMDIN@CODECREEK.ORG" />
+                                        <Label fx:id="order_status" styleClass="small-body-font, capitalize" text="STATUS: IN TRANSIT" />
+                                        <Label fx:id="order_staff" styleClass="small-body-font, capitalize" text="STAFF IN CHARGE: Faizudeen" />
+                                        <Label fx:id="order_est_del_date" styleClass="small-body-font, capitalize" text="ESTIMATED DATE OF DELIVERY: 30-12-2019" />
+                                    </VBox>
+                                </HBox>
+
+                                <!--MAKESHIFT LINE-->
+                                <Label text="''" maxWidth="100000000" prefHeight="5" minHeight="5" styleClass="darker-background" />
+                                
+                                <padding>
+                                    <Insets bottom="10" left="10" right="10" top="10" />
+                                </padding>
+
+                            </VBox>
+
+                            <padding>
+                                <Insets bottom="10" left="10" right="10" top="10" />
+                            </padding>
+                        </HBox>
+                    </VBox>                        
+                </content>
+            </ScrollPane>
+
+            <padding>
+                <Insets bottom="15.0" left="15.0" right="15.0" top="0" />
+            </padding>
+        </VBox>
+    </center>
+
+
+    <bottom>
+        <Label text="COPYRIGHT © 2019" styleClass="dark-color-style" alignment="CENTER" prefWidth="Infinity">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </Label>
+    </bottom>
+
+</BorderPane>
+

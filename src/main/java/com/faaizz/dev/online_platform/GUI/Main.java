@@ -41,6 +41,7 @@ public class Main extends Application {
 
             // LOAD LOGIN PAGE BY DEFAULT
             Parent root= FXMLLoader.load(getClass().getResource("view/login/login.fxml"));
+            //Parent root= FXMLLoader.load(getClass().getResource("view/orders/failed_orders_plus.fxml"));
 
             primaryStage.setTitle("Admin Portal");
 

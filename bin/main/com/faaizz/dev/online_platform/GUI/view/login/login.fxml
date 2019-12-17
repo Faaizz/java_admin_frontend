@@ -56,7 +56,7 @@
     </top>
 
     <center>
-        <VBox alignment="CENTER" maxWidth="500" maxHeight="300" styleClass="mild-color-style">
+        <VBox  fx:id="center_vbox" alignment="CENTER" maxWidth="500" maxHeight="300" styleClass="mild-color-style">
 
             <HBox spacing="30" alignment="CENTER">
                 <!--LABELS-->
@@ -72,16 +72,10 @@
                     <Button fx:id="login_button" text="LOGIN" alignment="CENTER" styleClass="big-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleLogin" />
                 </VBox>
             </HBox>
+
+            <VBox fx:id="pagination_vbox" />
+
         </VBox>
     </center>
-
-
-    <bottom>
-        <Label text="COPYRIGHT © 2019" styleClass="dark-color-style" alignment="CENTER" prefWidth="Infinity">
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </Label>
-    </bottom>
 
 </BorderPane>

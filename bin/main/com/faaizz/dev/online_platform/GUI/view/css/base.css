@@ -17,6 +17,19 @@
     -fx-font-family: 'cambria'; 
 }
 
+.small-body-font{
+    -fx-font-size: 11px;
+    -fx-font-family: 'cambria'; 
+}
+
+.capitalize{
+    -fx-text-transform: capitalize;
+}
+
+.boldened{
+    -fx-font-weight: bolder;
+}
+
 /* F    I   X   E   S */
 
 .big-body-textfield, .big-body-textfield:focused, .pagination-textfield, .pagination-textfield:focused, .big-body-textarea .content, .big-body-textarea:focused .content, .big-body-combobox:focused, .big-body-combobox{
@@ -45,6 +58,14 @@
 
 .general-background{
     -fx-background-color: #EAE9E5;
+}
+
+.darker-background{
+    -fx-background-color: #4C5258;
+}
+
+.transparent-background{
+    -fx-background-color: transparent!important;
 }
 
 .mild-color-style{
@@ -164,4 +185,16 @@
 
 .single-product-vbox:hover{
     -fx-background-color: #DAD9D5;
+}
+
+
+/*  O   R   D   E   R   S       W   O   R   K   L   O   A   D   */
+.failed-button{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: rgb(160, 28, 28);
+    -fx-text-fill: #DAD9D5;
+}
+
+.failed-button:hover{
+    -fx-background-color: #343A40;
 }

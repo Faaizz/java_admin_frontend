@@ -65,8 +65,6 @@ public class GenericProductController extends ProductController {
 
     @FXML
     protected ScrollPane content_scrollpane;
-    @FXML
-    protected VBox center_vbox;
 
     public void initialize() throws Exception {
 

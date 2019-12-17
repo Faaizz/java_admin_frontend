@@ -159,17 +159,12 @@
             <padding>
                 <Insets bottom="15.0" left="15.0" right="15.0" top="0" />
             </padding>
+
+
+            <VBox fx:id="pagination_vbox" />
+            
         </VBox>
     </center>
-
-
-    <bottom>
-        <Label text="COPYRIGHT © 2019" styleClass="dark-color-style" alignment="CENTER" prefWidth="Infinity">
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-            </padding>
-        </Label>
-    </bottom>
 
 </BorderPane>
 

@@ -39,6 +39,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class ManageProductsController extends GenericProductController {
 
@@ -295,256 +297,65 @@ public class ManageProductsController extends GenericProductController {
         content_scrollpane.setContent(flow_pane);
 
         // SETUP PAGINATION
-        setupPagination(page_meta, post_data);
+        setupPagination(page_meta, post_data, this::loadNewProducts);
 
     }
 
-    /**
-     * DISPLAYS PAGINATION BUTTONS AND ASSIGN THE CORRESPONDING loadNewProducts() HANDLER FOR EACH
-     * @param page_meta
-     * @param post_data
-     */
-    private HBox h_box_pagination;
-    private HBox h_box_pagination_direct;
-    private void setupPagination(Meta page_meta, Map<String, String> post_data){
-
-        // OUTER HBox
-        h_box_pagination= new HBox();
-        h_box_pagination.setAlignment(Pos.CENTER);
-        h_box_pagination.setSpacing(5);
-        h_box_pagination.setPadding(new Insets(15, 15, 0, 15));
-
-        Button first= new Button("first");
-        first.getStyleClass().add("pagination-button");
-        first.getStyleClass().add("mid-body-font");
-        first.setOnAction( new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-                
-                try {
-                    loadNewProducts(post_data, 1);
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-            
-        } );
-
-
-        Button prev= new Button("<");
-        prev.getStyleClass().add("pagination-button");
-        prev.getStyleClass().add("mid-body-font");
-        prev.setOnAction( new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-                
-                try {
-                    loadNewProducts(post_data, (page_meta.getCurrent_page() - 1));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-            
-        } );
-
-        // IF SEARCH IS AT FIRST PAGE, DISABLE first AND prev
-        if(page_meta.getCurrent_page() == 1){
-            first.setDisable(true);
-            prev.setDisable(true);
-        }
-
-        StringBuilder tempSB= new StringBuilder().append(page_meta.getCurrent_page()).append(" of ").append(page_meta.getLast_page());
-        Label page_number= new Label(tempSB.toString());
-        page_number.getStyleClass().add("mid-body-font");
-
-        Button next= new Button(">");
-        next.getStyleClass().add("pagination-button");
-        next.getStyleClass().add("mid-body-font");
-        next.setOnAction( new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-                
-                try {
-                    loadNewProducts(post_data, (page_meta.getCurrent_page() + 1));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-            
-        } );
-
-        Button last= new Button("last");
-        last.getStyleClass().add("pagination-button");
-        last.getStyleClass().add("mid-body-font");
-        last.setOnAction( new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-                
-                try {
-                    loadNewProducts(post_data, (page_meta.getLast_page()));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
-            }
-            
-        } );
-
-        // IF SEARCH IS AT LAST PAGE, DISABLE last AND next
-        if(page_meta.getCurrent_page() == page_meta.getLast_page()){
-            last.setDisable(true);
-            next.setDisable(true);
-        }
-
-
-        // APPEND PAGINATION BUTTONS TO h_box
-        h_box_pagination.getChildren().add(first);
-        h_box_pagination.getChildren().add(prev);
-        h_box_pagination.getChildren().add(page_number);
-        h_box_pagination.getChildren().add(next);
-        h_box_pagination.getChildren().add(last);
-
-
-        // ADD h_box TO center_vbox
-        center_vbox.getChildren().add(h_box_pagination);
-
-
-
-        // DIRECT PAGE NAVIGATION
-        h_box_pagination_direct= new HBox();
-        h_box_pagination_direct.setAlignment(Pos.CENTER);
-        h_box_pagination_direct.setSpacing(5);
-        h_box_pagination_direct.setPadding(new Insets(15, 15, 0, 15));
-
-        HBox h_box_inner= new HBox();
-        h_box_inner.setAlignment(Pos.CENTER);
-        h_box_inner.setSpacing(5);
-
-        TextField search_tf= new TextField();
-        search_tf.getStyleClass().add("pagination-textfield");
-        search_tf.setPrefWidth(50);
-
-        Button go_button= new Button("GO");
-        go_button.getStyleClass().add("pagination-button");
-        go_button.getStyleClass().add("mid-body-font");
-        go_button.setOnAction( new EventHandler<ActionEvent>(){
-
-            @Override
-            public void handle(ActionEvent event) {
-
-                try{
-
-                    // VALIDATE PAGE VALUE
-                    int page_number= Integer.valueOf(search_tf.getText());
-
-                    // IF SPECIFIED PAGE VALUE EXCEEDS THE LAST PAGE, SET RED BORDERS
-                    if( page_number > page_meta.getLast_page() ){
-                        if(!search_tf.getStyleClass().contains(CSS_RED_BORDERS)){
-                            search_tf.getStyleClass().add(CSS_RED_BORDERS);
-                        }
-                    }
-                    // OTHERWISE 
-                    else{
-
-                        if(search_tf.getStyleClass().contains(CSS_RED_BORDERS)){
-                            search_tf.getStyleClass().remove(CSS_RED_BORDERS);
-                        }
-
-                        loadNewProducts(post_data, page_number);
-
-                    }
-
-                }
-                catch(NumberFormatException e){
-                    // INVALID NUMBER, SET RED BORDERS
-                    if(!search_tf.getStyleClass().contains(CSS_RED_BORDERS)){
-                        search_tf.getStyleClass().add(CSS_RED_BORDERS);
-                        e.printStackTrace();
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                
-            }
-            
-        } );
-
-
-        // ADD TO hbox_inner
-        h_box_inner.getChildren().add(search_tf);
-        h_box_inner.getChildren().add(go_button);
-
-        // ADD TO h_box_direct
-        h_box_pagination_direct.getChildren().add(h_box_inner);
-
-        // ADD h_box TO center_vbox
-        center_vbox.getChildren().add(h_box_pagination_direct);
-
-
-    }
-
-
-    private void loadNewProducts(Map<String, String> post_data, int page_number) throws IOException {
+    private void loadNewProducts(Map<String, String> post_data, int page_number) {
 
         // SETUP PRODUCT RESOURCE
         ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
         // SET REQUEST PAGE
         productResource.setPage_number(page_number);
 
-        // SHOW LOADING MINI DIALOG
-        // Call inherited method from MainController class
-        MiniDialogController mini_dialog_controller= showLoadingMiniDialog();
+        try{
 
-        Runnable search_runnable= new Runnable() {
-            @Override
-            public void run() {
-                Platform.runLater( ()->{
-                    try {
+            // SHOW LOADING MINI DIALOG
+            // Call inherited method from MainController class
+            MiniDialogController mini_dialog_controller= showLoadingMiniDialog();
 
-                        //PERFORM SEARCH
-                        String matched_products_string= productResource.search(post_data);
+            Runnable search_runnable= new Runnable() {
+                @Override
+                public void run() {
+                    Platform.runLater( ()->{
+                        try {
 
-                        //PARSE RESPONSE
-                        ProductCollection matched_products= APIParser.getInstance().parseMultiProductResponse(matched_products_string);
+                            //PERFORM SEARCH
+                            String matched_products_string= productResource.search(post_data);
 
-                        // IF NO PRODUCT IS FOUND
-                        if(matched_products.getProducts().size() <= 0){
+                            //PARSE RESPONSE
+                            ProductCollection matched_products= APIParser.getInstance().parseMultiProductResponse(matched_products_string);
+
+                            // IF NO PRODUCT IS FOUND
+                            if(matched_products.getProducts().size() <= 0){
+                                mini_dialog_controller.enableCloseButton();
+                                mini_dialog_controller.setDialog_text_label("SORRY. COULD NOT FIND ANY PRODUCT WITH THE SPECIFIED SEARCH PARAMETERS.");
+                            }
+                            // OTHERWISE
+                            else{
+
+                                // DISPLAY MATCHED PRODUCTS
+                                displayProducts(matched_products.getProducts(), matched_products.getMeta(), post_data);
+
+                                // REMOVE LOADING DIALOG
+                                mini_dialog_controller.handleExit();
+                            }
+
+                        } catch (Exception e) {
                             mini_dialog_controller.enableCloseButton();
-                            mini_dialog_controller.setDialog_text_label("SORRY. COULD NOT FIND ANY PRODUCT WITH THE SPECIFIED SEARCH PARAMETERS.");
+                            mini_dialog_controller.setDialog_text_label("An Error Occurred\n" + e.getMessage());
+                            e.printStackTrace();
                         }
-                        // OTHERWISE
-                        else{
+                    });
+                }
+            };
 
-                            // DISPLAY MATCHED PRODUCTS
-                            displayProducts(matched_products.getProducts(), matched_products.getMeta(), post_data);
+            // EXECUTE RUNNABLE
+            search_runnable.run();
 
-                            // REMOVE LOADING DIALOG
-                            mini_dialog_controller.handleExit();
-                        }
-
-                    } catch (Exception e) {
-                        mini_dialog_controller.enableCloseButton();
-                        mini_dialog_controller.setDialog_text_label("An Error Occurred\n" + e.getMessage());
-                        e.printStackTrace();
-                    }
-                });
-            }
-        };
-
-        // EXECUTE RUNNABLE
-        search_runnable.run();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
 
     }

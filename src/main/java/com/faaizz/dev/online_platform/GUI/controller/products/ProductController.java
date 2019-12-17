@@ -39,6 +39,8 @@ public class ProductController extends MainController {
 
     public void initialize() throws Exception {
 
+        super.initialize();
+
         /*
          * =============================================================================
          * ===========
