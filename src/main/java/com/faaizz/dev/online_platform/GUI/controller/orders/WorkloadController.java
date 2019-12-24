@@ -97,6 +97,9 @@ public class WorkloadController extends GenericOrdersController {
         OrderResource order_resource = new OrderResource(SettingsData.getSettings().getBase_url(),
                 SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
+        // SET REQUEST PAGE
+        order_resource.setPage_number(page_number);
+
         try{
 
             // SHOW LOADING MINI DIALOG
@@ -235,6 +238,7 @@ public class WorkloadController extends GenericOrdersController {
 
             level_one_hbox= new HBox();
             level_one_hbox.setSpacing(7);
+            level_one_hbox.setPadding(new Insets(10, 10, 10, 10));
 
             image_vbox= new VBox();
             image= new Image(image_is, 150, 0, true, false);

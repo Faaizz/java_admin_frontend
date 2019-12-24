@@ -92,7 +92,7 @@
             <!--ORDER BUTTONS-->
             <VBox fx:id="orders_sub_section" spacing="10"  styleClass="sub-section-style">
                 <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToMyWorkload" />
-                <Button fx:id="unassigned_orders" text="Unassigned Order" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
+                <Button fx:id="unassigned_orders" text="Unassigned Orders" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
                 <Button fx:id="pending_orders" text="Pending Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToPendingOrders" />
                 <Button fx:id="failed_orders" text="Failed Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToFailedOrders" />
                 <padding>
