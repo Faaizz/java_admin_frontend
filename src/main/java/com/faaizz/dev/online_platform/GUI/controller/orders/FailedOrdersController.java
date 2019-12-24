@@ -134,10 +134,7 @@ public class FailedOrdersController extends GenericOrdersController {
                             else {
 
                                 // DISPLAY MATCHED PRODUCTS
-                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data);
-
-                                // REMOVE LOADING DIALOG
-                                mini_dialog_controller.handleExit();
+                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data, mini_dialog_controller);
 
                             }
 
@@ -162,7 +159,7 @@ public class FailedOrdersController extends GenericOrdersController {
     }
 
 
-    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data)
+    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data, MiniDialogController mini_dialog_controller)
             throws Exception {
 
         VBox topmost_vbox= new VBox();
@@ -203,6 +200,9 @@ public class FailedOrdersController extends GenericOrdersController {
         // SETUP PAGINATION
         setupPagination(page_meta, post_data, this::loadFailedOrders);
 
+        // REMOVE LOADING DIALOG
+        mini_dialog_controller.handleExit();
+
     }
 
     /**
@@ -237,6 +237,8 @@ public class FailedOrdersController extends GenericOrdersController {
 
             level_one_vbox= new VBox();
             level_one_vbox.setSpacing(7);
+            level_one_vbox.setMaxWidth(600);
+            level_one_vbox.setPrefWidth(600);
 
             level_one_hbox= new HBox();
             level_one_hbox.setSpacing(7);

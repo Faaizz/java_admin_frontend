@@ -20,7 +20,7 @@
 <?import javafx.collections.*?>
 
 <?import java.lang.String?>
-<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.products.RemoveProductsController">
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.customers.SearchCustomersController">
 
     <top>
         <VBox>
@@ -66,9 +66,9 @@
 
             <!-- SECTIONS -->
             <GridPane styleClass="">
-                <Button fx:id="products_button" styleClass="section-buttons, big-body-font, active-section-button" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToProducts" />
+                <Button fx:id="products_button" styleClass="section-buttons, big-body-font" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToProducts" />
                 <Button fx:id="orders_button" styleClass="section-buttons, big-body-font" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToOrders"  />
-                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
+                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font, active-section-button" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
                 <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToManageStaff" />
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -89,11 +89,10 @@
                 </padding>
             </VBox>
 
-            <!--PRODUCT BUTTONS-->
-            <VBox fx:id="products_sub_section" spacing="10"  styleClass="sub-section-style">
-                <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddProducts" />
-                <Button fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageProducts" />
-                <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
+            <!--ORDER BUTTONS-->
+            <VBox fx:id="customers_sub_section" spacing="10"  styleClass="sub-section-style">
+                <Button fx:id="view_customers" text="View Customers" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToViewCustomers" />
+                <Button fx:id="search_customers" text="Search Customers" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToSearchCustomers" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>
@@ -108,7 +107,7 @@
     <center>
         <VBox fx:id="center_vbox" >
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
-                <Label text="DELETE PRODUCTS" styleClass="big-body-font" maxWidth="100000000000" />
+                <Label text="SEARCH STAFF" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
@@ -119,35 +118,19 @@
                     <HBox  styleClass="sub-section-style" spacing="30" alignment="CENTER">
                         <!--LABELS-->
                         <VBox fx:id="labels_vbox" spacing="10">
-                            <Label text="Section:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
-                            <Label text="Sub-section:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
-                            <Label text="Category:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
-                            <Label text="Color:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
-                            <Label text="Price Range:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
-                            <Label text="Product Name:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30"/>
-                            <Label text="Brand:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30"/>
+                            <Label text="First Name:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                            <Label text="Last Name:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                            <Label text="Address:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
+                            <Label text="Email:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />
                         </VBox>
 
                         <!--TEXTFIELDS-->
                         <VBox fx:id="textfields_vbox"  spacing="10">
-                            <ComboBox fx:id="section_dropdown" styleClass="big-body-combobox" onAction="#handleSectionChange" />
-                            <ComboBox fx:id="sub_section_dropdown" styleClass="big-body-combobox" onAction="#handleSub_sectionChange" />
-                            <ComboBox fx:id="category_dropdown" styleClass="big-body-combobox" />
-                            <TextField fx:id="color_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
-                            <VBox fx:id="price_range_vbox">
-                                <HBox fx:id="price_range_hbox" >
-                                    <TextField fx:id="min_price_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" minWidth="70" prefWidth="70" />
-                                    <Label text="to" styleClass="mid-body-font" minHeight="30" prefHeight="30">
-                                        <padding>
-                                            <Insets bottom="0" left="25.0" right="15.0" top="0" />
-                                        </padding>
-                                    </Label>
-                                    <TextField fx:id="max_price_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30" minWidth="70" prefWidth="70" />
-                                </HBox>
-                            </VBox>
-                            <TextField fx:id="name_textfield"  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
-                            <TextField fx:id="brand_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
-                            <Button fx:id="search_products_button" text="DELETE ALL MATCHES" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleDeleteProducts" />
+                            <TextField fx:id="first_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                            <TextField fx:id="last_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                            <TextField fx:id="address_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                            <TextField fx:id="email_textfield"  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                            <Button fx:id="search_customers_button" text="GO" alignment="CENTER" styleClass="mid-body-font, dark-color-style, dark-color-button" minHeight="35" prefHeight="35" onAction="#handleSearchCustomer" />
                         </VBox>
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
@@ -162,7 +145,7 @@
 
 
             <VBox fx:id="pagination_vbox" />
-
+            
         </VBox>
     </center>
 

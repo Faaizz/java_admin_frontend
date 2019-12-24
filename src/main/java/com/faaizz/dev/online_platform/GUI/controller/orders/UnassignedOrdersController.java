@@ -1,6 +1,5 @@
 package com.faaizz.dev.online_platform.GUI.controller.orders;
 
-import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableOrder;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -12,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -21,10 +19,6 @@ import javafx.scene.layout.VBox;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +26,6 @@ import java.util.Map;
 import com.faaizz.dev.online_platform.GUI.InstanceData;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
-import com.faaizz.dev.online_platform.api_inbound.model.Customer;
 import com.faaizz.dev.online_platform.api_inbound.model.Order;
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
@@ -40,13 +33,11 @@ import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollecti
 import com.faaizz.dev.online_platform.api_inbound.model.collection.StaffCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
 import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
-import com.faaizz.dev.online_platform.api_outbound.platform.CustomerResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.OrderResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.StaffResource;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -156,10 +147,8 @@ public class UnassignedOrdersController extends GenericOrdersController {
                             else {
 
                                 // DISPLAY MATCHED PRODUCTS
-                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data);
+                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data, mini_dialog_controller);
 
-                                // REMOVE LOADING DIALOG
-                                mini_dialog_controller.handleExit();
 
                             }
 
@@ -184,7 +173,7 @@ public class UnassignedOrdersController extends GenericOrdersController {
     }
 
 
-    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data)
+    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data, MiniDialogController mini_dialog_controller)
             throws Exception {
 
         VBox topmost_vbox= new VBox();
@@ -225,6 +214,9 @@ public class UnassignedOrdersController extends GenericOrdersController {
         // SETUP PAGINATION
         setupPagination(page_meta, post_data, this::loadUnassignedOrders);
 
+        // REMOVE LOADING DIALOG
+        mini_dialog_controller.handleExit();
+
     }
 
     /**
@@ -259,6 +251,8 @@ public class UnassignedOrdersController extends GenericOrdersController {
 
             level_one_vbox= new VBox();
             level_one_vbox.setSpacing(7);
+            level_one_vbox.setMaxWidth(600);
+            level_one_vbox.setPrefWidth(600);
 
             level_one_hbox= new HBox();
             level_one_hbox.setSpacing(7);

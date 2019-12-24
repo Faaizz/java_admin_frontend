@@ -69,7 +69,7 @@
                 <Button fx:id="products_button" styleClass="section-buttons, big-body-font, active-section-button" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
                 <Button fx:id="orders_button" styleClass="section-buttons, big-body-font" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
                 <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
-                <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="MANAGE STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
+                <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" />
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                 </padding>
@@ -134,7 +134,7 @@
 
                         <!--TEXTFIELDS-->
                         <VBox fx:id="textfields_vbox"  spacing="10">
-                            <TextField fx:id="id_textfield" disable="true" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
+                            <TextField fx:id="id_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
                             <TextField fx:id="name_textfield"  styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
                             <TextField fx:id="brand_textfield" styleClass="big-body-textfield" minHeight="30" prefHeight="30"/>
                             <TextArea fx:id="description_text_area" styleClass="big-body-textarea" minHeight="70" prefHeight="70" />

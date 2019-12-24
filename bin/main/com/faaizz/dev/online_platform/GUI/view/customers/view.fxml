@@ -20,7 +20,8 @@
 <?import javafx.collections.*?>
 
 <?import java.lang.String?>
-<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.orders.FailedOrdersController">
+
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.customers.ViewCustomersController">
 
     <top>
         <VBox>
@@ -67,8 +68,8 @@
             <!-- SECTIONS -->
             <GridPane styleClass="">
                 <Button fx:id="products_button" styleClass="section-buttons, big-body-font" text="PRODUCTS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToProducts" />
-                <Button fx:id="orders_button" styleClass="section-buttons, big-body-font, active-section-button" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToOrders"  />
-                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
+                <Button fx:id="orders_button" styleClass="section-buttons, big-body-font" text="ORDERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToOrders"  />
+                <Button fx:id="customers_button" styleClass="section-buttons, big-body-font, active-section-button" text="CUSTOMERS"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToCustomers" />
                 <Button fx:id="staff_button" styleClass="section-buttons, big-body-font" text="STAFF"  prefWidth="200" minWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" onAction="#handleSectionChangeToManageStaff" />
                 <padding>
                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -90,11 +91,9 @@
             </VBox>
 
             <!--ORDER BUTTONS-->
-            <VBox fx:id="orders_sub_section" spacing="10"  styleClass="sub-section-style">
-                <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToMyWorkload" />
-                <Button fx:id="unassigned_orders" text="Unassigned Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
-                <Button fx:id="pending_orders" text="Pending Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToPendingOrders" />
-                <Button fx:id="failed_orders" text="Failed Orders" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToFailedOrders" />
+            <VBox fx:id="customers_sub_section" spacing="10"  styleClass="sub-section-style">
+                <Button fx:id="view_customers" text="View Customers" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToViewCustomers" />
+                <Button fx:id="search_customers" text="Search Customers" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToSearchCustomers" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>
@@ -109,7 +108,7 @@
     <center>
         <VBox fx:id="center_vbox" >
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
-                <Label text="FAILED ORDERS" styleClass="big-body-font" maxWidth="100000000000" />
+                <Label text="ALL CUSTOMERS" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
                     <Insets bottom="20" left="10" right="10" top="10" />
                 </padding>
