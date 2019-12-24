@@ -123,6 +123,20 @@ public class OrderResource extends APIResource {
 
     }
 
+    public String unassigned() throws Exception{
+
+        tempSB= new StringBuilder().append("/unassigned");
+
+        URI uri= buildUri(tempSB.toString());
+
+        HttpGet httpGet= new HttpGet(uri);
+
+        CloseableHttpResponse response= this.executeRequest(httpGet);
+
+        return this.handleResponse(response);
+
+    }
+
 
     /**
      * Get orders assoicated with the product with specified id

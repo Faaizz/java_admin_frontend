@@ -105,7 +105,7 @@ public class UploadableOrder{
 
 
     /*========================================================================================*/
-    /*  C   O   N   S   T   R   U   C   T   O   R   S   */    
+    /*  C   O   N   S   T   R   U   C   T   O   R   S   */
 
     public UploadableOrder(int product_id, String product_size, int product_quantity, String customer_email) {
         this.product_id = product_id;

@@ -76,7 +76,10 @@ public class Staff {
     @Override
     public String toString(){
 
+
         StringBuilder temp= new StringBuilder();
+
+        /*
 
         temp.append("First Name: " + this.first_name + "\n");
         temp.append("Last Name: " + this.last_name + "\n");
@@ -96,6 +99,11 @@ public class Staff {
         temp.append("Privilege Level: " + this.privilege_level.getPrivilege_level() + "\n");
         temp.append("Pending Orders: " + this.pending_orders + "\n");
 
+
+         */
+
+        temp.append(this.getFirst_name()).append(" ").append(this.getLast_name());
+
         return temp.toString();
 
     }
@@ -108,14 +116,22 @@ public class Staff {
     @Override
     public boolean equals(Object to_compare){
 
-        Staff staff_to_compare= (Staff) to_compare;
+        // IF OBJECT IS NOT NULL
+        if(to_compare != null){
 
-        if( this.email.equals(staff_to_compare.getEmail()) ){
-            return true;
+            Staff staff_to_compare= (Staff) to_compare;
+
+            if( this.email.equals(staff_to_compare.getEmail()) ){
+                return true;
+            }
+            else {
+                return false;
+            }
+
         }
-        else {
-            return false;
-        }
+
+        // IF OBJECT TO COMPARE IS null, RETURN FALSE
+        return false;
 
     }
 

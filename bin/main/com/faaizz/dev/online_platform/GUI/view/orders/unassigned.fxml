@@ -20,7 +20,7 @@
 <?import javafx.collections.*?>
 
 <?import java.lang.String?>
-<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.orders.WorkloadController">
+<BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.orders.UnassignedOrdersController">
 
     <top>
         <VBox>
@@ -91,8 +91,8 @@
 
             <!--ORDER BUTTONS-->
             <VBox fx:id="orders_sub_section" spacing="10"  styleClass="sub-section-style">
-                <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToMyWorkload" />
-                <Button fx:id="unassigned_orders" text="Unassigned Order" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
+                <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToMyWorkload" />
+                <Button fx:id="unassigned_orders" text="Unassigned Order" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
                 <Button fx:id="pending_orders" text="Pending Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToPendingOrders" />
                 <Button fx:id="failed_orders" text="Failed Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToFailedOrders" />
                 <padding>
@@ -109,7 +109,7 @@
     <center>
         <VBox fx:id="center_vbox" >
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
-                <Label text="MY WORKLOAD" styleClass="big-body-font" maxWidth="100000000000" />
+                <Label text="UNASSIGNED ORDERS" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
                     <Insets bottom="20" left="10" right="10" top="10" />
                 </padding>
@@ -127,6 +127,15 @@
             <VBox fx:id="pagination_vbox" />
         </VBox>
     </center>
+
+
+    <bottom>
+        <Label text="COPYRIGHT © 2019" styleClass="dark-color-style" alignment="CENTER" prefWidth="Infinity">
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </Label>
+    </bottom>
 
 </BorderPane>
 

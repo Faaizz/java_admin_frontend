@@ -37,11 +37,13 @@ import com.faaizz.dev.online_platform.api_inbound.model.Order;
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollection;
+import com.faaizz.dev.online_platform.api_inbound.model.collection.StaffCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
 import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
 import com.faaizz.dev.online_platform.api_outbound.platform.CustomerResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.OrderResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
+import com.faaizz.dev.online_platform.api_outbound.platform.StaffResource;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -50,24 +52,32 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class WorkloadController extends GenericOrdersController {
+public class UnassignedOrdersController extends GenericOrdersController {
+
+    protected ObservableList<Staff> staff_list= null;
 
     public void initialize() throws Exception {
 
         super.initialize();
+
+        // INITIALIZE staff_list
+        staff_list= FXCollections.observableArrayList();
 
         Staff current_staff = InstanceData.getCurrentStaff();
 
         //
 
         Map<String, String> post_data = new HashMap<>();
-        post_data.put("staff_email", current_staff.getEmail());
 
         Platform.runLater( new Runnable(){
         
             @Override
             public void run() {
-                loadWorkload(post_data, 1);
+                try{
+                    loadUnassignedOrders(post_data, 1);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         } );
 
@@ -76,36 +86,42 @@ public class WorkloadController extends GenericOrdersController {
 
 
     private int current_page;
-    private Map<String, String> current_post_data;
 
     /**
-     * Loads the orders assigned to current staff whose email is in
-     * poat_data.get("staff_email")
+     * Loads unassigned orders
      * 
      * @param post_data   MAKSHIFT Map<String, String> TO ALLOW COMPATIBILITY WITH
      *                    MainController's setupPagination() METHOD
      * @param page_number
+     * @throws Exception
      * @throws IOException
      */
-    private void loadWorkload(Map<String, String> post_data, int page_number){
-
-        // SET CURRENT PAGE AND POST DATA TO ENABLE PAGE REFRESH
-        this.current_post_data= post_data;
-        this.current_page= page_number;
-
-        // CREATE NEW ORDER RESOURCE
-        OrderResource order_resource = new OrderResource(SettingsData.getSettings().getBase_url(),
-                SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
+    private void loadUnassignedOrders(Map<String, String> post_data, int page_number) {
+        
 
         try{
+
+            // SET CURRENT PAGE AND POST DATA TO ENABLE PAGE REFRESH
+            this.current_page= page_number;
+
+            // VERIFY ADMIN
+            verifyAdminAuthorization();
+
+            // CREATE NEW STAFF RESOURCE
+            StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(),
+                SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
+
+            // CREATE NEW ORDER RESOURCE
+            OrderResource order_resource = new OrderResource(SettingsData.getSettings().getBase_url(),
+                SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
             // SHOW LOADING MINI DIALOG
             // Call inherited method from MainController class
             MiniDialogController mini_dialog_controller = showLoadingMiniDialog();
 
-            // GET ORDERS ASSIGNED TO THE CURRENT STAFF
+            // GET UNASSIGNED ORDERS
 
-            Runnable load_workload = new Runnable() {
+            Runnable load_unassigned = new Runnable() {
 
                 @Override
                 public void run() {
@@ -114,8 +130,16 @@ public class WorkloadController extends GenericOrdersController {
 
                         try {
 
+                            // LOAD STAFF LIST
+                            String matched_staff_string= staff_resource.all();
+
+                            StaffCollection matched_staff_collection= APIParser.getInstance().parseMultiStaffResponse(matched_staff_string);
+
+                            // SET staff_list  TO LOADED STAFF LIST
+                            staff_list= FXCollections.observableArrayList(matched_staff_collection.getStaffs());
+
                             // PERFORM REQUEST
-                            String matched_orders_string = order_resource.staff(post_data.get("staff_email"));
+                            String matched_orders_string = order_resource.unassigned();
 
                             OrderCollection matched_orders = APIParser.getInstance()
                                     .parseMultiOrderResponse(matched_orders_string);
@@ -123,7 +147,7 @@ public class WorkloadController extends GenericOrdersController {
                             // IF NO ORDER IS FOUND
                             if (matched_orders.getOrders().size() <= 0) {
                                 mini_dialog_controller.enableCloseButton();
-                                mini_dialog_controller.setDialog_text_label("YOU DO NOT HAVE ANY PENDING ORDERS.");
+                                mini_dialog_controller.setDialog_text_label("THERE ARE NO UNASSIGNED ORDERS.");
                             }
                             // OTHERWISE
                             else {
@@ -148,9 +172,9 @@ public class WorkloadController extends GenericOrdersController {
             };
 
             // LOAD WORKLOAD
-            load_workload.run();
+            load_unassigned.run();
 
-        }catch(IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
 
@@ -196,7 +220,7 @@ public class WorkloadController extends GenericOrdersController {
         content_scrollpane.setContent(topmost_vbox);
 
         // SETUP PAGINATION
-        setupPagination(page_meta, post_data, this::loadWorkload);
+        setupPagination(page_meta, post_data, this::loadUnassignedOrders);
 
     }
 
@@ -206,7 +230,7 @@ public class WorkloadController extends GenericOrdersController {
      * current_orders, current_page_meta, and current_post_data
      */
     private void refreshOrders() throws Exception {
-        loadWorkload(current_post_data, current_page);
+        loadUnassignedOrders(null, current_page);
     }
 
     class SingleOrder extends HBox{
@@ -235,6 +259,7 @@ public class WorkloadController extends GenericOrdersController {
 
             level_one_hbox= new HBox();
             level_one_hbox.setSpacing(7);
+            level_one_hbox.setPadding(new Insets(10, 10, 10, 10));
 
             image_vbox= new VBox();
             image= new Image(image_is, 150, 0, true, false);
@@ -275,13 +300,9 @@ public class WorkloadController extends GenericOrdersController {
             status_L.getStyleClass().add("small-body-font");
             details_vbox.getChildren().add(status_L);
 
-            Label est_del_date_L= new Label("EST DEL DATE: " +  (est_del_date.isEmpty() ? "UNAVAILABLE" : est_del_date) );
-            est_del_date_L.getStyleClass().add("small-body-font");
-            details_vbox.getChildren().add(est_del_date_L);
-
 
             // CREATE UPDATE PANEL HBOX
-            HBox update_panel= new UpdatePanel(order.getStatus().toUpperCase(), est_del_date, order.getId());
+            HBox update_panel= new UpdatePanel(order.getId());
             details_vbox.getChildren().add(update_panel);
 
 
@@ -308,58 +329,36 @@ public class WorkloadController extends GenericOrdersController {
 
     class UpdatePanel extends HBox{
 
-        private ObservableList<String> order_status;
         VBox update_vbox;
-        TextField est_del_date_TF;
-        ComboBox<String> status_CB;
-        TextField failure_TF;
+        ComboBox<Staff> staff_select_CB;
 
         VBox confirm_vbox;
-        Button set_del_date_BT;
-        Button update_status_BT;
-        Button mark_failed_BT;
+        Button assign_staff_BT;
 
         int order_id;
 
 
-        public UpdatePanel(String status, String est_del_date, int order_id){
+        public UpdatePanel(int order_id){
 
             // INITIALIZE ORDER
             this.order_id= order_id;
 
-            // SETUP ORDER STATUS
-            order_status= FXCollections.observableArrayList();
-            order_status.add("Pending".toUpperCase());
-            order_status.add("Delivered".toUpperCase());
-
             this.setMaxWidth(1000000);
             this.setSpacing(10);
+            this.setPadding(new Insets(5, 5, 5, 5));
 
             // UPDATE VBOX
             update_vbox= new VBox();
             update_vbox.setMaxWidth(100000);
             update_vbox.setSpacing(7);
 
-            // EST DEL DATE TEXTFIELD
-            est_del_date_TF= new TextField(est_del_date);
-            est_del_date_TF.getStyleClass().addAll("big-body-textfield", "small-body-font");
-            est_del_date_TF.setPrefHeight(25);
-            est_del_date_TF.setMinHeight(25);
-            update_vbox.getChildren().add(est_del_date_TF);
-
-            status_CB= new ComboBox<>();
-            status_CB.setItems(order_status);
-            status_CB.setMinHeight(25);
-            status_CB.getStyleClass().addAll("big-body-combobox", "small-body-font");
-            status_CB.setPrefHeight(25);
-            status_CB.setMaxWidth(100000);
-            status_CB.getSelectionModel().select("PENDING");
-            update_vbox.getChildren().add(status_CB);
-            failure_TF= new TextField();
-            failure_TF.getStyleClass().addAll("big-body-textfield", "small-body-font");
-            failure_TF.setMinHeight(25);
-            failure_TF.setPrefHeight(25);
-            update_vbox.getChildren().add(failure_TF);
+            staff_select_CB= new ComboBox<>();
+            staff_select_CB.setItems(staff_list);
+            staff_select_CB.setMinHeight(25);
+            staff_select_CB.getStyleClass().addAll("big-body-combobox", "small-body-font");
+            staff_select_CB.setPrefHeight(25);
+            staff_select_CB.setMaxWidth(100000);
+            update_vbox.getChildren().add(staff_select_CB);
 
             this.getChildren().add(update_vbox);
 
@@ -369,109 +368,21 @@ public class WorkloadController extends GenericOrdersController {
             confirm_vbox.setSpacing(7);
             confirm_vbox.setMaxWidth(1000000);
 
-            set_del_date_BT= new Button("Set Est Delivery");
-            set_del_date_BT.setMinHeight(25);
-            set_del_date_BT.setPrefHeight(25);
-            set_del_date_BT.setMaxWidth(100000);
-            set_del_date_BT.getStyleClass().addAll("file-chooser-button", "image-view-button", "small-body-font");
-            set_del_date_BT.setOnAction( new EventHandler<ActionEvent>(){
-
-                @Override
-                public void handle(ActionEvent event) {
-                    String del_date_string= null;
-
-                    // CHECK IF A VALID DELIVERY DATE HAS BEEN SPECIFIED IN est_del_date_TF
-                    try{
-                        LocalDate del_date= LocalDate.parse(est_del_date_TF.getText());
-                        // IF VALID DATE IS ENTERED, GET IT IN THE REQUIRED STRING FORMAT "2019-12-17" 
-                        del_date_string= del_date.toString();
-
-                    }catch(DateTimeParseException e){
-                        // IF NO VALID DATE IS ENTERED, SHOW RED BORDERS
-                        if(!est_del_date_TF.getStyleClass().contains(CSS_RED_BORDERS)){
-                            est_del_date_TF.getStyleClass().add(CSS_RED_BORDERS);
-                        }
-                        e.printStackTrace();
-                    }
-
-                    // IF WE HAVE A VALID DATE
-                    if(del_date_string != null){
-                        // PREPARE FINAL VARIABLE FOR LAMBDA EXPRESSION
-                        final String del_date_string_final= del_date_string;
-
-                        try{
-
-                            // SHOW LOADING DIALOG
-                            MiniDialogController dialog_controller= showLoadingMiniDialog();
-                            // CREATE ORDER RESOURCE
-                            OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
-
-                            Runnable set_del_date_run= new Runnable(){
-                            
-                                @Override
-                                public void run() {
-                                    Platform.runLater(()->{
-
-                                        try{
-                                            //ATTEMPT DELIVERY DATE UPDATE
-                                            UploadableOrder updated_order= new UploadableOrder(0, "", 0, "");
-                                            // SET ESTIMATED DELIVERY DATE
-                                            updated_order.setEst_del_date(del_date_string_final);
-                                            order_resource.update(updated_order, order_id);
-
-                                            // SUCCESS UPDATE
-                                            // REFRESH ORDERS DISPLAYED
-                                            refreshOrders();
-                                            // ENABLE DIALOG CLOSE
-                                            dialog_controller.enableCloseButton();
-                                            // DISPLAY SUCCESS MESSAGE
-                                            dialog_controller.setDialog_text_label("Update Successful");
-
-
-                                        } catch (Exception e) {
-                                            // DISPLAY ERROR ON DIALOG
-                                            dialog_controller.setDialog_text_label(e.getMessage());
-                                            // ENABLE DIALOG CLOSE BUTTON
-                                            dialog_controller.enableCloseButton();
-
-                                            e.printStackTrace();
-                                        }
-
-                                    });
-                                }
-                            };
-
-                            set_del_date_run.run();
-
-                        
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                }
-                
-            } );
-            confirm_vbox.getChildren().add(set_del_date_BT);
-
-            update_status_BT= new Button("Update Status");
-            update_status_BT.setMinHeight(25);
-            update_status_BT.setPrefHeight(25);
-            update_status_BT.setMaxWidth(100000);
-            update_status_BT.getStyleClass().addAll("file-chooser-button", "small-body-font");
-            update_status_BT.setOnAction( new EventHandler<ActionEvent>(){
+            assign_staff_BT= new Button("Assign Staff");
+            assign_staff_BT.setMinHeight(25);
+            assign_staff_BT.setPrefHeight(25);
+            assign_staff_BT.setMaxWidth(100000);
+            assign_staff_BT.getStyleClass().addAll("file-chooser-button", "small-body-font");
+            assign_staff_BT.setOnAction( new EventHandler<ActionEvent>(){
 
                 @Override
                 public void handle(ActionEvent event) {
 
-                    // CHECK IF A STATUS HAS BEEN SELECTED IN status_CB 
-                    String status_string= status_CB.getSelectionModel().getSelectedItem();
+                    // CHECK IF A STAFF HAS BEEN SELECTED IN staff_select_CB 
+                    Staff selected_staff= staff_select_CB.getSelectionModel().getSelectedItem();
 
                     // IF WE HAVE A VALID DATE
-                    if(status_string != null){
-                        // PREPARE FINAL VARIABLE FOR LAMBDA EXPRESSION
-                        final String status_string_final= status_string;
+                    if(selected_staff != null){
 
                         try{
 
@@ -490,7 +401,8 @@ public class WorkloadController extends GenericOrdersController {
                                             //ATTEMPT STATUS UPDATE
                                             UploadableOrder updated_order= new UploadableOrder(0, "", 0, "");
                                             // SET STATUS DATE
-                                            updated_order.setStatus(status_string_final);
+                                            updated_order.setStaff_email(selected_staff.getEmail());
+
                                             order_resource.update(updated_order, order_id);
 
                                             // SUCCESS UPDATE
@@ -499,7 +411,7 @@ public class WorkloadController extends GenericOrdersController {
                                             // ENABLE DIALOG CLOSE
                                             dialog_controller.enableCloseButton();
                                             // DISPLAY SUCCESS MESSAGE
-                                            dialog_controller.setDialog_text_label("Update Successful");
+                                            dialog_controller.setDialog_text_label("Order Assigned Successful");
 
 
                                         } catch (Exception e) {
@@ -527,86 +439,7 @@ public class WorkloadController extends GenericOrdersController {
                 }
                 
             } );
-            confirm_vbox.getChildren().add(update_status_BT);
-
-            mark_failed_BT= new Button("Set as Failed");
-            mark_failed_BT.setMinHeight(25);
-            mark_failed_BT.setPrefHeight(25);
-            mark_failed_BT.setMaxWidth(100000);
-            mark_failed_BT.getStyleClass().addAll("file-chooser-button", "failed-button", "small-body-font");
-            mark_failed_BT.setOnAction( new EventHandler<ActionEvent>(){
-
-                @Override
-                public void handle(ActionEvent event) {
-
-                    // CHECK IF A FAILURE MESSAGE HAS BEEN ENTERED
-                    String failure_string= failure_TF.getText();
-
-                    // IF WE HAVE A VALID DATE
-                    if(failure_string != null){
-                        // PREPARE FINAL VARIABLE FOR LAMBDA EXPRESSION
-                        final String failure_string_final= failure_string;
-
-                        try{
-
-                            // SHOW LOADING DIALOG
-                            MiniDialogController dialog_controller= showLoadingMiniDialog();
-                            // CREATE ORDER RESOURCE
-                            OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
-
-                            Runnable set_del_date_run= new Runnable(){
-                            
-                                @Override
-                                public void run() {
-                                    Platform.runLater(()->{
-
-                                        try{
-                                            //ATTEMPT FAILURE UPDATE
-                                            UploadableOrder updated_order= new UploadableOrder(0, "", 0, "");
-                                            // SET FAILURE MESSAGE
-                                            updated_order.setFailure_cause(failure_string_final);
-                                            // SET FAILURE DATE
-                                            updated_order.setFailure_date(LocalDateTime.now().toString().replaceAll("T", " "));
-                                            // SET FAILURE STATUS
-                                            updated_order.setStatus("failed");
-                                            // EXECUTE UPDATE
-                                            order_resource.update(updated_order, order_id);
-
-                                            // SUCCESS UPDATE
-                                            // REFRESH ORDERS DISPLAYED
-                                            refreshOrders();
-                                            // ENABLE DIALOG CLOSE
-                                            dialog_controller.enableCloseButton();
-                                            // DISPLAY SUCCESS MESSAGE
-                                            dialog_controller.setDialog_text_label("Update Successful");
-
-
-                                        } catch (Exception e) {
-                                            // DISPLAY ERROR ON DIALOG
-                                            dialog_controller.setDialog_text_label(e.getMessage());
-                                            // ENABLE DIALOG CLOSE BUTTON
-                                            dialog_controller.enableCloseButton();
-
-                                            e.printStackTrace();
-                                        }
-
-                                    });
-                                }
-                            };
-
-                            set_del_date_run.run();
-
-                        
-                        }catch(IOException e){
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                }
-                
-            } );
-            confirm_vbox.getChildren().add(mark_failed_BT);
+            confirm_vbox.getChildren().add(assign_staff_BT);
 
             this.getChildren().add(confirm_vbox);
 

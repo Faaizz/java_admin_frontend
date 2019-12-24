@@ -415,7 +415,7 @@ public class Test_OrderResource{
             File image_three= new File("img/three.jpg");
 
             UploadableProduct product_to_add= new UploadableProduct(
-                            "Test Product", "Firma", "This is a test product from Firma",
+                            "Test Prttoduct", "Firma", "This is a test product from Firma",
                             "clothing", "male", "Trousers", "Red", "23000",
                             "Leather", options, image_one, image_two, image_three
                     );
@@ -439,7 +439,7 @@ public class Test_OrderResource{
             phone_numbers.add("+2348505050690");
 
             UploadablePerson customer_to_add= new UploadablePerson( "Aisha", "Yetunde",
-                    "nawhodehere@cccodecreekk.orgg", "PasswordHere", "Kurt-Schumacher, 16",
+                    "nawhodehere@cbbccodecreekk.orgg", "PasswordHere", "Kurt-Schumacher, 16",
                     "female", phone_numbers);
 
             // ADD NEW CUSTOMER
@@ -454,7 +454,7 @@ public class Test_OrderResource{
 
             // LOGIN CUSTOMER
             customerResource= new CustomerResource("127.0.0.1:8000", "/api", "x6Q7KqJfghcRzgo1bCpKStslqsOhBR8VnQDe0NgAtAGOhnkWN6YCENhg21tO");
-            customerResource.login("nawhodehere@cccodecreekk.orgg", "PasswordHere", "yes");
+            customerResource.login("nawhodehere@cbbccodecreekk.orgg", "PasswordHere", "yes");
 
             /*========================================================================================*/
 
@@ -499,6 +499,20 @@ public class Test_OrderResource{
             customerResource.logout();
 
             loginAdmin();
+
+
+            /*========================================================================================*/
+            // GET UNASSIGNED ORDERS
+            matched_orders_string= orderResource.unassigned();
+
+            matched_orders= APIParser.getInstance().parseMultiOrderResponse(matched_orders_string);
+
+            // ASSERT THAT EVERY MATCHED ORDER IS OF THE SPECIFIED PRODUCT
+            matched_orders.getOrders().forEach( order->{
+
+                assertEquals( null, order.getStaff_email() );
+
+            } );
 
 
             /*========================================================================================*/ 
