@@ -42,7 +42,7 @@ public class MainController {
 
     private final String PRODUCTS= "view/products/manage.fxml";
     private final String ORDERS= "view/orders/workload.fxml";
-    private final String STAFF= "";
+    private final String STAFF= "view/staff/edit.fxml";
     private final String CUSTOMERS= "view/customers/view.fxml";
 
     /*========================================================================================*/
