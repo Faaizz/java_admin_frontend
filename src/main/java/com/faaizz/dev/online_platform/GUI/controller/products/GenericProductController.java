@@ -68,6 +68,15 @@ public class GenericProductController extends ProductController {
 
     public void initialize() throws Exception {
 
+        // INITIALIZE MENU
+        super.setupMenu();
+
+        // SET "active-section-button" ON PRODUCTS
+        products_button.getStyleClass().add("active-section-button");
+
+        // SHOW MENU
+        super.renderMenu();
+
         // INITIALIZE SECTIONS, SUB SECTIONS AND CATEGORIES
         super.initialize();
 

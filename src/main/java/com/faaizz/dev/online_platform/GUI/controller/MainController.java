@@ -11,14 +11,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
@@ -47,13 +53,199 @@ public class MainController {
     protected Label staff_name;
 
     @FXML
-    protected Button settings_button;
-
-    @FXML
     protected VBox center_vbox;
 
     @FXML
     protected VBox pagination_vbox;
+
+
+    /** MENU CONTROLS */
+    protected VBox top_menu_vbox;
+    protected GridPane header_and_buttons_gpane;
+    protected Label title_label;
+    protected Button settings_button;
+    protected Button logout_button;
+    protected Button close_button;
+    protected Button products_button;
+    protected Button orders_button;
+    protected Button customers_button;
+    protected Button staff_button;
+    /**
+     * This method sets up the top menu
+     */
+    protected void setupMenu(){
+
+        top_menu_vbox= new VBox();
+        GridPane header_and_buttons_gpane= new GridPane();
+
+        // Title Label
+        title_label= new Label("STAFF PORTAL");
+        title_label.setPadding(new Insets(5));
+        title_label.getStyleClass().addAll("dark-color-style", "big-header-font");
+        // Add to gridpane
+        header_and_buttons_gpane.add(title_label, 0, 0);
+        GridPane.setHalignment(title_label, HPos.CENTER);
+        GridPane.setHgrow(title_label, Priority.ALWAYS);
+
+
+        // Settings Button
+        settings_button= new Button();
+        settings_button.getStyleClass().add("header-buttons");
+        settings_button.setMaxWidth(10);
+        settings_button.setOnAction(event -> {
+            try {
+                handleSettings();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        // Get button image
+        Image settings_image= new Image(getClass().getResourceAsStream("../../view/img/settings.png"));
+        ImageView settings_iview= new ImageView(settings_image);
+        settings_button.setGraphic(settings_iview);
+        settings_button.setTooltip(new Tooltip("settings"));
+        settings_button.setAlignment(Pos.CENTER_RIGHT);
+        // Add to gridpane
+        header_and_buttons_gpane.add(settings_button, 1, 0);
+
+
+        // Login Button
+        logout_button= new Button();
+        logout_button.getStyleClass().add("header-buttons");
+        logout_button.setMaxWidth(10);
+        logout_button.setOnAction(event -> {
+            try {
+                handleLogout();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        // Get button image
+        Image logout_image= new Image(getClass().getResourceAsStream("../../view/img/logout.png"));
+        ImageView logout_iview= new ImageView(logout_image);
+        logout_button.setGraphic(logout_iview);
+        logout_button.setTooltip(new Tooltip("logout"));
+        logout_button.setAlignment(Pos.CENTER_RIGHT);
+        // Add to gridpane
+        header_and_buttons_gpane.add(logout_button, 2, 0);
+
+
+        // Close Button
+        close_button= new Button();
+        close_button.getStyleClass().add("header-buttons");
+        close_button.setMaxWidth(10);
+        close_button.setOnAction(event -> {
+            handleExit();
+        });
+        // Get button image
+        Image close_image= new Image(getClass().getResourceAsStream("../../view/img/close.png"));
+        ImageView close_iview= new ImageView(close_image);
+        close_button.setGraphic(close_iview);
+        close_button.setTooltip(new Tooltip("exit"));
+        close_button.setAlignment(Pos.CENTER_RIGHT);
+        // Add to gridpane
+        header_and_buttons_gpane.add(close_button, 3, 0);
+
+        header_and_buttons_gpane.getStyleClass().add("dark-color-style");
+
+        // ADD GRIDPANE TO VBOX
+        top_menu_vbox.getChildren().add(header_and_buttons_gpane);
+
+
+        // Sections Gridpane
+        GridPane sections_gridpane= new GridPane();
+        
+
+        // Products Button
+        products_button= new Button("PRODUCTS");
+        products_button.getStyleClass().addAll("section-buttons", "big-body-font");
+        products_button.setPrefWidth(200);
+        products_button.setMaxWidth(200);
+        GridPane.setHalignment(products_button, HPos.LEFT);
+        GridPane.setHgrow(products_button, Priority.ALWAYS);
+        products_button.setOnAction(event -> {
+            try{
+                handleSectionChangeToProducts();
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
+        });
+        // Add to gridpane
+        sections_gridpane.add(products_button, 0, 0);
+        
+
+        // Orders Button
+        orders_button= new Button("ORDERS");
+        orders_button.getStyleClass().addAll("section-buttons", "big-body-font");
+        orders_button.setPrefWidth(200);
+        orders_button.setMaxWidth(200);
+        GridPane.setHalignment(orders_button, HPos.LEFT);
+        GridPane.setHgrow(orders_button, Priority.ALWAYS);
+        orders_button.setOnAction(event -> {
+            try{
+                handleSectionChangeToOrders();
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
+        });
+        // Add to gridpane
+        sections_gridpane.add(orders_button, 1, 0);
+        
+
+        // Customers Button
+        customers_button= new Button("CUSTOMERS");
+        customers_button.getStyleClass().addAll("section-buttons", "big-body-font");
+        customers_button.setPrefWidth(200);
+        customers_button.setMaxWidth(200);
+        GridPane.setHalignment(customers_button, HPos.LEFT);
+        GridPane.setHgrow(customers_button, Priority.ALWAYS);
+        customers_button.setOnAction(event -> {
+            try{
+                handleSectionChangeToCustomers();
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
+        });
+        // Add to gridpane
+        sections_gridpane.add(customers_button, 2, 0);
+        
+
+        // Staff Button
+        staff_button= new Button("STAFF");
+        staff_button.getStyleClass().addAll("section-buttons", "big-body-font");
+        staff_button.setPrefWidth(200);
+        staff_button.setMaxWidth(200);
+        GridPane.setHalignment(staff_button, HPos.LEFT);
+        GridPane.setHgrow(staff_button, Priority.ALWAYS);
+        staff_button.setOnAction(event -> {
+            try{
+                handleSectionChangeToManageStaff();
+            }catch(Exception e){
+                e.printStackTrace();
+            }            
+        });
+        // Add to gridpane
+        sections_gridpane.add(staff_button, 3, 0);
+
+        // Gridpane padding
+        sections_gridpane.setPadding(new Insets(15));
+
+        // ADD GRIDPANE TO VBOX
+        top_menu_vbox.getChildren().add(sections_gridpane);
+
+
+    }
+
+
+    /**
+     * This method renders the menu
+     */
+    protected void renderMenu(){
+
+        // SHOW MENU
+        root_border_pane.setTop(top_menu_vbox);
+
+    }
 
     /**
      * This method renders the application's footer
@@ -111,7 +303,7 @@ public class MainController {
     }
 
     @FXML
-    public void handleSettings() throws IOException {
+    public void handleSettings()throws IOException {
 
         // DISPLAY LOADING DIALOG
         // Create dialog
