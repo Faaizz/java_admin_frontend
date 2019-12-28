@@ -247,6 +247,10 @@ public class StaffResource extends APIResource {
             builder.addTextBody("new_password", updated_data.getNew_password());
         }
 
+        if( !updated_data.getPrivilege_level().isEmpty() ){
+            builder.addTextBody("privilege_level", updated_data.getPrivilege_level());
+        }
+
         Gson gson= new Gson();
 
         if( updated_data.getPhone_numbers() != null ){

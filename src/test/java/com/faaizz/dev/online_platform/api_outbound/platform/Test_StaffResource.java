@@ -32,7 +32,7 @@
         try {
 
             //LOGIN STAFF FOR EACH TEST
-            staffResource.login("barton.enid@bogan.com", "Qui tempore dolores qui excepturi corrupti magni.", "yes");
+            staffResource.login("femi@codecreek.org", "a", "yes");
 
         } catch (Exception e){
 
@@ -89,7 +89,7 @@
             phone_numbers.add("+2347090876543");
 
             UploadablePerson staff_to_add= new UploadablePerson("First", "Last",
-                    "first@cCottddODECnmgggRiiiiEEK.org", "TestPassword", "1, Firma Avanue, off Firma Road",
+                    "first@cCottddODECnmgggRiiiiEEK.oorg", "TestPassword", "1, Firma Avanue, off Firma Road",
                     "male", phone_numbers
                     );
 

@@ -1,6 +1,11 @@
 package com.faaizz.dev.online_platform.GUI.controller.staff;
 
+import java.io.IOException;
+
+import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.controller.MainController;
+import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 
@@ -9,10 +14,9 @@ public class GenericStaffController extends MainController {
     @FXML
     protected ScrollPane content_scrollpane;
 
-    private final String EDIT= "view/staff/edit.fxml";
-    private final String ADD= "view/staff/add.fxml";
-    private final String MANAGE= "view/staff/manage.fxml";
-
+    private final String EDIT = "view/staff/edit.fxml";
+    private final String ADD = "view/staff/add.fxml";
+    private final String MANAGE = "view/staff/manage.fxml";
 
     public void initialize() throws Exception {
 
@@ -33,22 +37,39 @@ public class GenericStaffController extends MainController {
 
     }
 
-
-    /*========================================================================================*/
-    /*  E   V   E   N   T       H   A   N   D   L   E   R   S */
+    /*
+     * =============================================================================
+     * ===========
+     */
+    /* E V E N T H A N D L E R S */
 
     @FXML
-    public void handleRedirectToEditDetails(){
+    public void handleRedirectToEditDetails() throws IOException, AuthenticationException {
+
+        // Get Main instance
+        Main.getInstance().redirectToPage(EDIT);
 
     }
 
     @FXML
-    public void handleRedirectToAddAccounts(){
+    public void handleRedirectToAddAccounts() throws Exception {
+
+        // Verify Admin Authorization
+        verifyAdminAuthorization();
+
+        // Get Main instance
+        Main.getInstance().redirectToPage(ADD);
 
     }
 
     @FXML
-    public void handleRedirectToManageAccounts(){
+    public void handleRedirectToManageAccounts() throws Exception {
+
+        // Verify Admin Authorization
+        verifyAdminAuthorization();
+        
+        // Get Main instance
+        Main.getInstance().redirectToPage(MANAGE);
 
     }
 

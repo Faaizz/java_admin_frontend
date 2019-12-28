@@ -16,6 +16,7 @@ public class UploadablePerson implements Cloneable{
     private String address;
     private String gender;
     private List<String> phone_numbers;
+    private String privilege_level;
 
 
     /*========================================================================================*/
@@ -51,6 +52,10 @@ public class UploadablePerson implements Cloneable{
 
     public String getNew_password(){ return this.new_password; }
 
+    public String getPrivilege_level(){
+        return this.privilege_level;
+    }
+
 
     /*========================================================================================*/
     /*  C   O   N   S   T   R   U   C   T   O   R   S   */
@@ -70,6 +75,9 @@ public class UploadablePerson implements Cloneable{
 
         //SET NEW PASSWORD TO A BLACK STRING BY DEFAULT, TO SET USE THE PROVIDED SETTER
         this.new_password= "";
+
+        // SET PRIVILEGE LEVEL TO STAFF BY DEFAULT
+        this.privilege_level= "staff";
 
     }
 
@@ -100,6 +108,8 @@ public class UploadablePerson implements Cloneable{
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public void setAdmin(){ this.privilege_level= "admin"; }
 
     public void setPhone_numbers(List<String> phone_numbers) {
         this.phone_numbers = phone_numbers;
