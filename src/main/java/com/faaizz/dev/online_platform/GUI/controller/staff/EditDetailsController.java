@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 public class EditDetailsController extends GenericStaffController {
 
@@ -36,6 +37,18 @@ public class EditDetailsController extends GenericStaffController {
 
         // INITIALIZE
         super.initialize();
+
+        // Set "ENTER" key event on con_new_password_textfield to trigger login attempt
+        con_new_password_textfield.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    handleSave();;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        );
 
         // LOAD INFO OF CURRENT STAFF
 

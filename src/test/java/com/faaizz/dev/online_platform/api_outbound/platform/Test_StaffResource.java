@@ -32,7 +32,7 @@
         try {
 
             //LOGIN STAFF FOR EACH TEST
-            staffResource.login("femi@codecreek.org", "a", "yes");
+            staffResource.login("barton.enid@bogan.com", "Qui tempore dolores qui excepturi corrupti magni.", "yes");
 
         } catch (Exception e){
 

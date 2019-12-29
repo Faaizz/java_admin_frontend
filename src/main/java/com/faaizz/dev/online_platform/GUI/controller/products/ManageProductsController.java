@@ -21,6 +21,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -49,6 +50,8 @@ public class ManageProductsController extends GenericProductController {
     @FXML
     protected TextField max_price_textfield;
     @FXML
+    protected TextField brand_textfield;
+    @FXML
     protected Button search_products_button;
 
     public void initialize() throws Exception {
@@ -59,6 +62,19 @@ public class ManageProductsController extends GenericProductController {
         section_dropdown.getSelectionModel().selectFirst();
         handleSectionChange(null);
         handleSub_sectionChange(null);
+
+        // Set "ENTER" key event on brand_textfield to trigger login attempt
+        brand_textfield.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    handleSearchProduct();;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        );
+
     }
 
 

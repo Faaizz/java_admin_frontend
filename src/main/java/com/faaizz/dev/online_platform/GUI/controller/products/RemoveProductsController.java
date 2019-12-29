@@ -15,12 +15,29 @@ import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 public class RemoveProductsController extends ManageProductsController {
+
+    @FXML
+    protected TextField brand_textfield;
 
     public void initialize() throws Exception {
         // INITIALIZE SECTIONS, SUB SECTIONS AND CATEGORIES
         super.initialize();
+
+        // Set "ENTER" key event on brand_textfield to trigger login attempt
+        brand_textfield.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    handleDeleteProducts();;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        );
     }
 
     @FXML

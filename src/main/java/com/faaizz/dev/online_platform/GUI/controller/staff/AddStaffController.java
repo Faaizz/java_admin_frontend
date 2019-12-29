@@ -58,6 +58,17 @@ public class AddStaffController extends GenericStaffController{
         admin_dropdown.getSelectionModel().select("false");
 
     
+        // Set "ENTER" key event on confirm_password_textfield to trigger login attempt
+        confirm_password_textfield.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    handleConfirm();;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        );
 
     }
 

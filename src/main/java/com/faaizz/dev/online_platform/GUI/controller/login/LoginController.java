@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -35,6 +36,22 @@ public class LoginController extends MainController {
 
     @FXML
     private Button login_button;
+
+    public void initialize(){
+
+        // Set "ENTER" key event on password field to trigger login attempt
+        passwordfield.setOnKeyPressed(event -> {
+            if (event.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    handleLogin();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        );
+
+    }
 
     private boolean validateEntries(){
 
