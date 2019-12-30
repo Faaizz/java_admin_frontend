@@ -11,12 +11,12 @@
 <?import javafx.scene.image.Image?>
 
 <?import javafx.geometry.Insets?>
-<HBox styleClass="dialog-root"  fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<HBox styleClass="dialog-border"  fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       stylesheets="@../css/base.css" prefHeight="200" prefWidth="600"
       fx:controller="com.faaizz.dev.online_platform.GUI.controller.settings.SettingsController"
 >
 
-    <VBox fx:id="settings_vbox" HBox.hgrow="ALWAYS" >
+    <VBox fx:id="settings_vbox"  styleClass="sub-section-style, dialog-border" HBox.hgrow="ALWAYS" >
         <HBox maxWidth="100000000" alignment="CENTER_RIGHT">
             <Button fx:id="close_button" styleClass="active-section-button" maxWidth="10" onMouseClicked="#handleExit">
                 <graphic>
@@ -30,7 +30,7 @@
             </Button>
         </HBox>
 
-        <HBox fx:id="settings_hbox" styleClass="sub-section-style" spacing="30" alignment="CENTER">
+        <HBox fx:id="settings_hbox" spacing="30" alignment="CENTER">
             <!--LABELS-->
             <VBox fx:id="labels_vbox" spacing="10">
                 <Label text="Base URL:" styleClass="mid-body-font" alignment="CENTER_RIGHT" minHeight="30" prefHeight="30" />

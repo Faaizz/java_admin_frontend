@@ -10,12 +10,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<HBox styleClass="dialog-root" fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<HBox styleClass="dialog-border" fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       stylesheets="@../css/base.css" prefHeight="400" prefWidth="600"
       fx:controller="com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController"
 >
 
-    <VBox HBox.hgrow="ALWAYS" >
+    <VBox  styleClass="sub-section-style, dialog-border" HBox.hgrow="ALWAYS" >
         <HBox maxWidth="100000000" alignment="CENTER_RIGHT">
             <Button fx:id="close_button" styleClass="active-section-button" maxWidth="10" onMouseClicked="#handleExit">
                 <graphic>
