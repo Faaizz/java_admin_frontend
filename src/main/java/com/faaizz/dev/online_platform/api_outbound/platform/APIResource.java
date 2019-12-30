@@ -230,7 +230,8 @@ public abstract class APIResource {
             String value= temp.substring(0, semi_colon_index);
 
             //IF WE HAVE COOKIES, ADD TO COOKIE STORE
-            CookieStore.getCookies().put(name, new Cookie(value));
+            CookieStore.getCookies().put(name, new Cookie(header.getValue()));
+            //CookieStore.getCookies().put(name, new Cookie(value));
 
         }
 
@@ -248,7 +249,7 @@ public abstract class APIResource {
 
             CookieStore.getCookies().forEach( (name, cookie)->{
 
-                request.addHeader("Cookie", cookie.getValue());
+                request.addHeader("Cookie",  cookie.getValue());
 
             });
 

@@ -7,8 +7,8 @@ IF EXIST "settings" (
     ::IF IT DOES, NAVIGATE IN AND CHECK IF save file DOESN'T EXIST
     CD settings
     IF NOT EXIST "main.json" (
-        ::CREATE IT
-        ECHO >> main.json
+        ::CREATE main.json FILE
+        copy NUL main.json
 
     )
 
