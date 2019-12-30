@@ -100,7 +100,8 @@ public class MainController {
             }
         });
         // Get button image
-        Image settings_image= new Image(getClass().getResourceAsStream("../../view/img/settings.png"));
+        //Image settings_image= new Image(getClass().getResourceAsStream("img/settings.png"));
+        Image settings_image= new Image(MainController.class.getResourceAsStream("img/settings.png"));
         ImageView settings_iview= new ImageView(settings_image);
         settings_button.setGraphic(settings_iview);
         settings_button.setTooltip(new Tooltip("settings"));
@@ -121,7 +122,8 @@ public class MainController {
             }
         });
         // Get button image
-        Image logout_image= new Image(getClass().getResourceAsStream("../../view/img/logout.png"));
+        //Image logout_image= new Image(getClass().getResourceAsStream("../../view/img/logout.png"));
+        Image logout_image= new Image(MainController.class.getResourceAsStream("img/logout.png"));
         ImageView logout_iview= new ImageView(logout_image);
         logout_button.setGraphic(logout_iview);
         logout_button.setTooltip(new Tooltip("logout"));
@@ -138,7 +140,8 @@ public class MainController {
             handleExit();
         });
         // Get button image
-        Image close_image= new Image(getClass().getResourceAsStream("../../view/img/close.png"));
+        //Image close_image= new Image(getClass().getResourceAsStream("../../view/img/close.png"));
+        Image close_image= new Image(MainController.class.getResourceAsStream("img/close.png"));
         ImageView close_iview= new ImageView(close_image);
         close_button.setGraphic(close_iview);
         close_button.setTooltip(new Tooltip("exit"));
@@ -311,7 +314,8 @@ public class MainController {
         settings_dialog.initOwner(root_border_pane.getScene().getWindow());
         // Create FXML Loader
         FXMLLoader settings_dialog_loader = new FXMLLoader();
-        settings_dialog_loader.setLocation(getClass().getResource("../../view/settings/settings.fxml"));
+        //settings_dialog_loader.setLocation(getClass().getResource("../../view/settings/settings.fxml"));
+        settings_dialog_loader.setLocation(MainController.class.getResource("settings/settings.fxml"));
         // Load FXML
         settings_dialog.getDialogPane().setContent(settings_dialog_loader.load());
         settings_dialog.initStyle(StageStyle.UNDECORATED);
@@ -355,7 +359,8 @@ public class MainController {
         mini_dialog.initOwner(root_border_pane.getScene().getWindow());
         // Create FXML Loader
         FXMLLoader mini_dialog_loader = new FXMLLoader();
-        mini_dialog_loader.setLocation(getClass().getResource("../../view/dialogs/mini_dialog.fxml"));
+        //mini_dialog_loader.setLocation(getClass().getResource("../../view/dialogs/mini_dialog.fxml"));
+        mini_dialog_loader.setLocation(MainController.class.getResource("dialogs/mini_dialog.fxml"));
         // Load FXML
         mini_dialog.getDialogPane().setContent(mini_dialog_loader.load());
         mini_dialog.initStyle(StageStyle.UNDECORATED);

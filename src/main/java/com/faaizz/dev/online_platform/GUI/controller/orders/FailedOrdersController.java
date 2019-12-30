@@ -128,7 +128,7 @@ public class FailedOrdersController extends GenericOrdersController {
                             // IF NO ORDER IS FOUND
                             if (matched_orders.getOrders().size() <= 0) {
                                 mini_dialog_controller.enableCloseButton();
-                                mini_dialog_controller.setDialog_text_label("THERE ARE NO PENDING ORDERS.");
+                                mini_dialog_controller.setDialog_text_label("THERE ARE NO FAILED ORDERS.");
                             }
                             // OTHERWISE
                             else {

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.faaizz.dev.online_platform.GUI.SettingsData;
+import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.StaffCollection;
@@ -297,7 +298,7 @@ public class ManageStaffController extends GenericStaffController{
             delete_button.setAlignment(Pos.TOP_RIGHT);
             delete_button.setPrefWidth(2);
             delete_button.setMaxWidth(2);
-            Image delete_icon= new Image(getClass().getResourceAsStream("../../view/img/delete.png")); 
+            Image delete_icon= new Image(MainController.class.getResourceAsStream("img/delete.png"));
             ImageView delete_IV= new ImageView(delete_icon);
             delete_button.setGraphic(delete_IV);
             delete_button.setTooltip(new Tooltip("delete"));

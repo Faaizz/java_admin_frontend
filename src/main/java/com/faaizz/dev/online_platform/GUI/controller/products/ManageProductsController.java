@@ -1,6 +1,7 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
 import com.faaizz.dev.online_platform.GUI.SettingsData;
+import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.ProductCollection;
@@ -1155,7 +1156,7 @@ public class ManageProductsController extends GenericProductController {
         delete_product_button.setMinHeight(35);
         delete_product_button.setPrefHeight(35);
         delete_product_button.setMaxWidth(10);
-        delete_product_button.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("../../view/img/delete.png"))));
+        delete_product_button.setGraphic(new ImageView(new Image(MainController.class.getResourceAsStream("img/delete.png"))));
         delete_product_button.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override

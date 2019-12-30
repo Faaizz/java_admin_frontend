@@ -1,0 +1,200 @@
+
+/* F    O   N   T   S */
+
+.big-header-font{
+    -fx-font-size: 22px;
+    -fx-font-family: 'cambria';
+    -fx-font-weight: bold;
+}
+
+.big-body-font{
+    -fx-font-size: 18px;
+    -fx-font-family: 'cambria';
+}
+
+.mid-body-font{
+    -fx-font-size: 14px;
+    -fx-font-family: 'cambria'; 
+}
+
+.small-body-font{
+    -fx-font-size: 11px;
+    -fx-font-family: 'cambria'; 
+}
+
+.capitalize{
+    -fx-text-transform: capitalize;
+}
+
+.boldened{
+    -fx-font-weight: bolder;
+}
+
+/* F    I   X   E   S */
+
+.big-body-textfield, .big-body-textfield:focused, .pagination-textfield, .pagination-textfield:focused, .big-body-textarea .content, .big-body-textarea:focused .content, .big-body-combobox:focused, .big-body-combobox{
+    -fx-highlight-fill: -fx-accent;
+    -fx-highlight-text-fill: white;
+    -fx-border-color: #343A40;
+    -fx-background-color: #DAD9D5;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3, 2;
+    -fx-prompt-text-fill: transparent;
+}
+
+.big-body-textarea, .scroll-pane{
+    -fx-background-color: #DAD9D5;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3, 2;
+    -fx-prompt-text-fill: transparent;
+}
+
+/*  C    O   L   O   R   S       S   T   Y   L   E   S   */
+
+.dark-color-style{
+    -fx-text-fill: #EEEEEE;
+    -fx-background-color: #343A40;
+}
+
+.general-background{
+    -fx-background-color: #EAE9E5;
+}
+
+.darker-background{
+    -fx-background-color: #4C5258;
+}
+
+.transparent-background{
+    -fx-background-color: transparent!important;
+}
+
+.mild-color-style{
+    -fx-text-fill: #343A40;
+    -fx-background-color: #DAD9D5;
+    -fx-border-color: #343A40;
+}
+
+.sub-section-style{
+    -fx-text-fill: #4C5258;
+    -fx-background-color: #DAD9D5;
+}
+
+
+/*  T   E   X   T   F   I   E   L   D   S   */
+.pagination-textfield, .pagination-textfield:focused{
+    -fx-background-color: #EAE9E5;
+}
+
+
+/* B    U   T   T   O   N   S */
+
+.dark-color-button, .dark-color-button:hover{
+    -fx-border-color: #343A40;
+    -fx-cursor: hand;
+}
+
+.dark-color-button:hover{
+    -fx-background-color: #EEEEEE;
+    -fx-text-fill: #343A40;
+}
+
+.header-buttons, .header-buttons:focused{
+    -fx-cursor: hand;
+    -fx-highlight-fill: -fx-accent;
+    -fx-highlight-text-fill: white;
+    -fx-border-color: #343A40;
+    -fx-background-color: inherit;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 3, 2;
+    -fx-prompt-text-fill: transparent;
+}
+
+.header-buttons:hover{
+    -fx-background-color: #DAD9D5;
+}
+
+.section-buttons{
+    -fx-background-color: #DAD9D5;
+    -fx-text-fill: #343A40;
+    -fx-cursor: hand;
+}
+
+.active-section-button, .section-buttons:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #4C5258;
+    -fx-text-fill: #DAD9D5;
+}
+
+.sub-section-buttons{
+    -fx-cursor: hand;
+    -fx-background-color: #EAE9E5;
+    -fx-text-fill: #343A40;
+}
+
+.active-sub-section-button, .sub-section-buttons:hover{
+    -fx-cursor: hand;
+    -fx-background-color: #646A70;
+    -fx-text-fill: #EAE9E5;
+}
+
+.file-chooser-button{
+    -fx-cursor: hand;
+    -fx-background-color: #DAD9D5;
+    -fx-border-color: #343A40;
+    -fx-text-fill: #343A40;
+}
+
+.file-chooser-button:hover{
+    -fx-background-color: #EEEEEE;
+}
+
+.image-view-button{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: #646A70;
+    -fx-text-fill: #DAD9D5;
+}
+
+.image-view-button:hover{
+    -fx-background-color: #343A40;
+}
+
+.pagination-button{
+    -fx-cursor: hand;
+    -fx-background-color: #DAD9D5;
+    -fx-border-color: #343A40;
+    -fx-text-fill: #343A40;
+}
+
+.pagination-button:hover{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: #343A40;
+    -fx-text-fill: #DAD9D5;
+}
+
+
+/* V    A   L   I   D   A   T   I   O   N   */
+.red_borders{
+    -fx-border-color: red!important;
+}
+
+
+/*  S   I   N   G   L   E       P   R   O   D   U   C   T   S    */
+.single-product-vbox{
+    -fx-cursor: hand;
+}
+
+.single-product-vbox:hover{
+    -fx-background-color: #DAD9D5;
+}
+
+
+/*  O   R   D   E   R   S       W   O   R   K   L   O   A   D   */
+.failed-button{
+    -fx-border-color: #DAD9D5;
+    -fx-background-color: rgb(160, 28, 28);
+    -fx-text-fill: #DAD9D5;
+}
+
+.failed-button:hover{
+    -fx-background-color: #343A40;
+}
