@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<HBox fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<HBox styleClass="dialog-root" fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       stylesheets="@../css/base.css" prefHeight="400" prefWidth="600"
       fx:controller="com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController"
 >

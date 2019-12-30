@@ -318,7 +318,7 @@ public class MainController {
         settings_dialog_loader.setLocation(MainController.class.getResource("settings/settings.fxml"));
         // Load FXML
         settings_dialog.getDialogPane().setContent(settings_dialog_loader.load());
-        settings_dialog.initStyle(StageStyle.UNDECORATED);
+        settings_dialog.initStyle(StageStyle.TRANSPARENT);
         settings_dialog.show();
 
     }
@@ -363,7 +363,7 @@ public class MainController {
         mini_dialog_loader.setLocation(MainController.class.getResource("dialogs/mini_dialog.fxml"));
         // Load FXML
         mini_dialog.getDialogPane().setContent(mini_dialog_loader.load());
-        mini_dialog.initStyle(StageStyle.UNDECORATED);
+        mini_dialog.initStyle(StageStyle.TRANSPARENT);
         // Get Dialog Controller
         MiniDialogController mini_dialog_controller = mini_dialog_loader.getController();
         mini_dialog_controller.setDialog_text_label("Loading...");

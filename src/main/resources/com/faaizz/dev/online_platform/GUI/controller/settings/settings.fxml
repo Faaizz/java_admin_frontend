@@ -11,7 +11,7 @@
 <?import javafx.scene.image.Image?>
 
 <?import javafx.geometry.Insets?>
-<HBox fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<HBox styleClass="dialog-root"  fx:id="loading_hbox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       stylesheets="@../css/base.css" prefHeight="200" prefWidth="600"
       fx:controller="com.faaizz.dev.online_platform.GUI.controller.settings.SettingsController"
 >
