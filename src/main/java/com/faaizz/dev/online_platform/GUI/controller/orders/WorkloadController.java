@@ -497,6 +497,12 @@ public class WorkloadController extends GenericOrdersController {
                                             UploadableOrder updated_order= new UploadableOrder(0, "", 0, "");
                                             // SET STATUS DATE
                                             updated_order.setStatus(status_string_final);
+                                            // IF STATUS IS DELIVERED, SET DELIVERY DATE
+                                            if(status_string_final.toUpperCase().equals("DELIVERED")){
+                                                updated_order.setDelivery_date(LocalDate.now().toString());
+                                            }
+
+
                                             order_resource.update(updated_order, order_id);
 
                                             // SUCCESS UPDATE
