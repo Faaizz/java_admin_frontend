@@ -93,9 +93,6 @@ public class GenericCustomersController extends MainController {
             // SET CURRENT PAGE AND POST DATA TO ENABLE PAGE REFRESH
             this.current_page= page_number;
 
-            // VERIFY ADMIN
-            verifyAdminAuthorization();
-
             // CREATE NEW ORDER RESOURCE
             CustomerResource customer_resource = new CustomerResource(SettingsData.getSettings().getBase_url(),
                 SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());

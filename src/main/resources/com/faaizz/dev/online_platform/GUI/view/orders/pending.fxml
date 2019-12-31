@@ -42,6 +42,7 @@
                 <Button fx:id="my_workload" text="My Workload" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToMyWorkload" />
                 <Button fx:id="unassigned_orders" text="Unassigned Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToUnassignedOrders" />
                 <Button fx:id="pending_orders" text="Pending Orders" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToPendingOrders" />
+                <Button fx:id="delivered_orders" text="Delivered Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToDeliveredOrders" />
                 <Button fx:id="failed_orders" text="Failed Orders" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToFailedOrders" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
@@ -59,7 +60,7 @@
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
                 <Label text="PENDING ORDERS" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
-                    <Insets bottom="20" left="10" right="10" top="10" />
+                    <Insets bottom="5" left="5" right="5" top="5" />
                 </padding>
             </HBox>
             <ScrollPane fx:id="content_scrollpane" styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">

@@ -148,6 +148,7 @@ public class StaffResource extends APIResource {
         builder.addTextBody("password", new_staff.getPassword());
         builder.addTextBody("address", new_staff.getAddress());
         builder.addTextBody("phone_numbers", gson.toJson(new_staff.getPhone_numbers(), new TypeToken<List<String>>(){}.getType()));
+        builder.addTextBody("privilege_level", new_staff.getPrivilege_level());
 
         httpPost.setEntity(builder.build());
 
@@ -245,10 +246,6 @@ public class StaffResource extends APIResource {
 
         if( !updated_data.getNew_password().isEmpty() ){
             builder.addTextBody("new_password", updated_data.getNew_password());
-        }
-
-        if( !updated_data.getPrivilege_level().isEmpty() ){
-            builder.addTextBody("privilege_level", updated_data.getPrivilege_level());
         }
 
         Gson gson= new Gson();

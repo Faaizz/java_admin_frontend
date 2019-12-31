@@ -17,6 +17,7 @@ public class GenericOrdersController extends MainController {
     private final String PENDING= "view/orders/pending.fxml";
     private final String UNASSIGNED= "view/orders/unassigned.fxml";
     private final String FAILED= "view/orders/failed.fxml";
+    private final String DELIVERED= "view/orders/delivered.fxml";
 
 
     public void initialize() throws Exception {
@@ -58,6 +59,12 @@ public class GenericOrdersController extends MainController {
     protected void handleRedirectToUnassignedOrders() throws IOException, AuthenticationException {
         // GET INSTANCE OF Main AND PERFORM REDIRECTION
         Main.getInstance().redirectToPage(UNASSIGNED);
+    }
+
+    @FXML
+    protected void handleRedirectToDeliveredOrders() throws IOException, AuthenticationException {
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(DELIVERED);
     }
 
     @FXML

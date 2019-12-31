@@ -50,7 +50,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-public class FailedOrdersController extends GenericOrdersController {
+public class DeliveredOrdersController extends GenericOrdersController {
 
     public void initialize() throws Exception {
 
@@ -67,7 +67,7 @@ public class FailedOrdersController extends GenericOrdersController {
         
             @Override
             public void run() {
-                loadFailedOrders(post_data, 1);
+                loadDeliveredOrders(post_data, 1);
             }
         } );
 
@@ -86,7 +86,7 @@ public class FailedOrdersController extends GenericOrdersController {
      * @param page_number
      * @throws IOException
      */
-    private void loadFailedOrders(Map<String, String> post_data, int page_number) {
+    private void loadDeliveredOrders(Map<String, String> post_data, int page_number) {
         
 
         try{
@@ -117,7 +117,7 @@ public class FailedOrdersController extends GenericOrdersController {
                         try {
 
                             // PERFORM REQUEST
-                            String matched_orders_string = order_resource.failed();
+                            String matched_orders_string = order_resource.delivered();
 
                             OrderCollection matched_orders = APIParser.getInstance()
                                     .parseMultiOrderResponse(matched_orders_string);
@@ -125,7 +125,7 @@ public class FailedOrdersController extends GenericOrdersController {
                             // IF NO ORDER IS FOUND
                             if (matched_orders.getOrders().size() <= 0) {
                                 mini_dialog_controller.enableCloseButton();
-                                mini_dialog_controller.setDialog_text_label("THERE ARE NO FAILED ORDERS.");
+                                mini_dialog_controller.setDialog_text_label("THERE ARE NO DELIVERED ORDERS.");
                             }
                             // OTHERWISE
                             else {
@@ -195,7 +195,7 @@ public class FailedOrdersController extends GenericOrdersController {
         content_scrollpane.setContent(topmost_vbox);
 
         // SETUP PAGINATION
-        setupPagination(page_meta, post_data, this::loadFailedOrders);
+        setupPagination(page_meta, post_data, this::loadDeliveredOrders);
 
         // REMOVE LOADING DIALOG
         mini_dialog_controller.handleExit();
@@ -208,7 +208,7 @@ public class FailedOrdersController extends GenericOrdersController {
      * current_orders, current_page_meta, and current_post_data
      */
     private void refreshOrders() throws Exception {
-        loadFailedOrders(null, current_page);
+        loadDeliveredOrders(null, current_page);
     }
 
     class SingleOrder extends HBox{
@@ -230,7 +230,7 @@ public class FailedOrdersController extends GenericOrdersController {
 
             // PREPARE ORDER FOR RENDERING
             String order_date= order.getCreated_at().toString().split("T")[0];
-            String failure_date= (order.getFailure_date()== null) ? "" : order.getFailure_date().toString().split("T")[0];
+            String delivery_date= (order.getDelivery_date()== null) ? "" : order.getDelivery_date().toString().split("T")[0];
 
             level_one_vbox= new VBox();
             level_one_vbox.setSpacing(7);
@@ -276,13 +276,9 @@ public class FailedOrdersController extends GenericOrdersController {
             customer_email_L.getStyleClass().add("small-body-font");
             details_vbox.getChildren().add(customer_email_L);
 
-            Label failure_reason_L= new Label("FAILURE REASON: " +  ((order.getFailure_cause() != null) ? order.getFailure_cause().toUpperCase() : "NONE" ));
-            failure_reason_L.getStyleClass().add("small-body-font");
-            details_vbox.getChildren().add(failure_reason_L);
-
-            Label failure_date_L= new Label("FAILURE DATE: " +  (failure_date.isEmpty() ? "UNAVAILABLE" : failure_date) );
-            failure_date_L.getStyleClass().add("small-body-font");
-            details_vbox.getChildren().add(failure_date_L);
+            Label delivery_date_L= new Label("DELIVERY DATE: " +  (delivery_date.isEmpty() ? "UNAVAILABLE" : delivery_date) );
+            delivery_date_L.getStyleClass().add("small-body-font");
+            details_vbox.getChildren().add(delivery_date_L);
 
 
             level_one_hbox.getChildren().add(details_vbox);

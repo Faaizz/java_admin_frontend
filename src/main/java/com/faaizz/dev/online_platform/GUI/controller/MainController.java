@@ -383,21 +383,6 @@ public class MainController {
     }
 
 
-    public void verifyAdminAuthorization() throws Exception {
-
-        // CHECK IF AUTHENTICATED STAFF IS ADMIN
-        if( !(InstanceData.getCurrentStaff().getPrivilege_level().equals(StaffPrivilegeLevel.ADMIN)) ){
-
-            // IF NOT ADMIN, LOGOUT THE USER AND REDIRECT TO LOGIN PAGE
-            Main.getInstance().logout();
-
-            // THEN THROW AN EXCEPTION
-            // throw new AuthenticationException("Failed Authorization. \nPlease login as admin");
-        }
-
-
-    }
-
 
     /**
      * DISPLAYS PAGINATION BUTTONS AND ASSIGN THE CORRESPONDING CONSUMER HANDLER FOR EACH
@@ -413,11 +398,11 @@ public class MainController {
         h_box_pagination= new HBox();
         h_box_pagination.setAlignment(Pos.CENTER);
         h_box_pagination.setSpacing(5);
-        h_box_pagination.setPadding(new Insets(15, 15, 0, 15));
+        h_box_pagination.setPadding(new Insets(5, 5, 0, 5));
 
         Button first= new Button("first");
         first.getStyleClass().add("pagination-button");
-        first.getStyleClass().add("mid-body-font");
+        first.getStyleClass().add("small-body-font");
         first.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override
@@ -430,7 +415,7 @@ public class MainController {
 
         Button prev= new Button("<");
         prev.getStyleClass().add("pagination-button");
-        prev.getStyleClass().add("mid-body-font");
+        prev.getStyleClass().add("small-body-font");
         prev.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override
@@ -449,11 +434,11 @@ public class MainController {
 
         StringBuilder tempSB= new StringBuilder().append(page_meta.getCurrent_page()).append(" of ").append(page_meta.getLast_page());
         Label page_number= new Label(tempSB.toString());
-        page_number.getStyleClass().add("mid-body-font");
+        page_number.getStyleClass().add("small-body-font");
 
         Button next= new Button(">");
         next.getStyleClass().add("pagination-button");
-        next.getStyleClass().add("mid-body-font");
+        next.getStyleClass().add("small-body-font");
         next.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override
@@ -466,7 +451,7 @@ public class MainController {
 
         Button last= new Button("last");
         last.getStyleClass().add("pagination-button");
-        last.getStyleClass().add("mid-body-font");
+        last.getStyleClass().add("small-body-font");
         last.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override
@@ -504,7 +489,7 @@ public class MainController {
         h_box_pagination_direct= new HBox();
         h_box_pagination_direct.setAlignment(Pos.CENTER);
         h_box_pagination_direct.setSpacing(5);
-        h_box_pagination_direct.setPadding(new Insets(15, 15, 0, 15));
+        h_box_pagination_direct.setPadding(new Insets(5, 5, 0, 5));
 
         HBox h_box_inner= new HBox();
         h_box_inner.setAlignment(Pos.CENTER);
@@ -516,7 +501,7 @@ public class MainController {
 
         Button go_button= new Button("GO");
         go_button.getStyleClass().add("pagination-button");
-        go_button.getStyleClass().add("mid-body-font");
+        go_button.getStyleClass().add("small-body-font");
         go_button.setOnAction( new EventHandler<ActionEvent>(){
 
             @Override

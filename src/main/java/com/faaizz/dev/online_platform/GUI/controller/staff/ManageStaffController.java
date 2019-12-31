@@ -87,9 +87,6 @@ public class ManageStaffController extends GenericStaffController{
 
         try{
 
-            // VERIFY ADMIN
-            verifyAdminAuthorization();
-
             // CREATE NEW STAFF RESOURCE
             StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
@@ -166,9 +163,6 @@ public class ManageStaffController extends GenericStaffController{
 
             // DISPLAY LOADING DIALOG
             MiniDialogController mini_dialog_controller= showLoadingMiniDialog();
-
-            // VERIFY ADMIN
-            verifyAdminAuthorization();
 
             // CREATE NEW STAFF RESOURCE
             StaffResource staff_resource= new StaffResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());

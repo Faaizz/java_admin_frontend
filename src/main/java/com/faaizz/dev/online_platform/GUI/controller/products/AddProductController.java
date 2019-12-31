@@ -27,9 +27,6 @@ public class AddProductController extends GenericProductController {
 
         super.initialize();
 
-        //CHECK THAT STAFF IS ADMIN
-        super.verifyAdminAuthorization();
-
         // Select the first item by default
         section_dropdown.getSelectionModel().selectFirst();
         handleSectionChange(null);

@@ -54,9 +54,6 @@ public class GenericStaffController extends MainController {
     @FXML
     public void handleRedirectToAddAccounts() throws Exception {
 
-        // Verify Admin Authorization
-        verifyAdminAuthorization();
-
         // Get Main instance
         Main.getInstance().redirectToPage(ADD);
 
@@ -65,9 +62,6 @@ public class GenericStaffController extends MainController {
     @FXML
     public void handleRedirectToManageAccounts() throws Exception {
 
-        // Verify Admin Authorization
-        verifyAdminAuthorization();
-        
         // Get Main instance
         Main.getInstance().redirectToPage(MANAGE);
 

@@ -41,8 +41,8 @@
             <!--STAFF BUTTONS-->
             <VBox fx:id="staff_sub_section" spacing="10"  styleClass="sub-section-style">
                 <Button fx:id="edit_button" text="Edit Details" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToEditDetails" />
-                <Button fx:id="add_button" text="Add Account" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddAccounts" />
-                <Button fx:id="manage_button" text="Manage Accounts" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageAccounts" />
+                <Button fx:id="add_button" text="Add Account" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddAccounts" />
+                <Button fx:id="manage_button" text="Manage Accounts" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageAccounts" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>
@@ -60,7 +60,7 @@
             <HBox styleClass="sub-section-style"  maxWidth="100000000000000" alignment="CENTER">
                 <Label text="MANAGE STAFF" styleClass="big-body-font" maxWidth="100000000000" />
                 <padding>
-                    <Insets bottom="20" left="10" right="10" top="10" />
+                    <Insets bottom="5" left="5" right="5" top="5" />
                 </padding>
             </HBox>
             <ScrollPane fx:id="content_scrollpane" styleClass="scroll-pane" fitToWidth="true" fitToHeight="true">
