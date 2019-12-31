@@ -21,6 +21,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,9 @@ public class ManageStaffController extends GenericStaffController{
 
     @FXML
     private VBox anchor_vbox;
+
+    @FXML
+    protected ScrollPane content_scrollpane;
 
     public void initialize() throws Exception {
 
@@ -75,6 +79,9 @@ public class ManageStaffController extends GenericStaffController{
 
         // SETUP PAGINATION
         setupPagination(page_meta, new HashMap<String, String>(), this::loadStaff);
+
+        // Reset ScrollPane to top
+        content_scrollpane.setVvalue(0);
 
         // REMOVE LOADING DIALOG
         mini_dialog_controller.handleExit();

@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.ScrollPane?>
 <BorderPane fx:id="root_border_pane" stylesheets="@../css/base.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.faaizz.dev.online_platform.GUI.controller.login.LoginController">
 
     <top>
@@ -75,7 +76,11 @@
 
             <VBox fx:id="pagination_vbox" />
 
+            <ScrollPane fx:id="content_scrollpane" visible="false" />
+
         </VBox>
+
+
     </center>
 
 </BorderPane>

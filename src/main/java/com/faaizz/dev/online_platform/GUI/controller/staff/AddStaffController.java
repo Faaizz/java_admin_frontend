@@ -221,6 +221,16 @@ public class AddStaffController extends GenericStaffController{
                                 // Enable cllose button
                                 mini_dialog_controller.enableCloseButton();
 
+                                // Clear TextFeilds
+                                first_name_textfield.setText("");
+                                last_name_textfield.setText("");
+                                email_textfield.setText("");
+                                address_text_area.setText("");
+                                phone_number_textfield.setText("");
+                                alt_phone_number_textfield.setText("");
+
+                                // Reset ScrollPane to top
+                                content_scrollpane.setVvalue(0);
 
 
                             }catch(Exception e){

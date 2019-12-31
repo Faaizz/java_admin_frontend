@@ -14,11 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -51,6 +47,9 @@ public class MainController {
 
     @FXML
     protected Label staff_name;
+
+    @FXML
+    protected ScrollPane content_scrollpane;
 
     @FXML
     protected VBox center_vbox;
@@ -393,6 +392,9 @@ public class MainController {
     protected HBox h_box_pagination;
     protected HBox h_box_pagination_direct;
     protected void setupPagination(Meta page_meta, Map<String, String> post_data, BiConsumer<Map<String, String>, Integer> fetchFunction){
+
+        // Set ScrollPane to top
+        content_scrollpane.setVvalue(0);
 
         // OUTER HBox
         h_box_pagination= new HBox();

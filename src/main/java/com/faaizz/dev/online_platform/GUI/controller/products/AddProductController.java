@@ -156,6 +156,10 @@ public class AddProductController extends GenericProductController {
                             // Reset image_files_list
                             image_files_map= new HashMap<>();
 
+                            // Reset ScrollPane to top
+                            content_scrollpane.setVvalue(0);
+                            
+
                         } catch (Exception e) {
                             mini_dialog_controller.enableCloseButton();
                             mini_dialog_controller.setDialog_text_label("An error occurred\n" + e.getMessage());
