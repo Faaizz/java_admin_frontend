@@ -2,7 +2,7 @@
 This project is a frontend administrative application for an ecommerce platform which connects with a Laravel PHP REST API _https://github.com/Faaizz/laravel_api_.
 
 ## Launch Application
-A fully-functional deployed version can be found in the _deploy_ folder or at _faaizz.com/storage/demo_app.zip_. Java Runtime Environment 11 or newer is required.
+A fully-functional deployed version can be found in the _"/deploy"_ folder or at _http://faaizz.com/storage/demo_app.zip_. Java Runtime Environment 11 or newer is required.
 ### Instructions:  
 1. Extract demo_app.zip
 1. Launch launcher.sh (Linux) or launcher.bat (Windows)
