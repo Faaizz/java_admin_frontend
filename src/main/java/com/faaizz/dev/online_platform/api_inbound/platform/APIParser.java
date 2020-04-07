@@ -2,6 +2,7 @@ package com.faaizz.dev.online_platform.api_inbound.platform;
 
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
+import com.faaizz.dev.online_platform.api_inbound.model.Trend;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Links;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.supplement.*;
@@ -10,6 +11,7 @@ import com.faaizz.dev.online_platform.api_inbound.model.Order;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.CustomerCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.ProductCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.StaffCollection;
+import com.faaizz.dev.online_platform.api_inbound.model.collection.TrendCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -114,8 +116,6 @@ public class APIParser {
      * @return
      */
     public ProductCollection parseMultiProductResponse(String json){
-
-        Gson gson= new Gson();
 
         JsonElement resElement= JsonParser.parseString(json);
         JsonObject resObject= resElement.getAsJsonObject();
@@ -444,6 +444,93 @@ public class APIParser {
         OrderCollection orderCollection= new OrderCollection(orders, meta, links);
 
         return orderCollection;
+
+    }
+
+    /*========================================================================================*/
+    /* T    R   E   N   D  */
+
+    /**
+     * Parse JSON String into <code>Trend</code> object
+     * @param data
+     * @return
+     */
+    public Trend parseTrend(JsonObject data){
+        
+        Gson gson= new Gson();
+
+        // Intermediate object to enable proper parsing
+        TrendTrans intermediate= gson.fromJson(data, TrendTrans.class);
+
+        // Parse Trend images
+        JsonArray imgsObj= JsonParser.parseString(intermediate.getImages()).getAsJsonArray();
+
+        Type imgsTypeToken= new TypeToken<List<String>>(){}.getType();
+        List<String> imgsList= gson.fromJson(imgsObj, imgsTypeToken);
+
+        // Merge parts to create Trend object
+        Trend resultTrend= new Trend(
+            intermediate.getId(),
+            intermediate.getName(),
+            intermediate.getDescription(),
+            intermediate.getGender(),
+            intermediate.getProductsNumber(),
+            imgsList
+        );
+
+        return resultTrend;
+
+    }
+
+    /**
+     * Parse single Trend JSON response into <code>Trend</code> object
+     * @param String json
+     * @return Trend
+     */
+    public Trend parseSIngleTrendResponse(String json){
+
+        JsonElement resElement= JsonParser.parseString(json);
+        JsonObject resObject= resElement.getAsJsonObject();
+
+        JsonObject data= resObject.getAsJsonObject("data");
+
+        return parseTrend(data);
+    }
+
+    /**
+     * Parse multi Trend JSON response
+     * @param String json
+     * @return TrendCollection
+     */
+    public TrendCollection parseMultiTrendResponse(String json){
+
+        JsonElement resElement= JsonParser.parseString(json);
+        JsonObject resObject= resElement.getAsJsonObject();
+
+        //Array of trends
+        JsonArray data= resObject.getAsJsonArray("data");
+
+        //List of trends
+        List<Trend> trends= new ArrayList<>();
+
+        //Parse each Trend and add to list of trends
+        data.forEach( trendJson -> {
+
+            trends.add(parseTrend(trendJson.getAsJsonObject()));
+
+        });
+
+        //LINKS
+        Links links= getLinks(resObject);
+
+        //META
+        Meta meta= getMeta(resObject);
+
+        // Create TrendCollection and return it
+        TrendCollection trendCollection= new TrendCollection(trends, meta, links);
+
+        return trendCollection;
+        
 
     }
 

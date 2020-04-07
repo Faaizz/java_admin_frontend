@@ -6,7 +6,7 @@ public class ProductTrans {
      * An intermediate implementation of Product to enable proper parsing of JSON API response
      */
 
-    int id;
+    private int id;
     private String name;
     private String brand;
     private String description;

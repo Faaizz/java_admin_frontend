@@ -10,6 +10,7 @@ public class Trend {
 
     private int id;
     private String name;
+    private String description;
     private String gender;
     private int products_number;
     private List<String> images;
@@ -22,6 +23,10 @@ public class Trend {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getGender() {
@@ -45,15 +50,17 @@ public class Trend {
      *
      * @param id
      * @param name
+     * @param description
      * @param gender
      * @param products_number
      * @param images
      */
     public Trend(
-            int id, String name, String gender, int products_number, List<String> images
+            int id, String name, String description, String gender, int products_number, List<String> images
     ) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.gender = gender;
         this.products_number= products_number;
         this.images = images;
@@ -66,6 +73,7 @@ public class Trend {
         StringBuilder tempSB= new StringBuilder();
         tempSB.append("ID: " + this.getId() + "\n");
         tempSB.append("Name: " + this.getName() + "\n");
+        tempSB.append("Description: " + this.getDescription() + "\n");
         tempSB.append("Gender: " + this.getGender() + "\n");
         this.getImages().forEach( image-> {
 
