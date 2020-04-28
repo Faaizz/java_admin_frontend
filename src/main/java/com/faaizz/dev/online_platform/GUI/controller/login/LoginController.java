@@ -137,7 +137,10 @@ public class LoginController extends MainController {
                             mini_dialog_controller.handleExit();
 
                             // REDIRECT TO MANAGE PRODUCTS (SEARCH PRODUCTS)
-                            Main.getInstance().redirectToPage("view/products/manage.fxml");
+                            // Main.getInstance().redirectToPage("view/products/manage.fxml");
+
+                            // REDIRECT TO MY WORKLOAD
+                            Main.getInstance().redirectToPage("view/orders/workload.fxml");
 
                         }catch (ResponseException e){
 
