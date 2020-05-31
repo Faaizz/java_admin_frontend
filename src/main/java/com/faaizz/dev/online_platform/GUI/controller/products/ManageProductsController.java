@@ -1,5 +1,12 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
@@ -9,6 +16,13 @@ import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Me
 import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableProduct;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,21 +42,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class ManageProductsController extends GenericProductController {
 
@@ -247,66 +246,64 @@ public class ManageProductsController extends GenericProductController {
         // CREATE SINGLE PRODUCT VBOX FOR EACH PRODUCT AND ADD TO flow_pane CHILDREN
         for(Product product : matched_products) {
 
-            VBox v_box= new VBox();
-            v_box.getStyleClass().add("single-product-vbox");
-            v_box.setMaxWidth(150);
-            v_box.setMinWidth(150);
-
-            ImageView image_view= new ImageView();
-
-            // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
-            StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
-
-            // GET IMAGE AS BufferedStream
-            CloseableHttpClient http_client= HttpClients.createDefault();
-            HttpGet http_get= new HttpGet(image_urlSB.toString());
-
-            CloseableHttpResponse response = http_client.execute(http_get);
-            HttpEntity entity = response.getEntity();
-
-            BufferedInputStream image_imput_stream = new BufferedInputStream(entity.getContent());
-
-
-            Image image= new Image(image_imput_stream, 150, 0, true, false);
-            image_view.setImage(image);
-
-            v_box.getChildren().add(image_view);
-
-            // IMAGE LABELS
-            VBox v_box_inner= new VBox();
-            v_box_inner.setMaxWidth(150);
-            v_box_inner.setMinWidth(150);
-
-            Label product_id= new Label(String.valueOf(product.getId()));
-            product_id.setTextAlignment(TextAlignment.LEFT);
-
-            Label product_name= new Label(product.getName());
-            product_name.setTextAlignment(TextAlignment.LEFT);
-            product_name.getStyleClass().add("mid-body-font");
-
-            // APPEND product_id AND product_name TO v_box_inner
-            v_box_inner.getChildren().add(product_id);
-            v_box_inner.getChildren().add(product_name);
-
-            // APPEND v_box_inner TO v_box
-            v_box.getChildren().add(v_box_inner);
-
-            // SET onMouseClickHandler TO HANDLE CLICKING OF A PRODUCT
-            v_box.setOnMouseClicked( new EventHandler<MouseEvent>(){
-
-
-                @Override
-                public void handle(MouseEvent event) {
-                    
-                    singleProductLoad(product, page_meta, post_data);
-
-                }
-
+            Platform.runLater(
+                new Runnable(){
                 
-            } );
+                    @Override
+                    public void run() {
+                        VBox v_box= new VBox();
+                        v_box.getStyleClass().add("single-product-vbox");
+                        v_box.setMaxWidth(150);
+                        v_box.setMinWidth(150);
 
-            // APPEND v_box TO FlowPane
-            flow_pane.getChildren().add(v_box);
+                        ImageView image_view= new ImageView();
+
+                        // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
+                        StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
+
+                        Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
+                        image_view.setImage(image);
+
+                        v_box.getChildren().add(image_view);
+
+                        // IMAGE LABELS
+                        VBox v_box_inner= new VBox();
+                        v_box_inner.setMaxWidth(150);
+                        v_box_inner.setMinWidth(150);
+
+                        Label product_id= new Label(String.valueOf(product.getId()));
+                        product_id.setTextAlignment(TextAlignment.LEFT);
+
+                        Label product_name= new Label(product.getName());
+                        product_name.setTextAlignment(TextAlignment.LEFT);
+                        product_name.getStyleClass().add("mid-body-font");
+
+                        // APPEND product_id AND product_name TO v_box_inner
+                        v_box_inner.getChildren().add(product_id);
+                        v_box_inner.getChildren().add(product_name);
+
+                        // APPEND v_box_inner TO v_box
+                        v_box.getChildren().add(v_box_inner);
+
+                        // SET onMouseClickHandler TO HANDLE CLICKING OF A PRODUCT
+                        v_box.setOnMouseClicked( new EventHandler<MouseEvent>(){
+
+
+                            @Override
+                            public void handle(MouseEvent event) {
+                                
+                                singleProductLoad(product, page_meta, post_data);
+
+                            }
+
+                            
+                        } );
+
+                        // APPEND v_box TO FlowPane
+                        flow_pane.getChildren().add(v_box);
+                    }
+                }
+            );
 
         }
 

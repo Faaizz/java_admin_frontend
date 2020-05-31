@@ -32,4 +32,4 @@ CD ../
 SET module_path="windows\javafx-sdk-11.0.2\lib" 
 
 ::LAUNCH APPLICATION
-java -jar --module-path %module_path% --add-modules=javafx.controls,javafx.fxml java_admin_frontend-1.0-SNAPSHOT.jar
+java -jar --module-path %module_path% --add-modules=javafx.controls,javafx.fxml java_admin_frontend-1.1-SNAPSHOT.jar

@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.faaizz.dev.online_platform'
-version '1.0-SNAPSHOT'
+version '1.1-SNAPSHOT'
 
 sourceCompatibility = 11
 
@@ -17,6 +17,8 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.6'
     compile 'org.apache.httpcomponents:httpclient:4.5.10'
     compile 'org.apache.httpcomponents:httpmime:4.5.10'
+    // ASYNCHRONOUS HTTP CLIENT
+    // compile 'org.apache.httpcomponents.client5:httpclient5:5.0'
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
 }

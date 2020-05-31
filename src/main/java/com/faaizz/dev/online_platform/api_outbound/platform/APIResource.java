@@ -12,6 +12,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
+
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -33,7 +34,6 @@ public abstract class APIResource {
 
     //HTTP CLIENT
     CloseableHttpClient http_client;
-
 
     /* P   A   G   I   N   A   T   I   O   N    */
     private int per_page;

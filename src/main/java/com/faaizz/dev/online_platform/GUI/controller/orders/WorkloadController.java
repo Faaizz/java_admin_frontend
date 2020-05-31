@@ -1,7 +1,26 @@
 package com.faaizz.dev.online_platform.GUI.controller.orders;
 
-import com.faaizz.dev.online_platform.GUI.Main;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.faaizz.dev.online_platform.GUI.InstanceData;
+import com.faaizz.dev.online_platform.GUI.SettingsData;
+import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
+import com.faaizz.dev.online_platform.api_inbound.model.Order;
+import com.faaizz.dev.online_platform.api_inbound.model.Product;
+import com.faaizz.dev.online_platform.api_inbound.model.Staff;
+import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollection;
+import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
+import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableOrder;
+import com.faaizz.dev.online_platform.api_outbound.platform.OrderResource;
+import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,38 +36,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.faaizz.dev.online_platform.GUI.InstanceData;
-import com.faaizz.dev.online_platform.GUI.SettingsData;
-import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
-import com.faaizz.dev.online_platform.api_inbound.model.Customer;
-import com.faaizz.dev.online_platform.api_inbound.model.Order;
-import com.faaizz.dev.online_platform.api_inbound.model.Product;
-import com.faaizz.dev.online_platform.api_inbound.model.Staff;
-import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollection;
-import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
-import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
-import com.faaizz.dev.online_platform.api_outbound.platform.CustomerResource;
-import com.faaizz.dev.online_platform.api_outbound.platform.OrderResource;
-import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 
 public class WorkloadController extends GenericOrdersController {
 
@@ -165,7 +152,7 @@ public class WorkloadController extends GenericOrdersController {
         topmost_vbox.setPadding(new Insets(10, 10, 10, 10));
 
         // CREATE A SingleOrder OBH=JECT FOR EACH MATCHED ORDER
-        for( Order order: orders ){
+        for( final Order order: orders ){
 
             // GET PRODUCT
             ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
@@ -174,21 +161,18 @@ public class WorkloadController extends GenericOrdersController {
 
             // GET PRODUCT IMAGE
             StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
-            // GET IMAGE AS BufferedStream
-            CloseableHttpClient http_client= HttpClients.createDefault();
-            HttpGet http_get= new HttpGet(image_urlSB.toString());
-
-            CloseableHttpResponse response = http_client.execute(http_get);
-            HttpEntity entity = response.getEntity();
-
-            BufferedInputStream image_imput_stream = new BufferedInputStream(entity.getContent());
-            
-
-            // CREATE SINGLE ORDER HBox
-            HBox single_order= new SingleOrder(image_imput_stream, order_product.getId(), order_product.getName(), order);
-                                    
-            // ADD TO TOPMOST VBOX
-            topmost_vbox.getChildren().add(single_order);
+            Platform.runLater(
+                new Runnable(){
+                
+                    @Override
+                    public void run() {
+                        // CREATE SINGLE ORDER HBox
+                        HBox single_order= new SingleOrder(image_urlSB.toString(), order_product.getId(), order_product.getName(), order);
+                        // ADD TO TOPMOST VBOX
+                        topmost_vbox.getChildren().add(single_order);
+                    }
+                }
+            );
 
         }
 
@@ -221,7 +205,7 @@ public class WorkloadController extends GenericOrdersController {
         Image image;
         VBox details_vbox;
 
-        public SingleOrder(InputStream image_is, int product_id, String product_name, Order order)
+        public SingleOrder(String image_url, int product_id, String product_name, Order order)
             {
 
             // SET CSS STYLE
@@ -243,7 +227,7 @@ public class WorkloadController extends GenericOrdersController {
             level_one_hbox.setPadding(new Insets(10, 10, 10, 10));
 
             image_vbox= new VBox();
-            image= new Image(image_is, 150, 0, true, false);
+            image= new Image(image_url, 150, 0, true, false);
             imageview= new ImageView(image);
             
             image_vbox.getChildren().add(imageview);
