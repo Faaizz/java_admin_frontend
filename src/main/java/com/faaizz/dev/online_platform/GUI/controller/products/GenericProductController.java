@@ -1,21 +1,5 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
-import com.faaizz.dev.online_platform.GUI.Main;
-import com.faaizz.dev.online_platform.GUI.controller.MainController;
-import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
-import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
-import com.faaizz.dev.online_platform.api_outbound.exceptions.ResponseException;
-
-import javafx.collections.FXCollections;
-import javafx.event.Event;
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,12 +7,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.faaizz.dev.online_platform.GUI.Main;
+import com.faaizz.dev.online_platform.GUI.controller.validators.Validators;
+import com.faaizz.dev.online_platform.GUI.exceptions.AuthenticationException;
+
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
 public class GenericProductController extends ProductController {
 
     // PAGE PATHS
     private final String MANAGE_PRODUCTS = "view/products/manage.fxml";
     private final String ADD_PRODUCTS = "view/products/add.fxml";
     private final String REMOVE_PRODUCTS = "view/products/remove.fxml";
+    private final String MANAGE_TRENDS = "view/products/trends/manage.fxml";
+    private final String ADD_TRENDS = "view/products/trends/add.fxml";
+    private final String REMOVE_TRENDS = "view/products/trends/remove.fxml";
 
     @FXML
     protected Button add_size_button;
@@ -254,6 +258,32 @@ public class GenericProductController extends ProductController {
 
     }
 
+    @FXML
+    protected void handleRedirectToAddTrends() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(ADD_TRENDS);    
+
+    }
+
+
+    @FXML
+    protected void handleRedirectToManageTrends() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(MANAGE_TRENDS);    
+
+    }
+
+
+    @FXML
+    protected void handleRedirectToRemoveTrends() throws IOException, AuthenticationException {
+
+        // GET INSTANCE OF Main AND PERFORM REDIRECTION
+        Main.getInstance().redirectToPage(REMOVE_TRENDS);    
+
+    }
+
 
 
     /*========================================================================================*/
@@ -280,129 +310,41 @@ public class GenericProductController extends ProductController {
             textfields.add(quantity_textfield);
         } );
 
-        // Loop through all textfields
-        textfields.forEach( textfield->{
-
-            // If empty, add CSS CSS_RED_BORDERS class
-            if(textfield.getText().isEmpty()){
-                if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                    textfield.getStyleClass().add(CSS_RED_BORDERS);
-                }
-                // Increment validation_problems
-                validation_problems[0]++;
-            }
-
-            // If it has text, remove red_borders class
-            else{
-                textfield.getStyleClass().remove(CSS_RED_BORDERS);
-            }
-
-        } );
+        // VALIDATE TEXTFIELDS
+        Validators.validateTextFields(textfields, validation_problems);
 
         // VALIDATE NUMBERS
-        // Validate Price
-        try{
-            // Try to parse text content to double
-            Double.valueOf(price_textfield.getText());
-        }catch(NumberFormatException e){
-            // Set red_borders css class
-            if(!price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                price_textfield.getStyleClass().add(CSS_RED_BORDERS);
-            }
-            // Increment validation_problems
-            validation_problems[0]++;
-        }
+        List<TextField> price_textfields= new ArrayList<>();
+        price_textfields.add(price_textfield);
+        Validators.validatePrices(price_textfields, validation_problems);
+
 
         // Validate Quantities
         // Add all quantity textfields
-        quantity_textfields_list.forEach( textfield ->{
-
-            try{
-                // Try to parse text content to integer
-                Integer.valueOf(textfield.getText());
-            }catch(NumberFormatException e){
-                // Set red_borders css class
-                if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                    textfield.getStyleClass().add(CSS_RED_BORDERS);
-                }
-                // Increment validation_problems
-                validation_problems[0]++;
-            }
-
-        } );
+        Validators.validateNumbers(quantity_textfields_list, validation_problems);
 
         // VALIDATE DESCRIPTION TEXTAREA
-        if(description_text_area.getText().isEmpty()){
-            // Add CSS red_borders class
-            if(!description_text_area.getStyleClass().contains(CSS_RED_BORDERS)){
-                description_text_area.getStyleClass().add(CSS_RED_BORDERS);
-            }
-
-            // Increment validation_problems
-            validation_problems[0]++;
-        }else{
-            // Remove CSS red_borders class
-            description_text_area.getStyleClass().remove(CSS_RED_BORDERS);
-        }
+        List<TextArea> textareas= new ArrayList<>();
+        textareas.add(description_text_area);
+        Validators.validateTextAreas(textareas, validation_problems);
 
         // VALIDATE DROPDOWNS
         List<ComboBox> dropdowns= new ArrayList<>();
         dropdowns.add(section_dropdown);
         dropdowns.add(sub_section_dropdown);
         dropdowns.add(category_dropdown);
-
-        // Loop through dropdowns
-        dropdowns.forEach( dropdown ->{
-            // If no item is selected, add CSS red_borders class
-            if(dropdown.getSelectionModel().getSelectedItem() == null){
-                if(!dropdown.getStyleClass().contains(CSS_RED_BORDERS)){
-                    dropdown.getStyleClass().add(CSS_RED_BORDERS);
-                }
-
-                // Increment validation_problems
-                validation_problems[0]++;
-            }else{
-                // Remove CSS red_borders
-                dropdown.getStyleClass().remove(CSS_RED_BORDERS);
-            }
-        } );
+        Validators.validateDropdowns(dropdowns, validation_problems);
 
 
         // CHECK IF IMAGE ONE IS SET
-        if(!image_files_map.containsKey("one")){
-            if(!image_one_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
-                image_one_filechooser.getStyleClass().add(CSS_RED_BORDERS);
-            }
-            // Increment validation_problems
-            validation_problems[0]++;
-        }else{
-            // Otherwise remove CSS red borders
-            image_one_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
-        }
+        Validators.validateImageSelect(image_files_map, image_one_filechooser, validation_problems, "one");
 
         // CHECK IF IMAGE TWO IS SET
-        if(!image_files_map.containsKey("two")){
-            if(!image_two_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
-                image_two_filechooser.getStyleClass().add(CSS_RED_BORDERS);
-            }
-            // Increment validation_problems
-            validation_problems[0]++;
-        }else{
-            // Otherwise remove CSS red borders
-            image_two_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
-        }
-
+        Validators.validateImageSelect(image_files_map, image_two_filechooser, validation_problems, "two");
+        
         // CHECK IF IMAGE THREE IS SET
-        if(!image_files_map.containsKey("three")){
-            if(!image_three_filechooser.getStyleClass().contains(CSS_RED_BORDERS)){
-                image_three_filechooser.getStyleClass().add(CSS_RED_BORDERS);
-            }
-            // Increment validation_problems
-            validation_problems[0]++;
-        }else{
-            // Otherwise remove CSS red borders
-            image_three_filechooser.getStyleClass().remove(CSS_RED_BORDERS);
-        }
+        Validators.validateImageSelect(image_files_map, image_three_filechooser, validation_problems, "three");   
+
 
         return (validation_problems[0] <=0);
 

@@ -42,6 +42,9 @@
                 <Button fx:id="navigate_add_button" text="Add Product" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddProducts" />
                 <Button fx:id="navigate_manage_products" text="Manage Products" alignment="CENTER" styleClass="mid-body-font, active-sub-section-button" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageProducts" />
                 <Button fx:id="navigate_remove_products" text="Remove Products" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveProducts" />
+                <Button fx:id="navigate_add_trend_button" text="Add Trend" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToAddTrends" />
+                <Button fx:id="navigate_manage_trends" text="Manage Trends" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToManageTrends" />
+                <Button fx:id="navigate_remove_trends" text="Remove Trends" alignment="CENTER" styleClass="mid-body-font, sub-section-buttons" minHeight="35" prefHeight="35" prefWidth="Infinity" onAction="#handleRedirectToRemoveTrends" />
                 <padding>
                     <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
                 </padding>

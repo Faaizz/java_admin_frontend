@@ -10,6 +10,7 @@ import java.util.Map;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.MainController;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
+import com.faaizz.dev.online_platform.GUI.controller.validators.Validators;
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.ProductCollection;
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
@@ -171,7 +172,6 @@ public class ManageProductsController extends GenericProductController {
     public boolean validateSearchFields(){
 
         final int[] validation_problems = {0}; // Integer to keep count of invalid entries. Array is used because of lambda compatibility
-        final String CSS_RED_BORDERS= "red_borders";
 
         /*========================================================================================*/
         // VALIDATE PRICE FIELDS AND SECTION DROPDOWNS
@@ -184,25 +184,7 @@ public class ManageProductsController extends GenericProductController {
         List<TextField> expect_numbers= new ArrayList<>();
         expect_numbers.add(min_price_textfield);
         expect_numbers.add(max_price_textfield);
-
-        // Loop through expect_numbers
-        expect_numbers.forEach( textfield ->{
-
-            try{
-                if(!textfield.getText().isEmpty()){
-                    // Try to parse text content to number
-                    Double.valueOf(textfield.getText());
-                }
-            }catch(NumberFormatException e){
-                // Set red_borders css class
-                if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                    textfield.getStyleClass().add(CSS_RED_BORDERS);
-                }
-                // Increment validation_problems
-                validation_problems[0]++;
-            }
-
-        } );
+        Validators.validateNumbers(expect_numbers, validation_problems);
 
 
         // VALIDATE DROPDOWNS
@@ -210,22 +192,7 @@ public class ManageProductsController extends GenericProductController {
         dropdowns.add(section_dropdown);
         dropdowns.add(sub_section_dropdown);
         dropdowns.add(category_dropdown);
-
-        // Loop through dropdowns
-        dropdowns.forEach( dropdown ->{
-            // If no item is selected, add CSS red_borders class
-            if(dropdown.getSelectionModel().getSelectedItem() == null){
-                if(!dropdown.getStyleClass().contains(CSS_RED_BORDERS)){
-                    dropdown.getStyleClass().add(CSS_RED_BORDERS);
-                }
-
-                // Increment validation_problems
-                validation_problems[0]++;
-            }else{
-                // Remove CSS red_borders
-                dropdown.getStyleClass().remove(CSS_RED_BORDERS);
-            }
-        } );
+        Validators.validateDropdowns(dropdowns, validation_problems);
 
         return (validation_problems[0] <=0);
     }
@@ -768,16 +735,7 @@ public class ManageProductsController extends GenericProductController {
                                 // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
                                 StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(finalImage_number));
 
-                                // GET IMAGE AS BufferedStream
-                                CloseableHttpClient http_client= HttpClients.createDefault();
-                                HttpGet http_get= new HttpGet(image_urlSB.toString());
-
-                                CloseableHttpResponse response = http_client.execute(http_get);
-                                HttpEntity entity = response.getEntity();
-
-                                BufferedInputStream image_imput_stream = new BufferedInputStream(entity.getContent());
-
-                                Image image= new Image(image_imput_stream, 150, 0, true, false);
+                                Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
                                 image_view.setImage(image);
 
                                 mini_dialog_controller.setDialog_vbox_content(image_view);
@@ -888,7 +846,7 @@ public class ManageProductsController extends GenericProductController {
                     Platform.runLater(()->{
 
                         // VALIDATE TEXT ENTRIES
-                        int validation_errors= 0;
+                        int validation_problems[]= {0};
                         
                         // ADD ADDITIONAL SIZES IF THEY EXIST
                         for(TextField size : size_textfields_list){
@@ -902,73 +860,17 @@ public class ManageProductsController extends GenericProductController {
                             validation_sizes.add(size);
 
                         }
-
                         // ADD SIZES
                         validation_sizes.forEach( size->{
                             validation_text_textfields.add(size);
                         } );
 
                         // PERFORM VALIDATION
-                        for( TextField textfield: validation_text_textfields){
-
-                            // IF THE CURRENT ELEMENT IS NULL (CAN RESULT FROM size_textfields_list CONTAINING TextFields
-                            // THAT SHOULD HAVE BEEN LOADED FROM AN FXML FILE), THEN SKIP TO THE NEXT ITERATION
-                            if(textfield == null){
-                                continue;
-                            }
-
-                            // CHECK IF EMPTY
-                            if(textfield.getText().isEmpty()){
-                                // INCREMENT VALIDATION ERRORS COUNT
-                                validation_errors++;
-                                // ADD CSS_RED_BORDERS IF IT HASN'T BEEN ADDED ALREADY
-                                if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    textfield.getStyleClass().add(CSS_RED_BORDERS);
-                                }
-                            }
-                            // OTHERWISE, IF NOT EMPTY
-                            else{
-                                // REMOVE CSS_RED_BORDERS
-                                if(textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    textfield.getStyleClass().remove(CSS_RED_BORDERS);
-                                }
-
-                            }
-
-                        }
+                        Validators.validateTextFields(validation_sizes, validation_problems);
 
                         // VALIDATE PRICE
-                        if(price_textfield.getText().isEmpty()){
-                           // INCREMENT VALIDATION ERRORS COUNT
-                           validation_errors++;
-                           // ADD CSS_RED_BORDERS IF IT HASN'T BEEN ADDED ALREADY
-                           if(!price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                               price_textfield.getStyleClass().add(CSS_RED_BORDERS);
-                           }
-                        }
-                        // OTHERWISE IF IT'S NOT EMPTY
-                        else{
-                            // CHECK IF AN INVALID DOUBLE HAS BEEN ENTERED
-                            try{
-                                Double.valueOf(price_textfield.getText());
-
-                                // VALID PRICE
-                                // REMOVE CSS_RED_BORDERS IF THEY HAVE BEEN ADDED PRIOR
-                                if(price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    price_textfield.getStyleClass().remove(CSS_RED_BORDERS);
-                                }
-
-                            }
-                            catch(NumberFormatException e){
-                                // INCREMENT VALIDATION ERRORS COUNT
-                                validation_errors++;
-                                // ADD CSS_RED_BORDERS IF IT HASN'T BEEN ADDED ALREADY
-                                if(!price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    price_textfield.getStyleClass().add(CSS_RED_BORDERS);
-                                }
-                            }
-
-                        }
+                        List<TextField> prices= new ArrayList<>();
+                        Validators.validatePrices(prices, validation_problems);
 
                         // VALIDATE QUANTITIES
                         // ADD ADDITIONAL QUANTITIES IF THEY EXIST
@@ -982,81 +884,22 @@ public class ManageProductsController extends GenericProductController {
                         }
 
                         // PERFORM VALIDATION
-                        for( TextField quantity : validation_quantities ){
-
-                            if(quantity.getText().isEmpty()){
-                                // INCREMENT VALIDATION ERRORS COUNT
-                                validation_errors++;
-                                // ADD CSS_RED_BORDERS IF IT HASN'T BEEN ADDED ALREADY
-                                if(!quantity.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    quantity.getStyleClass().add(CSS_RED_BORDERS);
-                                }
-                            }
-                            // OTHERWISE IF IT'S NOT EMPTY
-                            else{
-                                // CHECK IF AN INVALID DOUBLE HAS BEEN ENTERED
-                                try{
-                                    Integer.valueOf(quantity.getText());
-
-                                    // VALID PRICE
-                                    // REMOVE CSS_RED_BORDERS IF THEY HAVE BEEN ADDED PRIOR
-                                    if(quantity.getStyleClass().contains(CSS_RED_BORDERS)){
-                                        quantity.getStyleClass().remove(CSS_RED_BORDERS);
-                                    }
-
-                                }
-                                catch(NumberFormatException e){
-                                    // INCREMENT VALIDATION ERRORS COUNT
-                                    validation_errors++;
-                                    // ADD CSS_RED_BORDERS IF IT HASN'T BEEN ADDED ALREADY
-                                    if(!quantity.getStyleClass().contains(CSS_RED_BORDERS)){
-                                        quantity.getStyleClass().add(CSS_RED_BORDERS);
-                                    }
-                                }
-
-                            }
-
-                        }
+                        Validators.validateNumbers(validation_quantities, validation_problems);
 
                         // VALIDATE DESCRIPTION TEXTAREA
-                        if(description_textarea.getText().isEmpty()){
-                            // Add CSS red_borders class
-                            if(!description_textarea.getStyleClass().contains(CSS_RED_BORDERS)){
-                                description_textarea.getStyleClass().add(CSS_RED_BORDERS);
-                            }
-
-                            // Increment validation_problems
-                            validation_errors++;
-                        }else{
-                            // Remove CSS red_borders class
-                            description_textarea.getStyleClass().remove(CSS_RED_BORDERS);
-                        }
+                        List<TextArea> descriptions= new ArrayList<>();
+                        Validators.validateTextAreas(descriptions, validation_problems);
 
                         // VALIDATE DROPDOWNS
                         List<ComboBox> dropdowns= new ArrayList<>();
                         dropdowns.add(section_dropdown);
                         dropdowns.add(sub_section_dropdown);
                         dropdowns.add(category_dropdown);
-
-                        // Loop through dropdowns
-                        for(ComboBox dropdown : dropdowns){
-                            // If no item is selected, add CSS red_borders class
-                            if(dropdown.getSelectionModel().getSelectedItem() == null){
-                                if(!dropdown.getStyleClass().contains(CSS_RED_BORDERS)){
-                                    dropdown.getStyleClass().add(CSS_RED_BORDERS);
-                                }
-
-                                // Increment validation_problems
-                                validation_errors++;
-                            }else{
-                                // Remove CSS red_borders
-                                dropdown.getStyleClass().remove(CSS_RED_BORDERS);
-                            }
-                        }
+                        Validators.validateDropdowns(dropdowns, validation_problems);
 
 
                         // IF VALIDATION SUCEEDS
-                        if(validation_errors == 0){
+                        if(validation_problems[0] == 0){
 
                             // SETUP PRODUCT RESOURCE
                             ProductResource productResource = new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
