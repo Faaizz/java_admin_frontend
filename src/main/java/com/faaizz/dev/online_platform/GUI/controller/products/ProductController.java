@@ -56,35 +56,41 @@ public class ProductController extends MainController {
     protected void initializeSections(){
         // ORGANISE SECTIONS, SUB SECTIONS, AND CATEGORIES FOR THEIR RESPECTIVE
         // COMBOBOXES
+        // List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
+        //         "Trousers", "Sweatshirts & Hoodies", "Sweaters, Jackets, & Coats", "Underwear");
         List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
-                "Trousers", "Sweatshirts & Hoodies", "Sweaters, Jackets, & Coats", "Underwear");
-        List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Skirts",
-                "Leggings & Vests", "Shorts", "Shirts", "Trousers", "Sweatshirts & Hoodies",
-                "Sweaters, Jackets, & Coats", "Underwear & Lingerie");
+                "Joggers", "Pants", "Sweatshirts & Hoodies", "Jackets", "Combined Looks", "Facemasks");
+        // List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Skirts",
+        //         "Leggings & Vests", "Shorts", "Shirts", "Trousers", "Sweatshirts & Hoodies",
+        //         "Sweaters, Jackets, & Coats", "Underwear & Lingerie");
+        List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Shorts", 
+                "Shirts", "Joggers & Sweatpants", "Jackets", "Combined Looks");
 
         Map<String, List<String>> clothing_section = new HashMap<>();
-        clothing_section.put("unisex", null);
+        // clothing_section.put("unisex", null);
         clothing_section.put("male", male_clothing_options);
         clothing_section.put("female", female_clothing_options);
 
-        List<String> male_shoes_options = FXCollections.observableArrayList("Oxford", "Loafers", "Sneakers", "Boots",
-                "Sandals & Slippers");
-        List<String> female_shoes_options = FXCollections.observableArrayList("Flats", "Heels & Pumps",
-                "Sandals & Slippers", "Sneakers", "Boots");
+        // List<String> male_shoes_options = FXCollections.observableArrayList("Oxford", "Loafers", "Sneakers", "Boots",
+        //         "Sandals & Slippers");
+        // List<String> female_shoes_options = FXCollections.observableArrayList("Flats", "Heels & Pumps",
+        //         "Sandals & Slippers", "Sneakers", "Boots");
 
-        Map<String, List<String>> shoes_section = new HashMap<>();
-        shoes_section.put("unisex", null);
-        shoes_section.put("male", male_shoes_options);
-        shoes_section.put("female", female_shoes_options);
+        // Map<String, List<String>> shoes_section = new HashMap<>();
+        // shoes_section.put("unisex", null);
+        // shoes_section.put("male", male_shoes_options);
+        // shoes_section.put("female", female_shoes_options);
 
         sections = new HashMap<>();
         sections.put("clothing", clothing_section);
-        sections.put("shoes", shoes_section);
-        sections.put("accessories", null);
-        sections.put("bags & watches", null);
+        // sections.put("shoes", shoes_section);
+        // sections.put("accessories", null);
+        // sections.put("bags & watches", null);
 
-        List<String> sections_list = FXCollections.observableArrayList("clothing", "shoes", "accessories",
-                "bags & watches");
+        // List<String> sections_list = FXCollections.observableArrayList("clothing", "shoes", "accessories",
+        //         "bags & watches");
+
+        List<String> sections_list = FXCollections.observableArrayList("clothing");
 
         // Set categories as ComboBox options
         section_dropdown.getItems().clear();

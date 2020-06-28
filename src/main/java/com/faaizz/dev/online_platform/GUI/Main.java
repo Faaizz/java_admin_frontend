@@ -8,6 +8,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,6 +39,11 @@ public class Main extends Application {
 
             // LOAD APPLICATION DATA
             SettingsData.loadSettings();
+
+            // LOAD LOGO FONT
+            Font myFont= Font.loadFont(getClass().getResourceAsStream("Vnhltfap.ttf"), 10);
+            // Get font name
+            // System.out.println(myFont);
 
             // LOAD LOGIN PAGE BY DEFAULT
             Parent root= FXMLLoader.load(getClass().getResource("view/login/login.fxml"));

@@ -1,6 +1,14 @@
 
 /* F    O   N   T   S */
 
+/* BADA FONT */
+
+.bada-logo{
+    -fx-font-size: 22px;
+    -fx-font-family: VNI-HLThuphap!important;
+    -fx-text-transform: uppercase;
+}
+
 .big-header-font{
     -fx-font-size: 22px;
     -fx-font-family: 'helvetica, arial, sans-serif';

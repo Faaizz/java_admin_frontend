@@ -78,9 +78,9 @@ public class MainController {
         GridPane header_and_buttons_gpane= new GridPane();
 
         // Title Label
-        title_label= new Label("STAFF PORTAL");
-        title_label.setPadding(new Insets(5));
-        title_label.getStyleClass().addAll("dark-color-style", "big-header-font");
+        title_label= new Label("BADA");
+        title_label.setPadding(new Insets(5, 5, 15, 5));
+        title_label.getStyleClass().addAll("dark-color-style", "bada-logo");
         // Add to gridpane
         header_and_buttons_gpane.add(title_label, 0, 0);
         GridPane.setHalignment(title_label, HPos.CENTER);

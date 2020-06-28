@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.faaizz.dev.online_platform'
-version '1.1-SNAPSHOT'
+version 'bada-1.0'
 
 sourceCompatibility = 11
 
