@@ -124,6 +124,10 @@ public class Validators {
                     try{
                         // Try to parse text content to double
                         Double.valueOf(price_textfield.getText());
+
+                        // Otherwise remove CSS red borders
+                        price_textfield.getStyleClass().remove(CSS_RED_BORDERS);
+
                     }catch(NumberFormatException e){
                         // Set red_borders css class
                         if(!price_textfield.getStyleClass().contains(CSS_RED_BORDERS)){
@@ -157,6 +161,9 @@ public class Validators {
                     try{
                         // Try to parse text content to double
                         Integer.valueOf(textfield.getText());
+
+                        // Otherwise remove CSS red borders
+                        textfield.getStyleClass().remove(CSS_RED_BORDERS);
                     }catch(NumberFormatException e){
                         // Set red_borders css class
                         if(!textfield.getStyleClass().contains(CSS_RED_BORDERS)){

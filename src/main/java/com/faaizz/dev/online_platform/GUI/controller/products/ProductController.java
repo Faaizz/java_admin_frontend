@@ -63,9 +63,9 @@ public class ProductController extends MainController {
                 "Sweaters, Jackets, & Coats", "Underwear & Lingerie");
 
         Map<String, List<String>> clothing_section = new HashMap<>();
+        clothing_section.put("unisex", null);
         clothing_section.put("male", male_clothing_options);
         clothing_section.put("female", female_clothing_options);
-        clothing_section.put("unisex", null);
 
         List<String> male_shoes_options = FXCollections.observableArrayList("Oxford", "Loafers", "Sneakers", "Boots",
                 "Sandals & Slippers");
@@ -73,9 +73,9 @@ public class ProductController extends MainController {
                 "Sandals & Slippers", "Sneakers", "Boots");
 
         Map<String, List<String>> shoes_section = new HashMap<>();
+        shoes_section.put("unisex", null);
         shoes_section.put("male", male_shoes_options);
         shoes_section.put("female", female_shoes_options);
-        shoes_section.put("unisex", null);
 
         sections = new HashMap<>();
         sections.put("clothing", clothing_section);

@@ -180,11 +180,19 @@ public class ManageProductsController extends GenericProductController {
         textfields.add(min_price_textfield);
         textfields.add(max_price_textfield);
 
-        // VALIDATE NUMBERS
+        // VALIDATE NUMBERS        
         List<TextField> expect_numbers= new ArrayList<>();
-        expect_numbers.add(min_price_textfield);
-        expect_numbers.add(max_price_textfield);
+        if(!min_price_textfield.getText().isEmpty()){
+            // If not blank, validate price
+            expect_numbers.add(min_price_textfield);
+        }
+        if(!min_price_textfield.getText().isEmpty()){
+            // If not blank, validate price
+            expect_numbers.add(max_price_textfield);
+        }
         Validators.validateNumbers(expect_numbers, validation_problems);
+        
+        
 
 
         // VALIDATE DROPDOWNS
@@ -227,7 +235,7 @@ public class ManageProductsController extends GenericProductController {
 
                         // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
                         StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
-
+                        
                         Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
                         image_view.setImage(image);
 
