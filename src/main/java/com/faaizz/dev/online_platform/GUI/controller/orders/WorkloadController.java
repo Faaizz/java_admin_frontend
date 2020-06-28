@@ -11,6 +11,7 @@ import java.util.Map;
 import com.faaizz.dev.online_platform.GUI.InstanceData;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
+import com.faaizz.dev.online_platform.api_inbound.model.Customer;
 import com.faaizz.dev.online_platform.api_inbound.model.Order;
 import com.faaizz.dev.online_platform.api_inbound.model.Product;
 import com.faaizz.dev.online_platform.api_inbound.model.Staff;
@@ -18,6 +19,7 @@ import com.faaizz.dev.online_platform.api_inbound.model.collection.OrderCollecti
 import com.faaizz.dev.online_platform.api_inbound.model.collection.supplement.Meta;
 import com.faaizz.dev.online_platform.api_inbound.platform.APIParser;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableOrder;
+import com.faaizz.dev.online_platform.api_outbound.platform.CustomerResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.OrderResource;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 
@@ -159,6 +161,11 @@ public class WorkloadController extends GenericOrdersController {
             String order_product_string= productResource.single(order.getProduct_id());
             Product order_product= APIParser.getInstance().parseSingleProductResponse(order_product_string);
 
+            // GET CUSTOMER
+            CustomerResource customerResource= new CustomerResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
+            String order_customer_string= customerResource.single(order.getCustomer_email());
+            Customer order_customer= APIParser.getInstance().parseSingleCustomerResponse(order_customer_string);
+
             // GET PRODUCT IMAGE
             StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
             Platform.runLater(
@@ -167,7 +174,7 @@ public class WorkloadController extends GenericOrdersController {
                     @Override
                     public void run() {
                         // CREATE SINGLE ORDER HBox
-                        HBox single_order= new SingleOrder(image_urlSB.toString(), order_product.getId(), order_product.getName(), order);
+                        HBox single_order= new SingleOrder(image_urlSB.toString(), order_product.getId(), order_product.getName(), order_customer, order);
                         // ADD TO TOPMOST VBOX
                         topmost_vbox.getChildren().add(single_order);
                     }
@@ -205,7 +212,7 @@ public class WorkloadController extends GenericOrdersController {
         Image image;
         VBox details_vbox;
 
-        public SingleOrder(String image_url, int product_id, String product_name, Order order)
+        public SingleOrder(String image_url, int product_id, String product_name, Customer order_customer, Order order)
             {
 
             // SET CSS STYLE
@@ -260,6 +267,14 @@ public class WorkloadController extends GenericOrdersController {
             Label customer_email_L= new Label("CUSTOMER EMAIL: " +  order.getCustomer_email().toUpperCase());
             customer_email_L.getStyleClass().add("small-body-font");
             details_vbox.getChildren().add(customer_email_L);
+
+            Label customer_address_L= new Label("CUSTOMER ADDRESS: " +  order_customer.getAddress().toUpperCase());
+            customer_address_L.getStyleClass().add("small-body-font");
+            details_vbox.getChildren().add(customer_address_L);
+
+            Label customer_phone_L= new Label("CUSTOMER PHONE: " +  order_customer.getPhone_numbers().get(0));
+            customer_phone_L.getStyleClass().add("small-body-font");
+            details_vbox.getChildren().add(customer_phone_L);
 
             Label status_L= new Label("STATUS: " +  order.getStatus().toUpperCase());
             status_L.getStyleClass().add("small-body-font");
