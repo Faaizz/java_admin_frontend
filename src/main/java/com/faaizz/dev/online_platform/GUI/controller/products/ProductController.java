@@ -119,11 +119,8 @@ public class ProductController extends MainController {
         else {
             sub_section_dropdown.getItems().setAll(selected_section);
         }
-
         // Select first item by default
         sub_section_dropdown.getSelectionModel().selectFirst();
-
-
     }
 
     @FXML
