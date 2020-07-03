@@ -118,7 +118,7 @@ public abstract class APIResource {
         if(this.per_page > 0){
 
             return new URIBuilder()
-                    .setScheme("http")
+                    .setScheme("https")
                     .setHost(this.base_URL)
                     .setPath(this.api_path + extra_path)
                     .addParameter("per_page", String.valueOf(this.per_page))
@@ -130,7 +130,7 @@ public abstract class APIResource {
         if(this.page_number > 0){
 
             return new URIBuilder()
-                    .setScheme("http")
+                    .setScheme("https")
                     .setHost(this.base_URL)
                     .setPath(this.api_path + extra_path)
                     .addParameter("page", String.valueOf(this.page_number))
@@ -141,7 +141,7 @@ public abstract class APIResource {
 
         //OTHERWISE
         return new URIBuilder()
-                .setScheme("http")
+                .setScheme("https")
                 .setHost(this.base_URL)
                 .setPath(this.api_path + extra_path)
                 .build();

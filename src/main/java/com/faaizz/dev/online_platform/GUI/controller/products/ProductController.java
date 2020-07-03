@@ -59,12 +59,12 @@ public class ProductController extends MainController {
         // List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
         //         "Trousers", "Sweatshirts & Hoodies", "Sweaters, Jackets, & Coats", "Underwear");
         List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
-                "Joggers", "Pants", "Sweatshirts & Hoodies", "Jackets", "Combined Looks", "Facemasks");
+                "Joggers", "Pants", "Sweatshirts & Hoodies", "Jackets", "Combined Looks", "Sustainability");
         // List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Skirts",
         //         "Leggings & Vests", "Shorts", "Shirts", "Trousers", "Sweatshirts & Hoodies",
         //         "Sweaters, Jackets, & Coats", "Underwear & Lingerie");
         List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Shorts", 
-                "Shirts", "Joggers & Sweatpants", "Jackets", "Combined Looks");
+                "Shirts", "Joggers & Sweatpants", "Jackets", "Combined Looks", "Sustainability");
 
         Map<String, List<String>> clothing_section = new HashMap<>();
         // clothing_section.put("unisex", null);

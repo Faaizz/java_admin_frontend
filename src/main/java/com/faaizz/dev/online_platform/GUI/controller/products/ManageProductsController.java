@@ -234,7 +234,7 @@ public class ManageProductsController extends GenericProductController {
                         ImageView image_view= new ImageView();
 
                         // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
-                        StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
+                        StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
                         
                         Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
                         image_view.setImage(image);
@@ -741,7 +741,7 @@ public class ManageProductsController extends GenericProductController {
                                 ImageView image_view= new ImageView();
 
                                 // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
-                                StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(finalImage_number));
+                                StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(finalImage_number));
 
                                 Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
                                 image_view.setImage(image);

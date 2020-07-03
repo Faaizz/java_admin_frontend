@@ -254,7 +254,7 @@ public class MainController {
      */
     private void renderFooter(){
 
-        Label footer_text= new Label("COPYRIGHT © 2019");
+        Label footer_text= new Label("© 2020 Codecreek Limited");
         footer_text.getStyleClass().add("dark-color-style");
         footer_text.setAlignment(Pos.CENTER);
         footer_text.setPrefWidth(1000000000);
