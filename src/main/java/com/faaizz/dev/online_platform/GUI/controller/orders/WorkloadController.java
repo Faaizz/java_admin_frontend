@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.faaizz.dev.online_platform.GUI.InstanceData;
+import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.Customer;
@@ -30,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -91,9 +93,8 @@ public class WorkloadController extends GenericOrdersController {
 
         try{
 
-            // SHOW LOADING MINI DIALOG
-            // Call inherited method from MainController class
-            MiniDialogController mini_dialog_controller = showLoadingMiniDialog();
+            // Show loading cursor
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
 
             // GET ORDERS ASSIGNED TO THE CURRENT STAFF
 
@@ -114,21 +115,25 @@ public class WorkloadController extends GenericOrdersController {
 
                             // IF NO ORDER IS FOUND
                             if (matched_orders.getOrders().size() <= 0) {
-                                mini_dialog_controller.enableCloseButton();
-                                mini_dialog_controller.setDialog_text_label("YOU DO NOT HAVE ANY PENDING ORDERS.");
+                                setLoadingOutcomeMessage("YOU DO NOT HAVE ANY PENDING ORDERS.");
+                                displayLoadingMessageInScrollpane();
                             }
                             // OTHERWISE
                             else {
 
                                 // DISPLAY MATCHED PRODUCTS
-                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data, mini_dialog_controller);
+                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data);
 
                             }
 
-                        } catch (Exception e) {
-                            mini_dialog_controller.enableCloseButton();
-                            mini_dialog_controller.setDialog_text_label("An Error Occurred\n" + e.getMessage());
+                        } 
+                        catch (Exception e) {
+                            setLoadingOutcomeMessage("An Error Occurred\n" + e.getMessage());
                             e.printStackTrace();
+                        }
+                        finally{
+                            // Hide loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.DEFAULT);
                         }
 
                     });
@@ -139,21 +144,21 @@ public class WorkloadController extends GenericOrdersController {
             // LOAD WORKLOAD
             load_workload.run();
 
-        }catch(IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
 
     }
 
 
-    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data, MiniDialogController mini_dialog_controller)
+    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data)
             throws Exception {
 
         VBox topmost_vbox= new VBox();
         topmost_vbox.getStyleClass().add("general-background");
         topmost_vbox.setPadding(new Insets(10, 10, 10, 10));
 
-        // CREATE A SingleOrder OBH=JECT FOR EACH MATCHED ORDER
+        // CREATE A SingleOrder OBJECT FOR EACH MATCHED ORDER
         for( final Order order: orders ){
 
             // GET PRODUCT
@@ -167,7 +172,7 @@ public class WorkloadController extends GenericOrdersController {
             Customer order_customer= APIParser.getInstance().parseSingleCustomerResponse(order_customer_string);
 
             // GET PRODUCT IMAGE
-            StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
+            StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
             Platform.runLater(
                 new Runnable(){
                 
@@ -188,9 +193,6 @@ public class WorkloadController extends GenericOrdersController {
 
         // SETUP PAGINATION
         setupPagination(page_meta, post_data, this::loadWorkload);
-
-        // REMOVE LOADING DIALOG
-        mini_dialog_controller.handleExit();
 
     }
 
@@ -408,6 +410,9 @@ public class WorkloadController extends GenericOrdersController {
 
                             // SHOW LOADING DIALOG
                             MiniDialogController dialog_controller= showLoadingMiniDialog();
+                            // Show loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.WAIT);
+
                             // CREATE ORDER RESOURCE
                             OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
@@ -441,6 +446,8 @@ public class WorkloadController extends GenericOrdersController {
 
                                             e.printStackTrace();
                                         }
+                                        // Hide loading cursor
+                                        Main.getStage().getScene().setCursor(Cursor.DEFAULT);
 
                                     });
                                 }
@@ -482,6 +489,8 @@ public class WorkloadController extends GenericOrdersController {
 
                             // SHOW LOADING DIALOG
                             MiniDialogController dialog_controller= showLoadingMiniDialog();
+                            // Show loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.WAIT);
                             // CREATE ORDER RESOURCE
                             OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
@@ -521,6 +530,8 @@ public class WorkloadController extends GenericOrdersController {
 
                                             e.printStackTrace();
                                         }
+                                        // Hide loading cursor
+                                        Main.getStage().getScene().setCursor(Cursor.DEFAULT);
 
                                     });
                                 }
@@ -562,6 +573,8 @@ public class WorkloadController extends GenericOrdersController {
 
                             // SHOW LOADING DIALOG
                             MiniDialogController dialog_controller= showLoadingMiniDialog();
+                            // Show loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.WAIT);
                             // CREATE ORDER RESOURCE
                             OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
@@ -600,6 +613,8 @@ public class WorkloadController extends GenericOrdersController {
 
                                             e.printStackTrace();
                                         }
+                                        // Hide loading cursor
+                                        Main.getStage().getScene().setCursor(Cursor.DEFAULT);
 
                                     });
                                 }

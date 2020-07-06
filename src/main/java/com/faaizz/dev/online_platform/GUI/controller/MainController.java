@@ -69,6 +69,9 @@ public class MainController {
     protected Button orders_button;
     protected Button customers_button;
     protected Button staff_button;
+    protected VBox message_vbox;
+    protected HBox message_hbox;
+    protected Label message_label;
     /**
      * This method sets up the top menu
      */
@@ -271,6 +274,9 @@ public class MainController {
         // DISPLAY FOOTER
         this.renderFooter();
 
+        // SETUP LOADING MESSAGE DISPLAY
+        this.setupLoadingMessageDisplayer();
+
     }
 
     /*========================================================================================*/
@@ -445,7 +451,7 @@ public class MainController {
 
             @Override
             public void handle(ActionEvent event) {
-
+                
                 fetchFunction.accept(post_data, (page_meta.getCurrent_page() + 1));
             }
 
@@ -557,6 +563,47 @@ public class MainController {
         pagination_vbox.getChildren().add(h_box_pagination_direct);
 
 
+    }
+
+
+    /**
+     * Setup mechanism for displaying the result of loading actions in the scrollpane
+     */
+    private void setupLoadingMessageDisplayer(){
+
+        message_vbox= new VBox();
+        message_vbox.getStyleClass().add("general-background");
+        message_vbox.setPadding(new Insets(10, 10, 10, 10));
+        message_vbox.setMinHeight(70);
+
+        message_hbox= new HBox();
+        message_hbox.setSpacing(7);
+        message_hbox.setAlignment(Pos.CENTER);
+
+        message_label= new Label();
+        message_label.getStyleClass().addAll("mid-body-font", "boldened");
+
+    }
+
+
+    /**
+     * Set the outcome of a loading action 
+     * @param mssg
+     */
+    protected void setLoadingOutcomeMessage(String mssg){
+        message_label.setText(mssg);
+    }
+
+    /**
+     * Displays the result of a loading action in the scrollpane
+     */
+    protected void displayLoadingMessageInScrollpane(){
+
+        message_hbox.getChildren().add(message_label);
+        message_vbox.getChildren().add(message_hbox);
+        content_scrollpane.setContent(message_vbox);
+        content_scrollpane.setHvalue(0);
+        
     }
 
 

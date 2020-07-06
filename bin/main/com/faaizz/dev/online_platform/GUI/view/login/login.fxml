@@ -18,9 +18,9 @@
 
     <top>
         <GridPane styleClass="dark-color-style">
-            <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="STAFF LOGIN" styleClass="dark-color-style, big-header-font" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
+            <Label GridPane.rowIndex="0" GridPane.columnIndex="0" text="BADA" styleClass="dark-color-style, bada-logo" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS">
                 <padding>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    <Insets bottom="15.0" left="5.0" right="5.0" top="5.0" />
                 </padding>
             </Label>
             <Button fx:id="settings_button" styleClass="header-buttons" GridPane.rowIndex="0" GridPane.columnIndex="1" alignment="CENTER_RIGHT" maxWidth="10" onAction="#handleSettings">

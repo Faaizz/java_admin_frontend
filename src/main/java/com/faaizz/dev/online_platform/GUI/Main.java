@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private Stage main_stage;
+    private static Stage main_stage;
     private Rectangle2D screen_size;
 
     private static Main instance;
@@ -35,7 +35,7 @@ public class Main extends Application {
             instance= this;
 
             // SET INTERNAL STATIC Stage VARIABLE
-            this.main_stage= primaryStage;
+            Main.main_stage= primaryStage;
 
             // LOAD APPLICATION DATA
             SettingsData.loadSettings();
@@ -89,6 +89,15 @@ public class Main extends Application {
      */
     public static Main getInstance(){
         return instance;
+    }
+
+    /**
+     * RETURN CURRENT STAGE
+     * @throws AuthenticationException
+     * @throws IOException
+     */
+    public static Stage getStage(){
+        return main_stage;
     }
 
 

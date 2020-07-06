@@ -1,7 +1,10 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +22,15 @@ import com.faaizz.dev.online_platform.api_outbound.model.UploadableProduct;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -212,6 +220,19 @@ public class ManageProductsController extends GenericProductController {
 
     private void displayProducts(List<Product> matched_products, Meta page_meta, Map<String, String> post_data) throws IOException {
 
+
+        // Get Images Asynchronously
+        // Setup Http Async Client
+        RequestConfig requestConfig = RequestConfig.custom()
+            .setSocketTimeout(3000)
+            .setConnectTimeout(3000).build();
+        CloseableHttpAsyncClient httpclient = HttpAsyncClients.custom()
+            .setDefaultRequestConfig(requestConfig)
+            .build();
+        
+
+        // Async call
+        Map<String, InputStream> images_stream=  loadImagesAsync(httpclient, matched_products);
         // SETUP NEW CONTENT NODE
         FlowPane flow_pane= new FlowPane();
         flow_pane.setAlignment(Pos.TOP_LEFT);
@@ -219,7 +240,12 @@ public class ManageProductsController extends GenericProductController {
         flow_pane.setHgap(30);
 
         // CREATE SINGLE PRODUCT VBOX FOR EACH PRODUCT AND ADD TO flow_pane CHILDREN
-        for(Product product : matched_products) {
+        final int[] sub_idx= {0};
+        for(int idx=0; idx<matched_products.size(); idx++) {
+
+            Product product= matched_products.get(idx);
+            
+            sub_idx[0]= idx;
 
             Platform.runLater(
                 new Runnable(){
@@ -234,9 +260,11 @@ public class ManageProductsController extends GenericProductController {
                         ImageView image_view= new ImageView();
 
                         // BUILD IMAGE URL BY APPENDING THE API BASE URL AND THE PATH TO THE IMAGES TO THE FIRST PRODUCT IMAGE NAME
-                        StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
-                        
-                        Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
+                        // StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
+
+                        // Image image= new Image(image_urlSB.toString(), 150, 0, true, false);
+                        // Image image= new Image(images_stream.get(image_urlSB.toString().strip()), 150, 0, true, false);
+                        Image image= new Image(images_stream.get(String.valueOf(product.getId())), 150, 0, true, false);
                         image_view.setImage(image);
 
                         v_box.getChildren().add(image_view);
@@ -289,6 +317,98 @@ public class ManageProductsController extends GenericProductController {
         setupPagination(page_meta, post_data, this::loadNewProducts);
 
     }
+
+
+    private Map<String, InputStream> loadImagesAsync(CloseableHttpAsyncClient httpclient, List<Product> matched_products){
+
+        // To keep trak of how many images have been fetched
+        final int[] images_no= {0};
+
+        // Store Image streams in a Map with product ids as keys
+        Map<String, InputStream> imagesIS= new HashMap<>();
+        
+        // Make requests
+        try{
+
+            httpclient.start();
+
+            // final CountDownLatch latch = new CountDownLatch(getArray.length);
+
+            final int[] sub_int= {0};
+
+            for(int idx=0; idx<matched_products.size(); idx++){
+
+                Product product= matched_products.get(idx);
+
+                StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(product.getImages().get(0));
+
+
+                // Add product id as key in Map
+                imagesIS.put(String.valueOf(product.getId()), null);
+                // System.out.println(image_urlSB.toString());
+
+                final HttpGet request= new HttpGet(image_urlSB.toString());
+                request.setHeader("product", String.valueOf(product.getId()));
+                // System.out.println(request.getURI().toString().strip());
+
+                httpclient.execute(request, new FutureCallback<HttpResponse>(){
+
+                    @Override
+                    public void completed(HttpResponse response) {
+                        
+                        try{
+                            imagesIS.replace(request.getFirstHeader("product").getValue(), response.getEntity().getContent());
+                            images_no[0]= images_no[0]+1;
+                        }
+                        catch(IOException e){
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void failed(Exception ex) {
+                        ex.printStackTrace();
+                        images_no[0]= images_no[0]+1;
+
+                    }
+
+                    @Override
+                    public void cancelled() {
+                        System.out.println("Cancelled");
+                        images_no[0]= images_no[0]+1;
+                    }
+
+                });
+
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            try{
+                while( images_no[0] < matched_products.size() ){
+                    // Do nothing.
+                    // Run the loop until Async call finished
+
+                    // Keeps the loop from running forever. For some reason, if I leave it empty, it runs forever.
+                    System.console();
+                }
+
+                httpclient.close();
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return imagesIS;
+
+    }
+
+
 
     private void loadNewProducts(Map<String, String> post_data, int page_number) {
 

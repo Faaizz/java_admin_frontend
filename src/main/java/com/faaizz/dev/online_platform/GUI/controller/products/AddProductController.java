@@ -1,12 +1,14 @@
 package com.faaizz.dev.online_platform.GUI.controller.products;
 
 import com.faaizz.dev.online_platform.GUI.InstanceData;
+import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_outbound.model.UploadableProduct;
 import com.faaizz.dev.online_platform.api_outbound.platform.ProductResource;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 
 import java.io.IOException;

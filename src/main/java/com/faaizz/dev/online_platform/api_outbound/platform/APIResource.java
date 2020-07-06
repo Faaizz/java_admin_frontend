@@ -49,7 +49,7 @@ public abstract class APIResource {
         this.api_path= api_path;
         this.api_token= api_token;
 
-        this.per_page= 0;
+        this.per_page= 10;
         this.page_number= 0;
 
         //CREATE CLIENT
@@ -113,6 +113,17 @@ public abstract class APIResource {
     }
 
     URI buildUri(String extra_path) throws URISyntaxException {
+
+        // If both per_page and page_number are set
+        if( (this.per_page > 0) && (this.page_number > 0) ){
+            return new URIBuilder()
+                    .setScheme("https")
+                    .setHost(this.base_URL)
+                    .setPath(this.api_path + extra_path)
+                    .addParameter("per_page", String.valueOf(this.per_page))
+                    .addParameter("page", String.valueOf(this.page_number))
+                    .build();
+        }
 
         //IF per_page IS SET
         if(this.per_page > 0){

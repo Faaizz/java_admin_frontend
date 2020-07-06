@@ -219,7 +219,7 @@ public class ProductResource extends APIResource {
         } );
 
         URI uri= buildUri("/search" );
-
+        
         HttpPost httpPost = new HttpPost(uri);
         httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 

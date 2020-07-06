@@ -190,12 +190,12 @@ public class GenericProductController extends ProductController {
         FileChooser fileChooser = new FileChooser();
 
         List<String> extentions = new ArrayList<>();
-        extentions.add("*.bmp");
-        extentions.add("*.png");
-        extentions.add("*.jpeg");
+        // extentions.add("*.bmp");
+        // extentions.add("*.png");
+        // extentions.add("*.jpeg");
         extentions.add("*.jpg");
 
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (bmp, png, jpeg)",
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (jpg)",
                 extentions);
 
         fileChooser.getExtensionFilters().add(extFilter);

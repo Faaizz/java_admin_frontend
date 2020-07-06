@@ -44,7 +44,6 @@ public class StaffResource extends APIResource {
         nvps.add(new BasicNameValuePair("remember", String.valueOf(remember)));
 
         URI uri= buildUri("/login" );
-        System.out.println(uri);
 
         HttpPost httpPost = new HttpPost(uri);
 

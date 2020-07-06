@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.faaizz.dev.online_platform.GUI.InstanceData;
+import com.faaizz.dev.online_platform.GUI.Main;
 import com.faaizz.dev.online_platform.GUI.SettingsData;
 import com.faaizz.dev.online_platform.GUI.controller.dialogs.MiniDialogController;
 import com.faaizz.dev.online_platform.api_inbound.model.Order;
@@ -27,6 +28,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -98,9 +100,8 @@ public class UnassignedOrdersController extends GenericOrdersController {
             // SET REQUEST PAGE
             order_resource.setPage_number(page_number);
 
-            // SHOW LOADING MINI DIALOG
-            // Call inherited method from MainController class
-            MiniDialogController mini_dialog_controller = showLoadingMiniDialog();
+            // Show loading cursor
+            Main.getStage().getScene().setCursor(Cursor.WAIT);
 
             // GET UNASSIGNED ORDERS
 
@@ -129,22 +130,25 @@ public class UnassignedOrdersController extends GenericOrdersController {
 
                             // IF NO ORDER IS FOUND
                             if (matched_orders.getOrders().size() <= 0) {
-                                mini_dialog_controller.enableCloseButton();
-                                mini_dialog_controller.setDialog_text_label("THERE ARE NO UNASSIGNED ORDERS.");
+                                setLoadingOutcomeMessage("THERE ARE NO UNASSIGNED ORDERS.");
+                                displayLoadingMessageInScrollpane();
                             }
                             // OTHERWISE
                             else {
 
                                 // DISPLAY MATCHED PRODUCTS
-                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data, mini_dialog_controller);
-
+                                displayOrders(matched_orders.getOrders(), matched_orders.getMeta(), post_data);
 
                             }
 
                         } catch (Exception e) {
-                            mini_dialog_controller.enableCloseButton();
-                            mini_dialog_controller.setDialog_text_label("An Error Occurred\n" + e.getMessage());
+                            setLoadingOutcomeMessage("An Error Occurred\n" + e.getMessage());
+                            displayLoadingMessageInScrollpane();
                             e.printStackTrace();
+                        }
+                        finally{
+                            // Show loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.DEFAULT);
                         }
 
                     });
@@ -162,7 +166,7 @@ public class UnassignedOrdersController extends GenericOrdersController {
     }
 
 
-    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data, MiniDialogController mini_dialog_controller)
+    private void displayOrders(List<Order> orders, Meta page_meta, Map<String, String> post_data)
             throws Exception {
 
         VBox topmost_vbox= new VBox();
@@ -177,7 +181,7 @@ public class UnassignedOrdersController extends GenericOrdersController {
             Product order_product= APIParser.getInstance().parseSingleProductResponse(order_product_string);
 
             // GET PRODUCT IMAGE
-            StringBuilder image_urlSB= new StringBuilder().append("http://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
+            StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
             Platform.runLater(
                 new Runnable(){
                 
@@ -198,9 +202,6 @@ public class UnassignedOrdersController extends GenericOrdersController {
 
         // SETUP PAGINATION
         setupPagination(page_meta, post_data, this::loadUnassignedOrders);
-
-        // REMOVE LOADING DIALOG
-        mini_dialog_controller.handleExit();
 
     }
 
@@ -367,9 +368,9 @@ public class UnassignedOrdersController extends GenericOrdersController {
                     if(selected_staff != null){
 
                         try{
+                            // Show loading cursor
+                            Main.getStage().getScene().setCursor(Cursor.WAIT);
 
-                            // SHOW LOADING DIALOG
-                            MiniDialogController dialog_controller= showLoadingMiniDialog();
                             // CREATE ORDER RESOURCE
                             OrderResource order_resource= new OrderResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
 
@@ -390,6 +391,8 @@ public class UnassignedOrdersController extends GenericOrdersController {
                                             // SUCCESS UPDATE
                                             // REFRESH ORDERS DISPLAYED
                                             refreshOrders();
+                                            // SHOW LOADING DIALOG
+                                            MiniDialogController dialog_controller= showLoadingMiniDialog();
                                             // ENABLE DIALOG CLOSE
                                             dialog_controller.enableCloseButton();
                                             // DISPLAY SUCCESS MESSAGE
@@ -397,12 +400,15 @@ public class UnassignedOrdersController extends GenericOrdersController {
 
 
                                         } catch (Exception e) {
-                                            // DISPLAY ERROR ON DIALOG
-                                            dialog_controller.setDialog_text_label(e.getMessage());
-                                            // ENABLE DIALOG CLOSE BUTTON
-                                            dialog_controller.enableCloseButton();
+                                            // Display error message
+                                            setLoadingOutcomeMessage(e.getMessage());
+                                            displayLoadingMessageInScrollpane();
 
                                             e.printStackTrace();
+                                        }
+                                        finally{
+                                            // Hide loading cursor
+                                            Main.getStage().getScene().setCursor(Cursor.DEFAULT);
                                         }
 
                                     });
@@ -412,7 +418,7 @@ public class UnassignedOrdersController extends GenericOrdersController {
                             set_del_date_run.run();
 
                         
-                        }catch(IOException e){
+                        }catch(Exception e){
                             e.printStackTrace();
                         }
 
