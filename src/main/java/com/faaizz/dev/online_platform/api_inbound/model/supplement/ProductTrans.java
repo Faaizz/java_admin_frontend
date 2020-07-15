@@ -14,7 +14,7 @@ public class ProductTrans {
     private String sub_section;
     private String category;
     private double price;
-    private String color;
+    private String colors;
     private String material;
     private String images;
     private String options;
@@ -53,8 +53,8 @@ public class ProductTrans {
         return price;
     }
 
-    public String getColor() {
-        return color;
+    public String getColors() {
+        return colors;
     }
 
     public String getMaterial() {
@@ -74,7 +74,7 @@ public class ProductTrans {
 
     public ProductTrans(
             int id, String name, String brand, String description, String section, String sub_section,
-            String category, double price, String color, String material, String images, String options
+            String category, double price, String colors, String material, String images, String options
     ) {
         this.id = id;
         this.name = name;
@@ -84,7 +84,7 @@ public class ProductTrans {
         this.sub_section = sub_section;
         this.category = category;
         this.price = price;
-        this.color = color;
+        this.colors = colors;
         this.material = material;
         this.images = images;
         this.options = options;

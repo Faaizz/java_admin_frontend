@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class APIParser {
 
@@ -100,7 +101,7 @@ public class APIParser {
                 intermediate.getSub_section(),
                 intermediate.getCategory(),
                 intermediate.getPrice(),
-                intermediate.getColor(),
+                intermediate.getColors(),
                 intermediate.getMaterial(),
                 imgsList,
                 optionsList
@@ -385,6 +386,12 @@ public class APIParser {
         //Intermediate object to enable proper parsing
         OrderTrans intermediate= gson.fromJson(data, OrderTrans.class);
 
+        // Parse Order Products
+        JsonArray ord_prods= JsonParser.parseString(intermediate.getProducts()).getAsJsonArray();
+
+        Type prodsTypeToken= new TypeToken<List<Map<String,String>>>(){}.getType();
+        List<Map<String,String>> prodsList= gson.fromJson(ord_prods, prodsTypeToken);
+
         //PARSE DATES
         LocalDateTime est_del_date= handleDates(intermediate.getEst_del_date());
         LocalDateTime failure_date= handleDates(intermediate.getFailure_date());
@@ -396,10 +403,11 @@ public class APIParser {
         //Append parts to create Order object
         Order resultOrder= new Order(
                 intermediate.getId(),
-                intermediate.getProduct_id(),
-                intermediate.getProduct_size(),
-                intermediate.getProduct_quantity(),
+                prodsList,
                 intermediate.getCustomer_email(),
+                intermediate.getReference(),
+                intermediate.getAmount(),
+                intermediate.getAmount_paid(),
                 intermediate.getStaff_email(),
                 intermediate.getStatus(),
                 est_del_date,

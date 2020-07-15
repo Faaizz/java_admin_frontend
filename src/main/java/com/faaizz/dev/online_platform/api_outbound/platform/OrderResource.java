@@ -192,9 +192,7 @@ public class OrderResource extends APIResource {
         // BUILD UP POST DATA
         MultipartEntityBuilder builder= MultipartEntityBuilder.create();
         
-        builder.addTextBody("product_id", String.valueOf(order.getProduct_id()));
-        builder.addTextBody("product_size", order.getProduct_size());
-        builder.addTextBody("product_quantity", String.valueOf(order.getProduct_quantity()));
+        builder.addTextBody("product", String.valueOf(order.getProducts()));
         builder.addTextBody("customer_email", order.getCustomer_email());
 
         // SETUP POST REQUEST

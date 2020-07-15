@@ -2,9 +2,7 @@ package com.faaizz.dev.online_platform.api_outbound.model;
 
 public class UploadableOrder{
 
-    private int product_id;
-    private String product_size;
-    private int product_quantity;
+    private String products;
     private String customer_email;
     private String staff_email;
     private String status;
@@ -17,16 +15,8 @@ public class UploadableOrder{
     /*========================================================================================*/
     /*  G   E   T   T   E   R   S   */
 
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public String getProduct_size() {
-        return product_size;
-    }
-
-    public int getProduct_quantity() {
-        return product_quantity;
+    public String getProducts() {
+        return products;
     }
 
     public String getCustomer_email() {
@@ -61,17 +51,8 @@ public class UploadableOrder{
     /*========================================================================================*/
     /*  S   E   T   T   E   R   S   */
 
-
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
-    }
-
-    public void setProduct_size(String product_size) {
-        this.product_size = product_size;
-    }
-
-    public void setProduct_quantity(int product_quantity) {
-        this.product_quantity = product_quantity;
+    public void setProducts(String products) {
+        this.products = products;
     }
 
     public void setCustomer_email(String customer_email) {
@@ -107,10 +88,8 @@ public class UploadableOrder{
     /*========================================================================================*/
     /*  C   O   N   S   T   R   U   C   T   O   R   S   */
 
-    public UploadableOrder(int product_id, String product_size, int product_quantity, String customer_email) {
-        this.product_id = product_id;
-        this.product_size = product_size;
-        this.product_quantity = product_quantity;
+    public UploadableOrder(String products, String customer_email) {
+        this.products = products;
         this.customer_email = customer_email;
         
         this.staff_email = "";
@@ -120,6 +99,7 @@ public class UploadableOrder{
         this.failure_date= "";
         this.delivery_date= "";
     }
+
 
 
 }

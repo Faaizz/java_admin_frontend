@@ -6,9 +6,10 @@ public class OrderTrans {
      * An intermediate implementation of Order to enable proper parsing of JSON API response
      */
     private int id;
-    private int product_id;
-    private String product_size;
-    private int product_quantity;
+    private String products;
+    private String reference;
+    private double amount;
+    private double amount_paid;
     private String customer_email;
     private String staff_email;
     private String status;
@@ -26,24 +27,29 @@ public class OrderTrans {
         return id;
     }
 
-    public int getProduct_id() {
-        return product_id;
-    }
-
-    public String getProduct_size() {
-        return product_size;
-    }
-
-    public int getProduct_quantity() {
-        return product_quantity;
-    }
-
     public String getCustomer_email() {
         return customer_email;
     }
 
     public String getStaff_email() {
         return staff_email;
+    }
+    
+    public String getProducts() {
+        return products;
+    }
+
+
+    public String getReference() {
+        return reference;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getAmount_paid() {
+        return amount_paid;
     }
 
     public String getStatus() {
@@ -77,14 +83,15 @@ public class OrderTrans {
     /*  C   O   N   S   T   R   U   C   T   O   R   S   */
 
     public OrderTrans(
-            int id, int product_id, String product_size, int product_quantity, String customer_email,
-            String staff_email, String status, String est_del_date, String failure_date,
+            int id, String products, String customer_email,
+            String staff_email, String reference, double amount, double amount_paid, String status, String est_del_date, String failure_date,
             String failure_cause, String delivery_date, String created_at, String updated_at
     ) {
         this.id = id;
-        this.product_id = product_id;
-        this.product_size = product_size;
-        this.product_quantity = product_quantity;
+        this.products = products;
+        this.reference = reference;
+        this.amount = amount;
+        this.amount_paid = amount_paid;
         this.customer_email = customer_email;
         this.staff_email = staff_email;
         this.status = status;
@@ -95,4 +102,5 @@ public class OrderTrans {
         this.created_at= created_at;
         this.updated_at= updated_at;
     }
+
 }

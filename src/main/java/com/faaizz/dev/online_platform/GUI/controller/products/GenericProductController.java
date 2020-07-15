@@ -298,7 +298,7 @@ public class GenericProductController extends ProductController {
 
         textfields.add(name_textfield);
         textfields.add(brand_textfield);
-        textfields.add(color_textfield);
+        textfields.add(colors_textfield);
         textfields.add(price_textfield);
         textfields.add(material_textfield);
         // Add all size textfields

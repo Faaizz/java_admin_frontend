@@ -1,6 +1,8 @@
 package com.faaizz.dev.online_platform.api_inbound.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 public class Order {
 
@@ -9,9 +11,10 @@ public class Order {
      */
 
     private int id;
-    private int product_id;
-    private String product_size;
-    private int product_quantity;
+    private List<Map<String,String>> products;
+    private String reference;
+    private double amount;
+    private double amount_paid;
     private String customer_email;
     private String staff_email;
     private String status;
@@ -29,17 +32,23 @@ public class Order {
         return id;
     }
 
-    public int getProduct_id() {
-        return product_id;
+    public List<Map<String,String>> getProducts() {
+        return products;
     }
 
-    public String getProduct_size() {
-        return product_size;
+
+    public String getReference() {
+        return reference;
     }
 
-    public int getProduct_quantity() {
-        return product_quantity;
+    public double getAmount() {
+        return amount;
     }
+
+    public double getAmount_paid() {
+        return amount_paid;
+    }
+
 
     public String getCustomer_email() {
         return customer_email;
@@ -80,14 +89,15 @@ public class Order {
     /*  C   O   N   S   T   R   U   C   T   O   R   S   */
 
     public Order(
-            int id, int product_id, String product_size, int product_quantity, String customer_email,
+            int id, List<Map<String,String>> products, String customer_email, String reference, double amount, double amount_paid, 
             String staff_email, String status, LocalDateTime est_del_date, LocalDateTime failure_date,
             String failure_cause, LocalDateTime delivery_date, LocalDateTime created_at, LocalDateTime updated_at
     ) {
         this.id = id;
-        this.product_id = product_id;
-        this.product_size = product_size;
-        this.product_quantity = product_quantity;
+        this.products = products;
+        this.reference = reference;
+        this.amount = amount;
+        this.amount_paid = amount_paid;
         this.customer_email = customer_email;
         this.staff_email = staff_email;
         this.status = status;
@@ -106,9 +116,7 @@ public class Order {
         StringBuilder tempSB= new StringBuilder();
 
         tempSB.append("ID: " + this.getId() + "\n");
-        tempSB.append("Product ID: " + this.getProduct_id() + "\n");
-        tempSB.append("Product Size: " + this.getProduct_size() + "\n");
-        tempSB.append("Product Quantity: " + this.getProduct_quantity() + "\n");
+        tempSB.append("Products: " + this.getProducts() + "\n");
         tempSB.append("Customer Email: " + this.getCustomer_email() + "\n");
         tempSB.append("Staff Email: " + this.getStaff_email() + "\n");
         tempSB.append("Status " + this.getStatus() + "\n");

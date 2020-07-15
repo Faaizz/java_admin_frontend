@@ -21,7 +21,7 @@ public class UploadableProduct {
     private String section;
     private String sub_section;
     private String category;
-    private String color;
+    private String colors;
     private String price;
     private String material;
     private List<Map<String, String>> options;
@@ -56,8 +56,8 @@ public class UploadableProduct {
         return category;
     }
 
-    public String getColor() {
-        return color;
+    public String getColors() {
+        return colors;
     }
 
     public String getPrice() {
@@ -95,7 +95,7 @@ public class UploadableProduct {
 
     public UploadableProduct(
             String name, String brand, String description, String section, String sub_section,
-            String category, String color, String price, String material, List<Map<String, String>> options,
+            String category, String colors, String price, String material, List<Map<String, String>> options,
             File image_one, File image_two, File image_three
     ) {
         this.name = name;
@@ -104,7 +104,7 @@ public class UploadableProduct {
         this.section = section;
         this.sub_section = sub_section;
         this.category = category;
-        this.color = color;
+        this.colors = colors;
         this.price = price;
         this.material = material;
         this.options = options;

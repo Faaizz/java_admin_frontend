@@ -244,7 +244,7 @@ public class ProductResource extends APIResource {
         builder.addTextBody("section", product.getSection(), ContentType.TEXT_PLAIN);
         builder.addTextBody("sub_section", product.getSub_section(), ContentType.TEXT_PLAIN);
         builder.addTextBody("category", product.getCategory(), ContentType.TEXT_PLAIN);
-        builder.addTextBody("color", product.getColor(), ContentType.TEXT_PLAIN);
+        builder.addTextBody("colors", product.getColors(), ContentType.TEXT_PLAIN);
         builder.addTextBody("price", product.getPrice(), ContentType.TEXT_PLAIN);
         builder.addTextBody("material", product.getMaterial(), ContentType.TEXT_PLAIN);
         builder.addTextBody("options", product.getOptions(), ContentType.TEXT_PLAIN);
@@ -293,8 +293,8 @@ public class ProductResource extends APIResource {
         if( !(product.getCategory().isEmpty() || product.getCategory() == null) )
             builder.addTextBody("category", product.getCategory(), ContentType.TEXT_PLAIN);
 
-        if( !(product.getColor().isEmpty() || product.getColor() == null) )
-            builder.addTextBody("color", product.getColor(), ContentType.TEXT_PLAIN);
+        if( !(product.getColors().isEmpty() || product.getColors() == null) )
+            builder.addTextBody("colors", product.getColors(), ContentType.TEXT_PLAIN);
 
         if( !(product.getPrice().isEmpty() || product.getPrice() == null) )
             builder.addTextBody("price", product.getPrice(), ContentType.TEXT_PLAIN);

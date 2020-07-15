@@ -34,7 +34,7 @@ public class ProductController extends MainController {
     @FXML
     protected TextField brand_textfield;
     @FXML
-    protected TextField color_textfield;
+    protected TextField colors_textfield;
 
 
     public void initialize() throws Exception {
@@ -59,17 +59,18 @@ public class ProductController extends MainController {
         // List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
         //         "Trousers", "Sweatshirts & Hoodies", "Sweaters, Jackets, & Coats", "Underwear");
         List<String> male_clothing_options = FXCollections.observableArrayList("T-Shirts", "Shorts", "Shirts",
-                "Joggers", "Pants", "Sweatshirts & Hoodies", "Jackets", "Combined Looks", "Sustainability");
+                "Joggers", "Pants", "Sweatshirts & Hoodies", "Jackets", "Combined Looks");
         // List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Skirts",
         //         "Leggings & Vests", "Shorts", "Shirts", "Trousers", "Sweatshirts & Hoodies",
         //         "Sweaters, Jackets, & Coats", "Underwear & Lingerie");
         List<String> female_clothing_options = FXCollections.observableArrayList("Tops", "Dresses", "Shorts", 
-                "Shirts", "Joggers & Sweatpants", "Jackets", "Combined Looks", "Sustainability");
+                "Shirts", "Joggers & Sweatpants", "Jackets", "Combined Looks");
 
         Map<String, List<String>> clothing_section = new HashMap<>();
         // clothing_section.put("unisex", null);
         clothing_section.put("male", male_clothing_options);
         clothing_section.put("female", female_clothing_options);
+        clothing_section.put("sustainability", FXCollections.observableArrayList("Sustainability"));
 
         // List<String> male_shoes_options = FXCollections.observableArrayList("Oxford", "Loafers", "Sneakers", "Boots",
         //         "Sandals & Slippers");

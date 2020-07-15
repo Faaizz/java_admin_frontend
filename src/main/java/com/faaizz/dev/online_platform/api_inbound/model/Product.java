@@ -18,7 +18,7 @@ public class Product {
     private String sub_section;
     private String category;
     private double price;
-    private String color;
+    private String colors;
     private String material;
     private List<String> images;
     private List<ProductOption> options;
@@ -57,8 +57,8 @@ public class Product {
         return price;
     }
 
-    public String getColor() {
-        return color;
+    public String getColors() {
+        return colors;
     }
 
     public String getMaterial() {
@@ -88,14 +88,14 @@ public class Product {
      * @param sub_section
      * @param category
      * @param price
-     * @param color
+     * @param colors
      * @param material
      * @param images
      * @param options
      */
     public Product(
             int id, String name, String brand, String description, String section, String sub_section,
-            String category, double price, String color, String material, List<String> images,
+            String category, double price, String colors, String material, List<String> images,
             List<ProductOption> options
     ) {
         this.id = id;
@@ -106,7 +106,7 @@ public class Product {
         this.sub_section = sub_section;
         this.category = category;
         this.price = price;
-        this.color = color;
+        this.colors = colors;
         this.material = material;
         this.images = images;
         this.options = options;
@@ -125,7 +125,7 @@ public class Product {
         tempSB.append("Sub-section: " + this.getSub_section() + "\n");
         tempSB.append("Category: " + this.getCategory() + "\n");
         tempSB.append("Price: " + this.getPrice() + "\n");
-        tempSB.append("Color: " + this.getColor() + "\n");
+        tempSB.append("Colors: " + this.getColors() + "\n");
         tempSB.append("Material: " + this.getMaterial() + "\n");
 
         this.getImages().forEach( image-> {

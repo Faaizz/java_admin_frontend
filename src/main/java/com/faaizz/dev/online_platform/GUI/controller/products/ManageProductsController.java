@@ -125,9 +125,9 @@ public class ManageProductsController extends GenericProductController {
                 post_data.put("brand", brand_textfield.getText());
             }
 
-            if(!color_textfield.getText().isEmpty()){
-                post_data.put("color", color_textfield.getText());
-            }
+            // if(!colors_textfield.getText().isEmpty()){
+            //     post_data.put("colors", colors_textfield.getText());
+            // }
 
             // SHOW LOADING MINI DIALOG
             // Call inherited method from MainController class
@@ -612,12 +612,12 @@ public class ManageProductsController extends GenericProductController {
         category_label.getStyleClass().add("mid-body-font");
         labels_vbox.getChildren().add(category_label);
 
-        Label color_label= new Label("Color:");
-        color_label.setAlignment(Pos.CENTER_RIGHT);
-        color_label.setMinHeight(30);
-        color_label.setPrefHeight(30);
-        color_label.getStyleClass().add("mid-body-font");
-        labels_vbox.getChildren().add(color_label);
+        Label colors_label= new Label("Colors:");
+        colors_label.setAlignment(Pos.CENTER_RIGHT);
+        colors_label.setMinHeight(30);
+        colors_label.setPrefHeight(30);
+        colors_label.getStyleClass().add("mid-body-font");
+        labels_vbox.getChildren().add(colors_label);
 
         Label price_label= new Label("Price:");
         price_label.setAlignment(Pos.CENTER_RIGHT);
@@ -707,12 +707,12 @@ public class ManageProductsController extends GenericProductController {
         sub_section_dropdown.getSelectionModel().select(product.getSub_section());
         category_dropdown.getSelectionModel().select(product.getCategory());
 
-        TextField color_textfield= new TextField(product.getColor());
-        color_textfield.setMinHeight(30);
-        color_textfield.setPrefHeight(30);
-        color_textfield.getStyleClass().add("big-body-textfield");
-        textfields_vbox.getChildren().add(color_textfield);
-        validation_text_textfields.add(color_textfield);
+        TextField colors_textfield= new TextField(product.getColors());
+        colors_textfield.setMinHeight(30);
+        colors_textfield.setPrefHeight(30);
+        colors_textfield.getStyleClass().add("big-body-textfield");
+        textfields_vbox.getChildren().add(colors_textfield);
+        validation_text_textfields.add(colors_textfield);
 
         TextField price_textfield= new TextField(String.valueOf(product.getPrice()));
         price_textfield.setMinHeight(30);
@@ -1061,7 +1061,7 @@ public class ManageProductsController extends GenericProductController {
                                 (String) section_dropdown.getSelectionModel().getSelectedItem(),
                                 (String) sub_section_dropdown.getSelectionModel().getSelectedItem(),
                                 (String) category_dropdown.getSelectionModel().getSelectedItem(),
-                                color_textfield.getText(),
+                                colors_textfield.getText(),
                                 price_textfield.getText(),
                                 material_textfield.getText(), options,
                                 (image_files_map.containsKey("one") ? image_files_map.get("one") : null),

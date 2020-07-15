@@ -37,6 +37,9 @@ public class AddProductController extends GenericProductController {
         // Reset image_files_list
         image_files_map= new HashMap<>();
 
+        // Set sample colors text
+        colors_textfield.setText("[\"color_one\", \"color_two\", \"color_three\"]");
+
     }
 
     /*
@@ -86,7 +89,7 @@ public class AddProductController extends GenericProductController {
                     (String) section_dropdown.getSelectionModel().getSelectedItem(),
                     (String) sub_section_dropdown.getSelectionModel().getSelectedItem(),
                     (String) category_dropdown.getSelectionModel().getSelectedItem(),
-                    color_textfield.getText(),
+                    colors_textfield.getText(),
                     price_textfield.getText(),
                     material_textfield.getText(), options,
                     (image_files_map.containsKey("one") ? image_files_map.get("one"): null),
@@ -113,7 +116,7 @@ public class AddProductController extends GenericProductController {
 
                             textfields.add(name_textfield);
                             textfields.add(brand_textfield);
-                            textfields.add(color_textfield);
+                            textfields.add(colors_textfield);
                             textfields.add(price_textfield);
                             textfields.add(material_textfield);
                             // Add all size textfields

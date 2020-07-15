@@ -148,21 +148,25 @@ public class FailedOrdersController extends GenericOrdersController {
         for( final Order order: orders ){
 
             // GET PRODUCT
-            ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
-            String order_product_string= productResource.single(order.getProduct_id());
-            Product order_product= APIParser.getInstance().parseSingleProductResponse(order_product_string);
+            // ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
+            // String order_product_string= productResource.single(order.getProduct_id());
+            // Product order_product= APIParser.getInstance().parseSingleProductResponse(order_product_string);
 
             // GET PRODUCT IMAGE
-            StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
+            // StringBuilder image_urlSB= new StringBuilder().append("https://").append(SettingsData.getSettings().getBase_url().strip()).append("/storage/").append(order_product.getImages().get(0));
             Platform.runLater(
                 new Runnable(){
                 
                     @Override
                     public void run() {
-                        // CREATE SINGLE ORDER HBox
-                        HBox single_order= new SingleOrder(image_urlSB.toString(), order_product.getId(), order_product.getName(), order);
-                        // ADD TO TOPMOST VBOX
-                        topmost_vbox.getChildren().add(single_order);
+                        try{
+                            // CREATE SINGLE ORDER HBox
+                            HBox single_order= new SingleOrder(order.getProducts(), order);
+                            // ADD TO TOPMOST VBOX
+                            topmost_vbox.getChildren().add(single_order);
+                        }catch(Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 }
             );
@@ -195,7 +199,7 @@ public class FailedOrdersController extends GenericOrdersController {
         Image image;
         VBox details_vbox;
 
-        public SingleOrder(String image_url, int product_id, String product_name, Order order)
+        public SingleOrder(List<Map<String,String>> products, Order order) throws NumberFormatException, Exception
             {
 
             // SET CSS STYLE
@@ -216,32 +220,46 @@ public class FailedOrdersController extends GenericOrdersController {
             level_one_hbox.setSpacing(7);
             level_one_hbox.setPadding(new Insets(10, 10, 10, 10));
 
-            image_vbox= new VBox();
-            image= new Image(image_url, 150, 0, true, false);
-            imageview= new ImageView(image);
+            // image_vbox= new VBox();
+            // image= new Image(image_url, 150, 0, true, false);
+            // imageview= new ImageView(image);
             
-            image_vbox.getChildren().add(imageview);
+            // image_vbox.getChildren().add(imageview);
 
-            level_one_hbox.getChildren().add(image_vbox);
+            // level_one_hbox.getChildren().add(image_vbox);
 
             details_vbox= new VBox();
             details_vbox.setSpacing(7);
 
-            Label product_id_L= new Label(String.valueOf(product_id));
-            product_id_L.getStyleClass().addAll("big-body-font", "boldened");
-            details_vbox.getChildren().add(product_id_L);
+            // Loop through order products
+            for(Map<String,String> ord_prod: products){
 
-            Label product_name_L= new Label(product_name.toUpperCase());
-            product_name_L.getStyleClass().addAll("mid-body-font", "boldened");
-            details_vbox.getChildren().add(product_name_L);
+                // GET PRODUCT
+               
+                ProductResource productResource= new ProductResource(SettingsData.getSettings().getBase_url(), SettingsData.getSettings().getApi_path(), SettingsData.getSettings().getApi_token());
+                String order_product_string= productResource.single(Integer.parseInt(ord_prod.get("id")));
+                Product order_product= APIParser.getInstance().parseSingleProductResponse(order_product_string);
 
-            Label quantity_L= new Label("QTY: " + String.valueOf(order.getProduct_quantity()));
-            quantity_L.getStyleClass().add("small-body-font");
-            details_vbox.getChildren().add(quantity_L);
+                Label product_id_L= new Label(ord_prod.get("id"));
+                product_id_L.getStyleClass().addAll("big-body-font", "boldened");
+                details_vbox.getChildren().add(product_id_L);
 
-            Label size_L= new Label("SIZE: " + order.getProduct_size().toUpperCase());
-            size_L.getStyleClass().add("small-body-font");
-            details_vbox.getChildren().add(size_L);
+                Label product_name_L= new Label(order_product.getName().toUpperCase());
+                product_name_L.getStyleClass().addAll("mid-body-font", "boldened");
+                details_vbox.getChildren().add(product_name_L);
+
+                Label color_L= new Label("COLOR: " + ord_prod.get("color").toUpperCase());
+                color_L.getStyleClass().add("small-body-font");
+                details_vbox.getChildren().add(color_L);
+
+                Label quantity_L= new Label("QTY: " + ord_prod.get("quantity"));
+                quantity_L.getStyleClass().add("small-body-font");
+                details_vbox.getChildren().add(quantity_L);
+
+                Label size_L= new Label("SIZE: " + ord_prod.get("size").toUpperCase());
+                size_L.getStyleClass().add("small-body-font");
+                details_vbox.getChildren().add(size_L);
+            }
 
             Label date_L= new Label("ORDER DATE: " + order_date);
             date_L.getStyleClass().add("small-body-font");

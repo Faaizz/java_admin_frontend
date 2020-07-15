@@ -73,8 +73,8 @@ public class RemoveProductsController extends ManageProductsController {
                 post_data.put("brand", brand_textfield.getText());
             }
 
-            if(!color_textfield.getText().isEmpty()){
-                post_data.put("color", color_textfield.getText());
+            if(!colors_textfield.getText().isEmpty()){
+                post_data.put("colors", colors_textfield.getText());
             }
 
             // SHOW LOADING MINI DIALOG
